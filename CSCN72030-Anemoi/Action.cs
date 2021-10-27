@@ -8,8 +8,12 @@ namespace CSCN72030_Anemoi
 {
     class Action
     {
-        //fields: Device
-        //properties: outputValue
+        private Device device;
+        private int outputValue;
+
+        public Device Device { get => device; set => device = value; }
+        public int OutputValue { get => outputValue; set => outputValue = value; }
+
         //functions: Execute(), constructor(Device, output)
     }
 }

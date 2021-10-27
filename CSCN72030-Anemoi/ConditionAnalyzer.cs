@@ -15,7 +15,7 @@ namespace CSCN72030_Anemoi
 
         public bool AddConditionalAction(string name, List<Condition> conditions, List<Action> actions, bool isEnabled = true)
         {
-            if (conditionalActions.Exists(x => x.Name == name))
+            if (conditionalActions.Exists(x => x.Name == name) || actions.Count == 0)
             {
                 return false;
             }
@@ -25,7 +25,7 @@ namespace CSCN72030_Anemoi
 
         public bool UpdateConditionalAction(string oldName, string newName, List<Condition> conditions, List<Action> actions, bool isEnabled)
         {
-            if (!conditionalActions.Exists(x => x.Name == oldName) || conditionalActions.Exists(x => x.Name == newName))
+            if (!conditionalActions.Exists(x => x.Name == oldName) || conditionalActions.Exists(x => x.Name == newName) || actions.Count == 0)
             {
                 return false;
             }
@@ -78,9 +78,9 @@ namespace CSCN72030_Anemoi
         //check all Enabled conditionalActions Conditions for true
         //if true, perform Actions
 
-
         public string Stringify()
         {
+            //name{C:(Sensor,isBetween,high,low),(Sensor,isBetween,high,low)A:(Device, output),(Device, output)E:true}
             var stringifiedConditionalAnalyzer = "";
             foreach (var conditionalAction in conditionalActions)
             {
@@ -95,15 +95,23 @@ namespace CSCN72030_Anemoi
                 {
                     stringifiedConditionalAnalyzer = stringifiedConditionalAnalyzer.Remove(lastIndex);
                 }
+
                 stringifiedConditionalAnalyzer += "A:";
-                //INCOMPLETE
+                foreach (var action in conditionalAction.Actions)
+                {
+                    stringifiedConditionalAnalyzer += string.Format("({0},{1}),",
+                        action.Device.GetType().Name, action.OutputValue);
+                }
+                lastIndex = stringifiedConditionalAnalyzer.LastIndexOf(',');
+                if (lastIndex != -1)
+                {
+                    stringifiedConditionalAnalyzer = stringifiedConditionalAnalyzer.Remove(lastIndex);
+                }
+
+                stringifiedConditionalAnalyzer += "E:" + conditionalAction.IsEnabled;
             }
             return stringifiedConditionalAnalyzer;
         }
-        //Stringify: need all sensors/devices available, everything in conditionalActions
-        /*
-         * name{C:(Sensor,isBetween,high,low),(Sensor,isBetween,high,low)A:(Device, output),(Device, output)E:true}
-         */
 
         private class ConditionalAction
         {
