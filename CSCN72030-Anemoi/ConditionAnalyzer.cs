@@ -88,7 +88,7 @@ namespace CSCN72030_Anemoi
                 foreach (var condition in conditionalAction.Conditions)
                 {
                     stringifiedConditionalAnalyzer += string.Format("({0},{1},{2},{3}),", 
-                        condition.Sensor.GetType().Name, condition.IsBetween, condition.LowThreshold, condition.HighThreshold);
+                        condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold);
                 }
                 var lastIndex = stringifiedConditionalAnalyzer.LastIndexOf(',');
                 if (lastIndex != -1)

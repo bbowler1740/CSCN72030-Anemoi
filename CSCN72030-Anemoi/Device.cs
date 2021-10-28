@@ -8,5 +8,6 @@ namespace CSCN72030_Anemoi
 {
     class Device
     {
+        public float Output;
     }
 }

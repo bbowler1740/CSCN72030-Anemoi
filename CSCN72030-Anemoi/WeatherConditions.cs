@@ -22,14 +22,14 @@ namespace CSCN72030_Anemoi
 
     class WeatherConditions
     {
-        private const int FULL_SUN = 100000; //lux
-        private const int CLOUDY_LOWER_THRESHOLD = 1000; //lux
-        private const int LOW_PRESSURE_THRESHOLD = 1010; //mb
-        private const int HIGH_PRESSURE_THRESHOLD = 1022; //mb
-        private const int RAIN_HUMIDITY_THRESHOLD = 90; //%
-        private const int STORM_WINDS = 20; //mph
-        private const int HURRICANE_WINDS = 74; //mph
-        private const int TORNADO_WINDS = 158; //mph
+        private const float FULL_SUN = 100000; //lux
+        private const float CLOUDY_LOWER_THRESHOLD = 1000; //lux
+        private const float LOW_PRESSURE_THRESHOLD = 1010; //mb
+        private const float HIGH_PRESSURE_THRESHOLD = 1022; //mb
+        private const float RAIN_HUMIDITY_THRESHOLD = 90; //%
+        private const float STORM_WINDS = 20; //mph
+        private const float HURRICANE_WINDS = 74; //mph
+        private const float TORNADO_WINDS = 158; //mph
         private const string SUNRISE_STRING = "8:00";
         private const string SUNSET_STRING = "19:00";
 
@@ -45,7 +45,7 @@ namespace CSCN72030_Anemoi
 
             if (lightSensor != null)
             {
-                if (lightSensor.Data > FULL_SUN) //Best determinate of sunny
+                if (lightSensor.Data >= FULL_SUN) //Best determinate of sunny
                 {
                     currentWeather = Weather.Sunny;
                 }
@@ -129,6 +129,118 @@ namespace CSCN72030_Anemoi
             }
 
             return currentWeather;
+        }
+
+        public static List<float> GetWeather(Weather weather)
+        {
+            List<float> conditionsList;
+            switch (weather)
+            {
+                case Weather.Night:
+                    conditionsList = new List<float>()
+                    {
+                        1,                              //sunlight
+                        0,                              //precipitation
+                        HIGH_PRESSURE_THRESHOLD + 1,    //air pressure
+                        60,                             //humidity
+                        STORM_WINDS - 5,                //wind
+                        20                              //temperature
+                    };
+                    break;
+                case Weather.Sunny:
+                    conditionsList = new List<float>()
+                    {
+                        FULL_SUN,
+                        0,
+                        HIGH_PRESSURE_THRESHOLD + 1,
+                        60,
+                        STORM_WINDS - 5,
+                        20
+                    };
+                    break;
+                case Weather.Cloudy:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD + 1,
+                        0,
+                        LOW_PRESSURE_THRESHOLD + 1,
+                        60,
+                        STORM_WINDS - 5,
+                        20
+                    };
+                    break;
+                case Weather.Overcast:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        0,
+                        LOW_PRESSURE_THRESHOLD + 1,
+                        60,
+                        STORM_WINDS - 5,
+                        20
+                    };
+                    break;
+                case Weather.Rain:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        10,
+                        LOW_PRESSURE_THRESHOLD + 1,
+                        RAIN_HUMIDITY_THRESHOLD + 1,
+                        STORM_WINDS - 5,
+                        20
+                    };
+                    break;
+                case Weather.Snow:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        10,
+                        LOW_PRESSURE_THRESHOLD + 1,
+                        RAIN_HUMIDITY_THRESHOLD + 1,
+                        STORM_WINDS - 5,
+                        -1
+                    };
+                    break;
+                case Weather.Thunderstorm:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        10,
+                        LOW_PRESSURE_THRESHOLD - 1,
+                        RAIN_HUMIDITY_THRESHOLD + 1,
+                        STORM_WINDS + 1,
+                        20
+                    };
+                    break;
+                case Weather.Hurricane:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        50,
+                        LOW_PRESSURE_THRESHOLD - 1,
+                        RAIN_HUMIDITY_THRESHOLD + 1,
+                        HURRICANE_WINDS + 1,
+                        20
+                    };
+                    break;
+                case Weather.Tornado:
+                    conditionsList = new List<float>()
+                    {
+                        CLOUDY_LOWER_THRESHOLD - 1,
+                        10,
+                        LOW_PRESSURE_THRESHOLD - 1,
+                        RAIN_HUMIDITY_THRESHOLD + 1,
+                        TORNADO_WINDS + 1,
+                        20
+                    };
+                    break;
+                case Weather.InsufficientSensors:
+                default:
+                    conditionsList = new List<float>();
+                    break;
+            }
+            return conditionsList;
         }
         //static?
         //hardcode the weather conditions and the sensor conditions that create the weather

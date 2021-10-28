@@ -8,6 +8,6 @@ namespace CSCN72030_Anemoi
 {
     class Sensor
     {
-        public int Data;
+        public float Data;
     }
 }
