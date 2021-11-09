@@ -9,20 +9,27 @@ namespace CSCN72030_Anemoi
     class Action
     {
         private Device device;
-        private float outputValue;
+        private bool outputState;
 
         public Device Device { get => device; set => device = value; }
-        public float OutputValue { get => outputValue; set => outputValue = value; }
+        public bool OutputState { get => outputState; set => outputState = value; }
 
-        public Action(Device device, float output)
+        public Action(Device device, bool output)
         {
             Device = device;
-            OutputValue = output;
+            OutputState = output;
         }
 
         public void Execute()
         {
-            Device.Output = OutputValue;
+            if (outputState)
+            {
+                Device.TurnOn();
+            }
+            else
+            {
+                Device.TurnOff();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace CSCN72030_Anemoi
     {
         private List<ConditionalAction> conditionalActions = new List<ConditionalAction>();
         private DeviceList deviceList;
+        private const string filename = "\\ConditionAnalyzer.moi";
 
         public DeviceList DeviceList { get => deviceList; set => deviceList = value; }
 
@@ -75,42 +77,100 @@ namespace CSCN72030_Anemoi
             return conditionalAction.IsEnabled;
         }
 
-        //check all Enabled conditionalActions Conditions for true
-        //if true, perform Actions
-
-        public string Stringify()
+        public void ProcessAllConditionalActions()
         {
-            //name{C:(Sensor,isBetween,high,low),(Sensor,isBetween,high,low)A:(Device, output),(Device, output)E:true}
-            var stringifiedConditionalAnalyzer = "";
+            var currentWeather = WeatherConditions.GetCurrentWeather(DeviceList.Sensors);
             foreach (var conditionalAction in conditionalActions)
             {
-                stringifiedConditionalAnalyzer += conditionalAction.Name + "{C:";
-                foreach (var condition in conditionalAction.Conditions)
-                {
-                    stringifiedConditionalAnalyzer += string.Format("({0},{1},{2},{3}),", 
-                        condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold);
-                }
-                var lastIndex = stringifiedConditionalAnalyzer.LastIndexOf(',');
-                if (lastIndex != -1)
-                {
-                    stringifiedConditionalAnalyzer = stringifiedConditionalAnalyzer.Remove(lastIndex);
-                }
-
-                stringifiedConditionalAnalyzer += "A:";
-                foreach (var action in conditionalAction.Actions)
-                {
-                    stringifiedConditionalAnalyzer += string.Format("({0},{1}),",
-                        action.Device.GetType().Name, action.OutputValue);
-                }
-                lastIndex = stringifiedConditionalAnalyzer.LastIndexOf(',');
-                if (lastIndex != -1)
-                {
-                    stringifiedConditionalAnalyzer = stringifiedConditionalAnalyzer.Remove(lastIndex);
-                }
-
-                stringifiedConditionalAnalyzer += "E:" + conditionalAction.IsEnabled;
+                conditionalAction.CheckAndExecute(currentWeather);
             }
-            return stringifiedConditionalAnalyzer;
+        }
+
+        public void Save(string directoryPath)
+        {
+            //name
+            //Sensor,isBetween,high,low
+            //Sensor,isBetween,high,low
+            //}
+            //Device,output
+            //Device,output
+            //}
+            //true
+            using (StreamWriter writer = new StreamWriter(directoryPath + filename, false))
+            {
+                foreach (var conditionalAction in conditionalActions)
+                {
+                    writer.WriteLine(conditionalAction.Name);
+
+                    foreach (var condition in conditionalAction.Conditions)
+                    {
+                        if (condition.Sensor != null)
+                        {
+                            writer.WriteLine(string.Format("{0},{1},{2},{3}",
+                                condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold));
+                        }
+                        else
+                        {
+                            writer.WriteLine(string.Format("{0},{1}",condition.Weather, condition.IsAboveTrigger));
+                        }
+                    }
+                    writer.WriteLine("}");
+
+                    foreach (var action in conditionalAction.Actions)
+                    {
+                        writer.WriteLine(string.Format("{0},{1}", action.Device.GetType().Name, action.OutputState));
+                    }
+                    writer.WriteLine("}");
+
+                    writer.WriteLine(conditionalAction.IsEnabled);
+                }
+            }
+        }
+
+        public static ConditionAnalyzer Load(string directoryPath)
+        {
+            var conditionAnalyzer = new ConditionAnalyzer();
+            //LOAD DEVICELIST SO I CAN GET THE SENSORS/DEVICES INSTANCES
+
+            if (File.Exists(directoryPath + filename))
+            {
+                using (StreamReader reader = new StreamReader(directoryPath + filename))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var name = reader.ReadLine();
+
+                        var conditions = new List<Condition>();
+                        while (reader.ReadLine() != "}")
+                        {
+                            var line = reader.ReadLine();
+                            var parts = line.Split(',');
+                            if (parts.Length == 4)
+                            {
+                                conditions.Add(new Condition(conditionAnalyzer.DeviceList.Sensors[0], //need search function
+                                    Convert.ToBoolean(parts[1]), Convert.ToSingle(parts[2]), Convert.ToSingle(parts[3])));
+                            }
+                            else
+                            {
+                                conditions.Add(new Condition((Weather)Enum.Parse(typeof(Weather), parts[0]), Convert.ToBoolean(parts[1])));
+                            }
+                        }
+
+                        var actions = new List<Action>();
+                        while (reader.ReadLine() != "}")
+                        {
+                            var line = reader.ReadLine();
+                            var parts = line.Split(',');
+                            actions.Add(new Action(conditionAnalyzer.DeviceList.Devices[0], Convert.ToBoolean(parts[1])));  //need search function
+                        }
+
+                        var isEnabled = Convert.ToBoolean(reader.ReadLine());
+
+                        conditionAnalyzer.AddConditionalAction(name, conditions, actions, isEnabled);
+                    }
+                }
+            }
+            return conditionAnalyzer;
         }
 
         private class ConditionalAction
@@ -131,6 +191,28 @@ namespace CSCN72030_Anemoi
                 Conditions = conditions;
                 Actions = actions;
                 IsEnabled = IsEnabled;
+            }
+
+            public void CheckAndExecute(Weather currentWeather)
+            {
+                if (isEnabled)
+                {
+                    var allConditionsMet = true;
+                    foreach (var condition in Conditions)
+                    {
+                        if (!condition.Check(currentWeather))
+                        {
+                            allConditionsMet = false;
+                        }
+                    }
+                    if (allConditionsMet)
+                    {
+                        foreach (var action in Actions)
+                        {
+                            action.Execute();
+                        }
+                    }
+                }
             }
         }
     }

@@ -131,7 +131,7 @@ namespace CSCN72030_Anemoi
             return currentWeather;
         }
 
-        public static List<float> GetWeather(Weather weather)
+        public static List<float> GetWeatherReadings(Weather weather)
         {
             List<float> conditionsList;
             switch (weather)
