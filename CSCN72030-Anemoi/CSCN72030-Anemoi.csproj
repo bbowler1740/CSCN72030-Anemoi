@@ -124,7 +124,11 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specific Devices\Irrigation.cs" />
     <Compile Include="Specific Devices\CustomDevices.cs" />
+    <Compile Include="Specific Devices\Canopy.cs" />
+    <Compile Include="Specific Devices\Lights.cs" />
+    <Compile Include="Specific Devices\PoolHeater.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
