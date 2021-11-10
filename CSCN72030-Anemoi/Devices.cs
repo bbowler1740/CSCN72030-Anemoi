@@ -16,7 +16,7 @@ namespace CSCN72030_Anemoi
 
         public string Save()
         {
-            return (this.deviceID + " | " + this.name + " | " + this.description + " | " + this.state);
+            return (this.deviceID + "|" + this.name + "|" + this.description + "|" + this.state);
         }
 
         public uint GetDeviceID()
