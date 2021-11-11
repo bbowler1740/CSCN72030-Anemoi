@@ -9,7 +9,7 @@ namespace CSCN72030_Anemoi
     class CustomDevice : Devices
     {
 
-        CustomDevice()
+        public CustomDevice()
         {
             this.deviceID = 0;
             this.name = "";
@@ -18,7 +18,7 @@ namespace CSCN72030_Anemoi
 
         }
 
-        CustomDevice(uint id, string name, string desc, bool state = false)
+        public CustomDevice(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
             this.name = name;
@@ -26,7 +26,7 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
-        CustomDevice(string loadingString)
+        public  CustomDevice(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
 
