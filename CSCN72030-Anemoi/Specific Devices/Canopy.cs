@@ -9,7 +9,7 @@ namespace CSCN72030_Anemoi
     class Canopy : Devices
     {
 
-        Canopy()
+        public Canopy()
         {
             this.deviceID = 0;
             this.name = "";
@@ -18,7 +18,7 @@ namespace CSCN72030_Anemoi
 
         }
 
-        Canopy(uint id, string name, string desc, bool state = false)
+        public Canopy(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
             this.name = name;
@@ -26,7 +26,7 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
-        Canopy(string loadingString)
+        public Canopy(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
 

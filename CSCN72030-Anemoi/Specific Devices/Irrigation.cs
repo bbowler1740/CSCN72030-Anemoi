@@ -9,7 +9,7 @@ namespace CSCN72030_Anemoi
     class Irrigation : Devices
     {
 
-        Irrigation()
+        public Irrigation()
         {
             this.deviceID = 0;
             this.name = "";
@@ -18,7 +18,7 @@ namespace CSCN72030_Anemoi
 
         }
 
-        Irrigation(uint id, string name, string desc, bool state = false)
+        public Irrigation(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
             this.name = name;
@@ -26,7 +26,7 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
-        Irrigation(string loadingString)
+        public Irrigation(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
 

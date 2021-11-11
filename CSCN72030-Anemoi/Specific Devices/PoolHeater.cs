@@ -9,7 +9,7 @@ namespace CSCN72030_Anemoi
     class PoolHeater : Devices
     {
 
-        PoolHeater()
+        public PoolHeater()
         {
             this.deviceID = 0;
             this.name = "";
@@ -18,7 +18,7 @@ namespace CSCN72030_Anemoi
 
         }
 
-        PoolHeater(uint id, string name, string desc, bool state = false)
+        public PoolHeater(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
             this.name = name;
@@ -26,7 +26,7 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
-        PoolHeater(string loadingString)
+        public PoolHeater(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
 

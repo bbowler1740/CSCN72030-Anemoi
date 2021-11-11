@@ -9,7 +9,7 @@ namespace CSCN72030_Anemoi
     class Lights : Devices
     {
 
-        Lights()
+        public Lights()
         {
             this.deviceID = 0;
             this.name = "";
@@ -18,7 +18,7 @@ namespace CSCN72030_Anemoi
 
         }
 
-        Lights(uint id, string name, string desc, bool state = false)
+        public Lights(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
             this.name = name;
@@ -26,7 +26,7 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
-        Lights(string loadingString)
+        public Lights(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
 
