@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
 {
-    abstract class Devices
+    abstract public class Devices
     {
         protected uint deviceID;
         protected string name;
