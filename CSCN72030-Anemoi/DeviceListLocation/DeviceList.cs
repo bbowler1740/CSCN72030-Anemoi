@@ -12,12 +12,11 @@ namespace CSCN72030_Anemoi
         public string path = @"DeviceList.txt";
         List<DeviceList> list = new List<DeviceList>(); // Must change Device List to Devices when intergrate
 
-        // change data types fromDeviceList to Device when integrated
-
-        /*        public int CompareTo()
-                {
-                    return this.id.CompareTo(list.id);
-                }*/
+        // Gets the list for use in other modules
+        public List<Devices> getDeviceList()
+        {
+            return list;
+        }
 
         // This function allows for the creation of devices
         // The switch case is for the user to select what device they want through a numbered list
@@ -135,11 +134,10 @@ namespace CSCN72030_Anemoi
             }
         }
 
-        // This function will call the Sort function built into the list object but instead of using the default compare to
-        // It will be overridden allowing for devices to be sorted
-        public void sortList() // Change from DeviceList to Device when implment
+
+        public void sortList()
         {
-            list.Sort();
+            list = list.OrderBy(d => d.GetDeviceID()).ToList();
         }
     }
 
