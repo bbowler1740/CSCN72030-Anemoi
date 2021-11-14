@@ -14,10 +14,7 @@ namespace CSCN72030_Anemoi
         protected bool state;   //true = on      false = off
 
 
-        public string Save()
-        {
-            return (this.deviceID + "|" + this.name + "|" + this.description + "|" + this.state);
-        }
+        public abstract string Save(); //Changed to abstract to type can be included.
 
         public uint GetDeviceID()
         {

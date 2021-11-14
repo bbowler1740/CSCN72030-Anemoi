@@ -73,5 +73,12 @@ namespace CSCN72030_Anemoi
 
 
         }
+
+        public override string Save()
+        {
+                 
+            return ("CustomDevice:"+ this.deviceID + "|" + this.name + "|" + this.description + "|" + this.state);
+        }
+    
     }
 }

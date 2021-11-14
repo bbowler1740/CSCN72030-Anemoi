@@ -73,5 +73,11 @@ namespace CSCN72030_Anemoi
 
 
         }
+
+        public override string Save()
+        {
+
+            return ("PoolHeater:" + this.deviceID + "|" + this.name + "|" + this.description + "|" + this.state);
+        }
     }
 }
