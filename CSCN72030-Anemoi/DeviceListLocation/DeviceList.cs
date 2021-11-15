@@ -11,6 +11,7 @@ namespace CSCN72030_Anemoi
     {
         public string path = @"DeviceList.txt";
         List<DeviceList> list = new List<DeviceList>(); // Must change Device List to Devices when intergrate
+        int idCount = 0;
 
         // Gets the list for use in other modules
         public List<Devices> getDeviceList()
@@ -18,11 +19,22 @@ namespace CSCN72030_Anemoi
             return list;
         }
 
+        public DeviceList search(int id)
+        {
+            foreach (Devices devices in list)
+            {
+                if (id == devices.GetDeviceID()) // must be changed from DeviceList to Device and devices.id to however id is accessed in Devices class
+                {
+                    return devices;
+                }
+            }
+        }
+
         // This function allows for the creation of devices
         // The switch case is for the user to select what device they want through a numbered list
         public void createDevice(string type, uint id, string name, string description)
         {
-
+            idCount++;
             switch (type)
             {
                 case "Irrigation":
@@ -62,7 +74,7 @@ namespace CSCN72030_Anemoi
 
             foreach (Devices devices in list) 
             {
-                if (id == devices.id) // must be changed from DeviceList to Device and devices.id to however id is accessed in Devices class
+                if (id == devices.GetDeviceID()) // must be changed from DeviceList to Device and devices.id to however id is accessed in Devices class
                 {
                     list.Remove(devices);
                     return;
@@ -130,9 +142,14 @@ namespace CSCN72030_Anemoi
                         Console.WriteLine("\nError Loading Data\n\n"); // remove later
                         break;
                 }
-
             }
-        }
+            foreach (Devices idcheck in list)
+            {
+                if (idcheck.getDeviceID() > idCount)
+                {
+                    idCount = idcheck.getDeviceID();
+                }
+            }
 
 
         public void sortList()

@@ -11,6 +11,7 @@ namespace CSCN72030_Anemoi
     {
         public string path = @"SensorList.txt";
         List<Sensors> list = new List<Sensors>(); // Must change Sensor List to Sensors when intergrate
+        int idCount = 0;
 
         public List<Sensors> getDeviceList()
         {
@@ -18,10 +19,21 @@ namespace CSCN72030_Anemoi
         }
 
         // This function allows for the creation of sensors
-        public void createDevice(string type, uint id, string name, string location)
+        public void createDevice(string type, uint id, string name, string location, float data)
         {
-            Sensors s = Sensors.createSensors(type, id, name, location);
+            Sensors s = Sensors.createSensors(type, id, name, location, data);
             list.Add(s);
+        }
+
+        public SensorList search(int id)
+        {
+            foreach (Sensors sensors in list)
+            {
+                if (id == sensors.getSensorID()) // must be changed from SensorList to sensor and sensor.id to however id is accessed in sensors class
+                {
+                    return sensors;
+                }
+            }
         }
 
         // This fucntion removes a sensor at a given index from the list
@@ -73,6 +85,13 @@ namespace CSCN72030_Anemoi
                 string text = file.ReadLine();
                 list.Add(new Sensors(text));
             }
+            foreach (Sensors idcheck in list)
+            {
+                if (idcheck.getDeviceID() > idCount)
+                {
+                    idCount = idcheck.getDeviceID();
+                }
+            }
         }
 
         public void sortList()
@@ -81,4 +100,4 @@ namespace CSCN72030_Anemoi
         }
     }
 }
-}
+
