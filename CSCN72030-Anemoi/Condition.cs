@@ -22,6 +22,13 @@ namespace CSCN72030_Anemoi
         public Weather Weather { get => weather; set => weather = value; }
         public bool IsAboveTrigger { get => isAboveTrigger; set => isAboveTrigger = value; }
 
+        /// <summary>
+        /// Parameterized constructor for a condition using a sensor
+        /// </summary>
+        /// <param name="sensor">the sensor providing the data to check</param>
+        /// <param name="isBetweenTrigger">indicate if sensor data reading between thresholds means the condition is met (explicitly between)</param>
+        /// <param name="lowThreshold">the lower bounds of the range</param>
+        /// <param name="highThreshold">the upper bounds of the range</param>
         public Condition(Sensor sensor, bool isBetweenTrigger, float lowThreshold, float highThreshold)
         {
             Sensor = sensor;
@@ -30,6 +37,11 @@ namespace CSCN72030_Anemoi
             HighThreshold = highThreshold;
         }
 
+        /// <summary>
+        /// Parameterized constructor for a condition using Weather enum
+        /// </summary>
+        /// <param name="weather">the weather condition to compare to</param>
+        /// <param name="isAboveTrigger">indicate if the weather condition and anything worse means the condition is met (inclusive)</param>
         public Condition(Weather weather, bool isAboveTrigger)
         {
             Weather = weather;
@@ -38,6 +50,11 @@ namespace CSCN72030_Anemoi
             Sensor = null;
         }
 
+        /// <summary>
+        /// Compare the sensor data or currentWeather to condition fields
+        /// </summary>
+        /// <param name="currentWeather">the current weather enum that is used against the set weather of the condition (if Sensor is condition, this is not used)</param>
+        /// <returns>true if condition has been met</returns>
         public bool Check(Weather currentWeather)
         {
             if (Sensor != null)

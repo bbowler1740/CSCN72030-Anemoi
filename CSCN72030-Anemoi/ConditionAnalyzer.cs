@@ -15,6 +15,14 @@ namespace CSCN72030_Anemoi
 
         public DeviceList DeviceList { get => deviceList; set => deviceList = value; }
 
+        /// <summary>
+        /// Creates a new conditional action
+        /// </summary>
+        /// <param name="name">name given to the conditional action</param>
+        /// <param name="conditions">all conditions that must be met</param>
+        /// <param name="actions">all actions taken when conditions are met</param>
+        /// <param name="isEnabled">indicate whether this conditional action is enabled, default true</param>
+        /// <returns>true when addition was successful</returns>
         public bool AddConditionalAction(string name, List<Condition> conditions, List<Action> actions, bool isEnabled = true)
         {
             if (conditionalActions.Exists(x => x.Name == name) || actions.Count == 0)
@@ -25,6 +33,15 @@ namespace CSCN72030_Anemoi
             return true;
         }
 
+        /// <summary>
+        /// Updates an existing conditional action
+        /// </summary>
+        /// <param name="oldName">the original name of the conditional action to find it within collection</param>
+        /// <param name="newName">new name to change to</param>
+        /// <param name="conditions">all conditions that must be met</param>
+        /// <param name="actions">all actions taken when conditions are met</param>
+        /// <param name="isEnabled">indicate whether this conditional action is enabled</param>
+        /// <returns>true when update was successful</returns>
         public bool UpdateConditionalAction(string oldName, string newName, List<Condition> conditions, List<Action> actions, bool isEnabled)
         {
             if (!conditionalActions.Exists(x => x.Name == oldName) || conditionalActions.Exists(x => x.Name == newName) || actions.Count == 0)
@@ -37,6 +54,11 @@ namespace CSCN72030_Anemoi
             return true;
         }
 
+        /// <summary>
+        /// Delete an existing conditional action from managed list
+        /// </summary>
+        /// <param name="name">name of the conditional action to remove</param>
+        /// <returns>true when removal was successful</returns>
         public bool RemoveConditionalAction(string name)
         {
             if (conditionalActions.Exists(x => x.Name == name))
@@ -49,6 +71,10 @@ namespace CSCN72030_Anemoi
             return true;
         }
 
+        /// <summary>
+        /// Gets the list of names for the conditional actions
+        /// </summary>
+        /// <returns>list of names</returns>
         public List<string> GetListOfName()
         {
             var listOfNames = new List<string>();
@@ -59,24 +85,42 @@ namespace CSCN72030_Anemoi
             return listOfNames;
         }
 
+        /// <summary>
+        /// Gets the list of conditions from a conditional action
+        /// </summary>
+        /// <param name="name">name of the conditional action to get conditions from</param>
+        /// <returns>list of conditions</returns>
         public List<Condition> GetConditions(string name)
         {
             var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
             return conditionalAction.Conditions;
         }
 
+        /// <summary>
+        /// Gets the list of actions from a conditional action
+        /// </summary>
+        /// <param name="name">name of the conditional action to get actions from</param>
+        /// <returns>list of actions</returns>
         public List<Action> GetActions(string name)
         {
             var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
             return conditionalAction.Actions;
         }
 
+        /// <summary>
+        /// Gets the boolean indicating is the conditional action is enabled
+        /// </summary>
+        /// <param name="name">name of the conditional action to check if enabled</param>
+        /// <returns>true if is enabled</returns>
         public bool IsActionEnabled(string name)
         {
             var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
             return conditionalAction.IsEnabled;
         }
 
+        /// <summary>
+        /// Iterates through all the conditional actions to check conditions and execute actions 
+        /// </summary>
         public void ProcessAllConditionalActions()
         {
             var currentWeather = WeatherConditions.GetCurrentWeather(DeviceList.Sensors);
@@ -86,7 +130,12 @@ namespace CSCN72030_Anemoi
             }
         }
 
-        public void Save(string directoryPath)
+        /// <summary>
+        /// Saves the conditional actions to a file within the given directory path
+        /// </summary>
+        /// <param name="directoryPath">path to the directory that save file will be made</param>
+        /// <returns>true if saved successfully</returns>
+        public bool Save(string directoryPath)
         {
             //name
             //Sensor,isBetween,high,low
@@ -125,8 +174,14 @@ namespace CSCN72030_Anemoi
                     writer.WriteLine(conditionalAction.IsEnabled);
                 }
             }
+            return true;
         }
 
+        /// <summary>
+        /// Loads the conditional actions from file within given directory path
+        /// </summary>
+        /// <param name="directoryPath">path to the directory that file will be read from</param>
+        /// <returns>this object created using the loaded information</returns>
         public static ConditionAnalyzer Load(string directoryPath)
         {
             var conditionAnalyzer = new ConditionAnalyzer();
@@ -185,6 +240,13 @@ namespace CSCN72030_Anemoi
             public List<Action> Actions { get => actions; set => actions = value; }
             public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
+            /// <summary>
+            /// Parameterized constructor for a collection of conditions pairs with their respective collection of actions
+            /// </summary>
+            /// <param name="name">name given to the conditional action</param>
+            /// <param name="conditions">all conditions that must be met</param>
+            /// <param name="actions">all actions taken when conditions are met</param>
+            /// <param name="isEnabled">indicate whether this conditional action is enabled, default true</param>
             public ConditionalAction(string name, List<Condition> conditions, List<Action> actions, bool isEnabled = true)
             {
                 Name = name;
@@ -193,6 +255,10 @@ namespace CSCN72030_Anemoi
                 IsEnabled = IsEnabled;
             }
 
+            /// <summary>
+            /// When enabled, checks all the conditions, and executes all the actions if the conditions have been met
+            /// </summary>
+            /// <param name="currentWeather">the current Weather as an enum to use for Conditions</param>
             public void CheckAndExecute(Weather currentWeather)
             {
                 if (isEnabled)

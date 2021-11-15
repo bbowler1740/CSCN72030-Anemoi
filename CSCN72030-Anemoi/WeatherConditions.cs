@@ -33,6 +33,11 @@ namespace CSCN72030_Anemoi
         private const string SUNRISE_STRING = "8:00";
         private const string SUNSET_STRING = "19:00";
 
+        /// <summary>
+        /// Determine the current weather based on the sensors provided
+        /// </summary>
+        /// <param name="sensors">collection of sensors used to determine weather</param>
+        /// <returns>Weather enum representing the current weather condition</returns>
         public static Weather GetCurrentWeather(List<Sensor> sensors)
         {
             var currentWeather = Weather.InsufficientSensors;
@@ -131,6 +136,11 @@ namespace CSCN72030_Anemoi
             return currentWeather;
         }
 
+        /// <summary>
+        /// Create a list of typical sensor readings for the given weather condition
+        /// </summary>
+        /// <param name="weather">enum representing a weather condition</param>
+        /// <returns>collection of values representing sensor readings</returns>
         public static List<float> GetWeatherReadings(Weather weather)
         {
             List<float> conditionsList;
