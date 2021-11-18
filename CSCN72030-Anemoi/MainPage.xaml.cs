@@ -25,6 +25,11 @@ namespace CSCN72030_Anemoi
         public MainPage()
         {
             this.InitializeComponent();
+
+            List<Devices> deviceLists = new List<Devices>();
+            DeviceList newList = new DeviceList();
+            newList.createDevice("Canopy","Bob","This is a canopy, his name is bob."); 
+            newList.save(@"e:\test.txt");
         }
     }
 }

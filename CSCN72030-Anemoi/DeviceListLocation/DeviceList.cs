@@ -10,8 +10,8 @@ namespace CSCN72030_Anemoi
     public class DeviceList : aList
     {
         public string path = @"DeviceList.txt";
-        List<DeviceList> list = new List<DeviceList>(); // Must change Device List to Devices when intergrate
-        int idCount = 0;
+        List<Devices> list = new List<Devices>(); // Must change Device List to Devices when intergrate
+        uint idCount = 0;
 
         // Gets the list for use in other modules
         public List<Devices> getDeviceList()
@@ -28,6 +28,7 @@ namespace CSCN72030_Anemoi
                     return devices;
                 }
             }
+            return null;
         }
 
         // This function allows for the creation of devices
@@ -88,7 +89,7 @@ namespace CSCN72030_Anemoi
 
         // This fucntion saves the text data taken from the Devices module and writes it to a text file generated inside of the solution
         // The text is formated with a idnetifier ahead of it so that it can be determined to be a device
-        public void save() // Change DeviceList to Device when integrate
+        public void save(string path) // Change DeviceList to Device when integrate
         {
 
             TextWriter writer = new StreamWriter(path);
@@ -110,7 +111,7 @@ namespace CSCN72030_Anemoi
         // This takes the list and then reads from the hradcoded file path by line
         // The function splits the file into text that is needed for loading the data
         // The correct text is then sent to the constructor cooresponding to the type of device that is meant for
-        public void load() // must change DeviceList to Devices when integrate
+        public void load(string path) // must change DeviceList to Devices when integrate
         {
             StreamReader file = new StreamReader(path);
 
@@ -122,23 +123,23 @@ namespace CSCN72030_Anemoi
                 switch (words[0])
                 {
                     case "Irrigation":
-                        //     Irrigation i = new Irrigation(words[1]);
+                             Irrigation i = new Irrigation(words[1]);
                         break;
 
                     case "Canopy":
-                        //     Canopy c = new Canopy(words[1]);
+                             Canopy c = new Canopy(words[1]);
                         break;
 
                     case "Lights":
-                        //     Lights l = new Lights(words[1]);
+                             Lights l = new Lights(words[1]);
                         break;
 
                     case "PoolHeater":
-                        //     PoolHeater p = new PoolHeater(words[1]);
+                            PoolHeater p = new PoolHeater(words[1]);
                         break;
 
                     case "Custom":
-                        //     CustomDevice cd = new CustomDevice(words[1]);
+                             CustomDevice cd = new CustomDevice(words[1]);
                         break;
                     default:
                         Console.Clear();
@@ -148,19 +149,19 @@ namespace CSCN72030_Anemoi
             }
             foreach (Devices idcheck in list)
             {
-                if (idcheck.getDeviceID() > idCount)
+                if (idcheck.GetDeviceID() > idCount)
                 {
-                    idCount = idcheck.getDeviceID();
+                    idCount = idcheck.GetDeviceID();
                 }
             }
 
 
-            public void sortList()
-            {
-                list = list.OrderBy(d => d.GetDeviceID()).ToList();
-            }
         }
 
+        public void sortList()
+        {
+            list = list.OrderBy(d => d.GetDeviceID()).ToList();
+        }
     }
 
 }
