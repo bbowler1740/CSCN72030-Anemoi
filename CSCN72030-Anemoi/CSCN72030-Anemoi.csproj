@@ -133,7 +133,6 @@
     <Compile Include="Specific Devices\Lights.cs" />
     <Compile Include="Specific Devices\PoolHeater.cs" />
     <Compile Include="DeviceListLocation\SensorList.cs" />
-
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

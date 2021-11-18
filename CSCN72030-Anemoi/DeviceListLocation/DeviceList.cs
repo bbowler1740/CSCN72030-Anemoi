@@ -9,9 +9,9 @@ namespace CSCN72030_Anemoi
 {
     public class DeviceList : aList
     {
-        public string path = @"DeviceList.txt";
+        public string name = @"\DeviceList.txt";
         List<Devices> list = new List<Devices>(); // Must change Device List to Devices when intergrate
-        uint idCount = 0;
+        uint idCount = 1;
 
         // Gets the list for use in other modules
         public List<Devices> getDeviceList()
@@ -91,12 +91,12 @@ namespace CSCN72030_Anemoi
         // The text is formated with a idnetifier ahead of it so that it can be determined to be a device
         public void save(string path) // Change DeviceList to Device when integrate
         {
+            string DeviceListPath = path + name;
+            TextWriter writer = new StreamWriter(DeviceListPath);
 
-            TextWriter writer = new StreamWriter(path);
-
-            if (!File.Exists(path))
+            if (!File.Exists(DeviceListPath))
             {
-                File.Create(path);
+                File.Create(DeviceListPath);
             }
 
             foreach (Devices element in list)
@@ -105,7 +105,6 @@ namespace CSCN72030_Anemoi
             }
             writer.Flush();
             writer.Close();
-
         }
 
         // This takes the list and then reads from the hradcoded file path by line
@@ -113,7 +112,10 @@ namespace CSCN72030_Anemoi
         // The correct text is then sent to the constructor cooresponding to the type of device that is meant for
         public void load(string path) // must change DeviceList to Devices when integrate
         {
-            StreamReader file = new StreamReader(path);
+            string DeviceListPath = path + name;
+            TextWriter writer = new StreamWriter(DeviceListPath);
+
+            StreamReader file = new StreamReader(DeviceListPath);
 
             foreach (Devices element in list)
             {
