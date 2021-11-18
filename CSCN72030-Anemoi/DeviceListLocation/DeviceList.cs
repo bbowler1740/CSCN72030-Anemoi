@@ -113,35 +113,39 @@ namespace CSCN72030_Anemoi
         public void load(string path) // must change DeviceList to Devices when integrate
         {
             string DeviceListPath = path + name;
-            TextWriter writer = new StreamWriter(DeviceListPath);
 
-            StreamReader file = new StreamReader(DeviceListPath);
+            string[] fileLines = File.ReadAllLines(DeviceListPath);
 
-            foreach (Devices element in list)
+            foreach (string lines in fileLines)
             {
-                string text = file.ReadLine();
-                string[] words = text.Split(':');
+                
+                string[] words = lines.Split(':'); 
 
                 switch (words[0])
                 {
                     case "Irrigation":
                              Irrigation i = new Irrigation(words[1]);
+                        list.Add(i);
                         break;
 
                     case "Canopy":
                              Canopy c = new Canopy(words[1]);
+                        list.Add(c);
                         break;
 
                     case "Lights":
                              Lights l = new Lights(words[1]);
+                        list.Add(l);
                         break;
 
                     case "PoolHeater":
                             PoolHeater p = new PoolHeater(words[1]);
+                        list.Add(p);
                         break;
 
                     case "Custom":
                              CustomDevice cd = new CustomDevice(words[1]);
+                        list.Add(cd);
                         break;
                     default:
                         Console.Clear();
@@ -149,11 +153,11 @@ namespace CSCN72030_Anemoi
                         break;
                 }
             }
-            foreach (Devices idcheck in list)
+            foreach (Devices device in list)
             {
-                if (idcheck.GetDeviceID() > idCount)
+                if (device.GetDeviceID() > idCount)
                 {
-                    idCount = idcheck.GetDeviceID();
+                    idCount = device.GetDeviceID();
                 }
             }
 
