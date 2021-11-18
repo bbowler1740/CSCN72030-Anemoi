@@ -33,7 +33,15 @@ namespace CSCN72030_Anemoi
             this.SensorData = sensorData;
         }
 
-        //Overloaded twice. This version with 4 parameters is intended for creating an object previously saved with data already set.
+        /// <summary>
+        /// Overloaded twice. This version with 4 parameters is intended for creating an object previously saved with data already set.
+        /// </summary>
+        /// <param name="type"> Type of sensor to be created.</param>
+        /// <param name="id">ID of the sensor being created.</param>
+        /// <param name="nickname">User entered nickname for the sensor being created.</param>
+        /// <param name="location">User entered location for the sensor being created.</param>
+        /// <param name="data">Data only supplied if this object is being loaded, not created new.</param>
+        /// <returns>An instantiated Sensor object.</returns>
         public static Sensor CreateSensor(string type, int id, string nickname, string location, float data)
         {
             switch (type)
@@ -81,7 +89,14 @@ namespace CSCN72030_Anemoi
             }
         }
 
-        //Overloaded twice. This version with 3 parameters is intended for creating a new object.
+        /// <summary>
+        /// Overloaded twice. This version with 3 parameters is intended for creating a new object.
+        /// </summary>
+        /// <param name="type"> Type of sensor to be created.</param>
+        /// <param name="id"> ID of the sensor being created.</param>
+        /// <param name="nickname"> User entered nickname for the sensor being created.</param>
+        /// <param name="location"> User entered location for the sensor being created.</param>
+        /// <returns> An instantiated Sensor object.</returns>
         public static Sensor CreateSensor(string type, int id, string nickname, string location)
         {
             switch (type)
@@ -138,6 +153,10 @@ namespace CSCN72030_Anemoi
             return;
         }
 
+        /// <summary>
+        /// A method to allow a Sensor object to pull data from an external file.
+        /// </summary>
+        /// <param name="fileName"> The filename that the Sensor object should pull its data from.</param>
         public void ReadScenarioDataFromFile(string fileName)
         {
             if (!File.Exists(fileName))
@@ -153,6 +172,10 @@ namespace CSCN72030_Anemoi
             this.SensorData = float.Parse(weatherData[random.Next(numDataPoints)]);
         }
 
+        /// <summary>
+        /// A method to convert the Sensor objects internal field values to a string.
+        /// </summary>
+        /// <returns> A string of save data.</returns>
         public string SaveInfoToString()
         {
             string saveInfo;
