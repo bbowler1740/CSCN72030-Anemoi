@@ -8,7 +8,9 @@ namespace CSCN72030_Anemoi
 {
     class CustomDevice : Devices
     {
-
+        /// <summary>
+        /// Default Constuctor for CustomDevice
+        /// </summary>
         public CustomDevice()
         {
             this.deviceID = 0;
@@ -18,6 +20,13 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// Paramerterized constructor for CustomDevice
+        /// </summary>
+        /// <param name="id">The identification number of the device. Must be unique.</param>
+        /// <param name="name">The name of the device. Must not conain | and must be unique.</param>
+        /// <param name="desc">The description of the device. Must not contain |.</param>
+        /// <param name="state">State of the device, and is defaulted to false (Off).</param>
         public CustomDevice(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
@@ -26,6 +35,10 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
+        /// <summary>
+        /// The loading constructor. 
+        /// </summary>
+        /// <param name="loadingString">The formated string of data.</param>
         public  CustomDevice(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
@@ -39,6 +52,9 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// Turning off a device. Changes the state to false.  
+        /// </summary>
         public override void TurnOff()
         {
             if (this.state)
@@ -56,6 +72,9 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// Turning on the device. Changes the state to true. 
+        /// </summary>
         public override void TurnOn()
         {
 
@@ -74,6 +93,10 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// The saving functonality which, returns a formatted string. 
+        /// </summary>
+        /// <returns>Formatted string of data. </returns>
         public override string Save()
         {
                  

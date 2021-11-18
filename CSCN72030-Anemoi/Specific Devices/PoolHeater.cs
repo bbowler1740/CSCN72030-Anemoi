@@ -9,6 +9,9 @@ namespace CSCN72030_Anemoi
     class PoolHeater : Devices
     {
 
+        /// <summary>
+        /// Default Constuctor for PoolHeater
+        /// </summary>
         public PoolHeater()
         {
             this.deviceID = 0;
@@ -18,6 +21,13 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// Paramerterized constructor for PoolHeater
+        /// </summary>
+        /// <param name="id">The identification number of the device. Must be unique.</param>
+        /// <param name="name">The name of the device. Must not conain | and must be unique.</param>
+        /// <param name="desc">The description of the device. Must not contain |.</param>
+        /// <param name="state">State of the device, and is defaulted to false (Off).</param>
         public PoolHeater(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
@@ -26,6 +36,10 @@ namespace CSCN72030_Anemoi
             this.state = state;
         }
 
+        /// <summary>
+        /// The loading constructor. 
+        /// </summary>
+        /// <param name="loadingString">The formated string of data.</param>
         public PoolHeater(string loadingString)
         {
             string[] parsedString = loadingString.Split('|');
@@ -39,6 +53,10 @@ namespace CSCN72030_Anemoi
 
         }
 
+
+        /// <summary>
+        /// Turning off a device. Changes the state to false.  
+        /// </summary>
         public override void TurnOff()
         {
             if (this.state)
@@ -56,6 +74,9 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// Turning on the device. Changes the state to true. 
+        /// </summary>
         public override void TurnOn()
         {
 
@@ -74,6 +95,10 @@ namespace CSCN72030_Anemoi
 
         }
 
+        /// <summary>
+        /// The saving functonality which, returns a formatted string. 
+        /// </summary>
+        /// <returns>Formatted string of data. </returns>
         public override string Save()
         {
 
