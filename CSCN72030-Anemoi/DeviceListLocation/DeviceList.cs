@@ -19,7 +19,7 @@ namespace CSCN72030_Anemoi
             return list;
         }
 
-        public DeviceList search(int id)
+        public Devices search(int id)
         {
             foreach (Devices devices in list)
             {
@@ -32,30 +32,33 @@ namespace CSCN72030_Anemoi
 
         // This function allows for the creation of devices
         // The switch case is for the user to select what device they want through a numbered list
-        public void createDevice(string type, uint id, string name, string description)
+        public void createDevice(string type, string name, string description)
         {
-            idCount++;
             switch (type)
             {
                 case "Irrigation":
-                    list.Add(new Irrigation(id, name, description) { });
-
+                    list.Add(new Irrigation(idCount, name, description));
+                    idCount++;
                     break;
 
                 case "Canopy":
-                    list.Add(new Lights(id, name, description) { });
+                    list.Add(new Lights(idCount, name, description));
+                    idCount++;
                     break;
 
                 case "PoolHeater":
-                    list.Add(new PoolHeater(id, name, description) { });
+                    list.Add(new PoolHeater(idCount, name, description));
+                    idCount++;
                     break;
 
                 case "Lights":
-                    list.Add(new Canopy(id, name, description) { });
+                    list.Add(new Canopy(idCount, name, description));
+                    idCount++;
                     break;
 
                 case "Custom":
-                    list.Add(new CustomDevice(id, name, description) { });
+                    list.Add(new CustomDevice(idCount, name, description));
+                    idCount++;
                     break;
 
                 default:
@@ -72,7 +75,7 @@ namespace CSCN72030_Anemoi
         public void removeDevice(uint id)
         {
 
-            foreach (Devices devices in list) 
+            foreach (Devices devices in list)
             {
                 if (id == devices.GetDeviceID()) // must be changed from DeviceList to Device and devices.id to however id is accessed in Devices class
                 {
@@ -152,11 +155,12 @@ namespace CSCN72030_Anemoi
             }
 
 
-        public void sortList()
-        {
-            list = list.OrderBy(d => d.GetDeviceID()).ToList();
+            public void sortList()
+            {
+                list = list.OrderBy(d => d.GetDeviceID()).ToList();
+            }
         }
+
     }
 
 }
-

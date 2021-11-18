@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="DeviceListLocation\DeviceList.cs" />
     <Compile Include="DeviceListLocation\List.cs" />
+    <Compile Include="DeviceListLocation\Location.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

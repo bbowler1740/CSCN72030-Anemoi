@@ -19,13 +19,14 @@ namespace CSCN72030_Anemoi
         }
 
         // This function allows for the creation of sensors
-        public void createDevice(string type, uint id, string name, string location, float data)
+        public void createDevice(string type, string name, string location, float data)
         {
-            Sensors s = Sensors.createSensors(type, id, name, location, data);
+            Sensors s = Sensors.createSensors(type, idCount, name, location, data);
+            idCount++;
             list.Add(s);
         }
 
-        public SensorList search(int id)
+        public Sensors search(int id)
         {
             foreach (Sensors sensors in list)
             {
