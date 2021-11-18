@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,11 +64,11 @@ namespace CSCN72030_Anemoi
             {
                 this.state = false;
 
-                Console.WriteLine("The pool is turned off. \n");
+                Debug.WriteLine("The pool is turned off. \n");
             }
             else
             {
-                Console.WriteLine("The pool heater is already off.\n");
+                Debug.WriteLine("The pool heater is already off.\n");
 
             }
 
@@ -80,15 +81,15 @@ namespace CSCN72030_Anemoi
         public override void TurnOn()
         {
 
-            if (this.state)
+            if (!this.state)
             {
                 this.state = true;
 
-                Console.WriteLine("The pool heater is turned on.\n");
+                Debug.WriteLine("The pool heater is turned on.\n");
             }
             else
             {
-                Console.WriteLine("The pool heater is already on.\n");
+                Debug.WriteLine("The pool heater is already on.\n");
 
             }
 

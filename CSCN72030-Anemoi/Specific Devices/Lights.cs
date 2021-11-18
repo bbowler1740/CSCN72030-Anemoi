@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,11 +64,11 @@ namespace CSCN72030_Anemoi
             {
                 this.state = false;
 
-                Console.WriteLine("The lights are turned off.\n");
+                Debug.WriteLine("The lights are turned off.\n");
             }
             else
             {
-                Console.WriteLine("The lights are already turned off.\n");
+                Debug.WriteLine("The lights are already turned off.\n");
 
             }
 
@@ -80,15 +81,15 @@ namespace CSCN72030_Anemoi
         public override void TurnOn()
         {
 
-            if (this.state)
+            if (!this.state)
             {
                 this.state = true;
 
-                Console.WriteLine("The lights are turned on.\n");
+                Debug.WriteLine("The lights are turned on.\n");
             }
             else
             {
-                Console.WriteLine("The lights are already turned on.\n");
+                Debug.WriteLine("The lights are already turned on.\n");
 
             }
 

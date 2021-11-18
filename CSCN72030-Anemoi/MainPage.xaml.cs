@@ -27,11 +27,26 @@ namespace CSCN72030_Anemoi
         {
             this.InitializeComponent();
 
-            List<Devices> deviceLists = new List<Devices>();
-            DeviceList newList = new DeviceList();
-            newList.createDevice("Canopy","Bob","This is a canopy, his name is bob."); 
-            newList.save(ApplicationData.Current.LocalFolder.Path);
-            newList.removeDevice(1);
+            // ----------- Device List Intergration 
+            //List<Devices> deviceLists = new List<Devices>();
+            //DeviceList newList = new DeviceList();
+            //newList.createDevice("Canopy","Bob","This is a canopy, his name is bob."); 
+            //newList.save(ApplicationData.Current.LocalFolder.Path);
+            //newList.removeDevice(1);
+
+            // ------------ Device Intergration 
+
+           // List<Devices> deviceLists = new List<Devices>();
+           // DeviceList newList = new DeviceList();
+           // newList.createDevice("Canopy","Bob","This is a canopy, his name is bob.");
+
+           //Devices canopy = newList.search(1);
+
+         
+
+            
+
+
         }
     }
 }

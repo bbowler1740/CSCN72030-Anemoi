@@ -43,7 +43,7 @@ namespace CSCN72030_Anemoi
                     break;
 
                 case "Canopy":
-                    list.Add(new Lights(idCount, name, description));
+                    list.Add(new Canopy(idCount, name, description));
                     idCount++;
                     break;
 
@@ -53,7 +53,7 @@ namespace CSCN72030_Anemoi
                     break;
 
                 case "Lights":
-                    list.Add(new Canopy(idCount, name, description));
+                    list.Add(new Lights(idCount, name, description));
                     idCount++;
                     break;
 
