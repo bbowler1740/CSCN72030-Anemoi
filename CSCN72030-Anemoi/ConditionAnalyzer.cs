@@ -10,7 +10,9 @@ namespace CSCN72030_Anemoi
     class ConditionAnalyzer
     {
         private List<ConditionalAction> conditionalActions = new List<ConditionalAction>();
+        //private SensorList sensorList;
         private DeviceList deviceList;
+        //deviceList.GetList()
         private const string filename = "\\ConditionAnalyzer.moi";
 
         public DeviceList DeviceList { get => deviceList; set => deviceList = value; }
@@ -138,11 +140,11 @@ namespace CSCN72030_Anemoi
         public bool Save(string directoryPath)
         {
             //name
-            //Sensor,isBetween,high,low
-            //Sensor,isBetween,high,low
+            //SensorId,isBetween,high,low
+            //SensorId,isBetween,high,low
             //}
-            //Device,output
-            //Device,output
+            //DeviceId,output
+            //DeviceId,output
             //}
             //true
             using (StreamWriter writer = new StreamWriter(directoryPath + filename, false))
@@ -156,7 +158,7 @@ namespace CSCN72030_Anemoi
                         if (condition.Sensor != null)
                         {
                             writer.WriteLine(string.Format("{0},{1},{2},{3}",
-                                condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold));
+                                condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold)); 
                         }
                         else
                         {
@@ -174,6 +176,7 @@ namespace CSCN72030_Anemoi
                     writer.WriteLine(conditionalAction.IsEnabled);
                 }
             }
+            //deviceList.Save(directoryPath);
             return true;
         }
 
@@ -185,6 +188,7 @@ namespace CSCN72030_Anemoi
         public static ConditionAnalyzer Load(string directoryPath)
         {
             var conditionAnalyzer = new ConditionAnalyzer();
+            //deviceList.Load(directoryPath);
             //LOAD DEVICELIST SO I CAN GET THE SENSORS/DEVICES INSTANCES
 
             if (File.Exists(directoryPath + filename))
@@ -202,7 +206,7 @@ namespace CSCN72030_Anemoi
                             var parts = line.Split(',');
                             if (parts.Length == 4)
                             {
-                                conditions.Add(new Condition(conditionAnalyzer.DeviceList.Sensors[0], //need search function
+                                conditions.Add(new Condition(conditionAnalyzer.DeviceList.Sensors[0], //need search function, Type
                                     Convert.ToBoolean(parts[1]), Convert.ToSingle(parts[2]), Convert.ToSingle(parts[3])));
                             }
                             else
