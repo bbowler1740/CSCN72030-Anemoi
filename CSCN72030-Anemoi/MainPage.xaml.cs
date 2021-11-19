@@ -27,6 +27,8 @@ namespace CSCN72030_Anemoi
         {
             this.InitializeComponent();
 
+            var panel = new ConditionalActionPanel();
+            main.Children.Add(panel);
             // ----------- Device List Intergration 
             //List<Devices> deviceLists = new List<Devices>();
             //DeviceList newList = new DeviceList();

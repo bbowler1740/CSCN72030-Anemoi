@@ -116,9 +116,17 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Action.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Condition.cs" />
+    <Compile Include="ConditionalActionPanel.xaml.cs">
+      <DependentUpon>ConditionalActionPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConditionAnalyzer.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="DeviceList.cs" />
     <Compile Include="Devices.cs" />
     <Compile Include="DeviceListLocation\DeviceList.cs" />
     <Compile Include="DeviceListLocation\List.cs" />
@@ -128,6 +136,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sensor.cs" />
+    <Compile Include="WeatherConditions.cs" />
     <Compile Include="Specific Sensors\AirPressure.cs" />
     <Compile Include="Specific Sensors\Custom.cs" />
     <Compile Include="Specific Sensors\WindDirection.cs" />
@@ -164,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ConditionalActionPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
