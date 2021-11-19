@@ -36,16 +36,10 @@ namespace CSCN72030_Anemoi
             //newList.removeDevice(1);
 
             // ------------ Device Intergration 
-           // List<Devices> deviceLists = new List<Devices>();
-           // DeviceList newList = new DeviceList();
-           // newList.createDevice("Canopy","Bob","This is a canopy, his name is bob.");
-           //Devices canopy = newList.search(1);
-
-
-
-         
-
-            
+            List<Devices> deviceLists = new List<Devices>();
+            DeviceList newList = new DeviceList();
+            //newList.createDevice("Canopy","Bo|b","This is :a canopy, his name is bob.");
+            //Devices canopy = newList.search(1);
 
 
         }

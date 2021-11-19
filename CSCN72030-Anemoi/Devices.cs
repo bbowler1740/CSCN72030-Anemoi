@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
@@ -53,7 +54,7 @@ namespace CSCN72030_Anemoi
         /// <param name="name">Uses a string name. Must not include | and must be unique.</param>
         public void SetName(string name)
         {
-            this.name = name;
+            this.name = stripString(name);
 
         }
 
@@ -73,7 +74,9 @@ namespace CSCN72030_Anemoi
         /// <param name="name">Uses a string description. Must not include.</param>
         public void SetDescription(string desc)
         {
-            this.description = desc;
+
+
+            this.description = stripString(desc);
 
         }
 
@@ -106,6 +109,20 @@ namespace CSCN72030_Anemoi
         /// Turning off the device. Changes the state to false. 
         /// </summary>
         public abstract void TurnOff();
+
+        /// <summary>
+        /// Removed unwanted characters from a string: Characters include | and :.
+        /// </summary>
+        /// <param name="fullString">String which may contain the characters.</param>
+        /// <returns>Cleaned string.</returns>
+        protected string stripString(string fullString)
+        {
+
+           string strippedString = fullString.Replace("|", "");
+           strippedString = strippedString.Replace(":", "");
+           
+            return strippedString;
+        }
 
     }
 }

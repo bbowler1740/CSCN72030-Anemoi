@@ -32,8 +32,8 @@ namespace CSCN72030_Anemoi
         public PoolHeater(uint id, string name, string desc, bool state = false)
         {
             this.deviceID = id;
-            this.name = name;
-            this.description = desc;
+            this.name = stripString(name);
+            this.description = stripString(desc);
             this.state = state;
         }
 
@@ -71,7 +71,6 @@ namespace CSCN72030_Anemoi
                 Debug.WriteLine("The pool heater is already off.\n");
 
             }
-
 
         }
 
