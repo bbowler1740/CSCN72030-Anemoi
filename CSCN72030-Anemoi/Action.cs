@@ -8,10 +8,10 @@ namespace CSCN72030_Anemoi
 {
     class Action
     {
-        private Device device;
+        private Devices device;
         private bool outputState;
 
-        public Device Device { get => device; set => device = value; }
+        public Devices Device { get => device; set => device = value; }
         public bool OutputState { get => outputState; set => outputState = value; }
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace CSCN72030_Anemoi
         /// </summary>
         /// <param name="device">the device to be controlled by the action</param>
         /// <param name="output">the output state the device will set to</param>
-        public Action(Device device, bool output)
+        public Action(Devices device, bool output)
         {
             Device = device;
             OutputState = output;

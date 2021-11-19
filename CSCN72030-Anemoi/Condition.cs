@@ -59,7 +59,7 @@ namespace CSCN72030_Anemoi
         {
             if (Sensor != null)
             {
-                if (Sensor.Data > LowThreshold && Sensor.Data < HighThreshold)
+                if (Sensor.SensorData > LowThreshold && Sensor.SensorData < HighThreshold)
                 {
                     return IsBetweenTrigger;
                 }

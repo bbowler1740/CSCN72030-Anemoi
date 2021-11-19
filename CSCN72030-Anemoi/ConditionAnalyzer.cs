@@ -10,12 +10,12 @@ namespace CSCN72030_Anemoi
     class ConditionAnalyzer
     {
         private List<ConditionalAction> conditionalActions = new List<ConditionalAction>();
-        //private SensorList sensorList;
-        private DeviceList deviceList;
-        //deviceList.GetList()
+        private SensorList sensorList = new SensorList();
+        private DeviceList deviceList = new DeviceList();
         private const string filename = "\\ConditionAnalyzer.moi";
 
         public DeviceList DeviceList { get => deviceList; set => deviceList = value; }
+        public SensorList SensorList { get => sensorList; set => sensorList = value; }
 
         /// <summary>
         /// Creates a new conditional action
@@ -125,7 +125,7 @@ namespace CSCN72030_Anemoi
         /// </summary>
         public void ProcessAllConditionalActions()
         {
-            var currentWeather = WeatherConditions.GetCurrentWeather(DeviceList.Sensors);
+            var currentWeather = WeatherConditions.GetCurrentWeather(SensorList.getSensorList());
             foreach (var conditionalAction in conditionalActions)
             {
                 conditionalAction.CheckAndExecute(currentWeather);
@@ -158,7 +158,7 @@ namespace CSCN72030_Anemoi
                         if (condition.Sensor != null)
                         {
                             writer.WriteLine(string.Format("{0},{1},{2},{3}",
-                                condition.Sensor.GetType().Name, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold)); 
+                                condition.Sensor.SensorID, condition.IsBetweenTrigger, condition.LowThreshold, condition.HighThreshold)); 
                         }
                         else
                         {
@@ -169,14 +169,16 @@ namespace CSCN72030_Anemoi
 
                     foreach (var action in conditionalAction.Actions)
                     {
-                        writer.WriteLine(string.Format("{0},{1}", action.Device.GetType().Name, action.OutputState));
+                        writer.WriteLine(string.Format("{0},{1}", action.Device.GetDeviceID(), action.OutputState));
                     }
                     writer.WriteLine("}");
 
                     writer.WriteLine(conditionalAction.IsEnabled);
                 }
             }
-            //deviceList.Save(directoryPath);
+
+            deviceList.save(directoryPath);
+            sensorList.save(directoryPath);
             return true;
         }
 
@@ -185,11 +187,10 @@ namespace CSCN72030_Anemoi
         /// </summary>
         /// <param name="directoryPath">path to the directory that file will be read from</param>
         /// <returns>this object created using the loaded information</returns>
-        public static ConditionAnalyzer Load(string directoryPath)
+        public void Load(string directoryPath)
         {
-            var conditionAnalyzer = new ConditionAnalyzer();
-            //deviceList.Load(directoryPath);
-            //LOAD DEVICELIST SO I CAN GET THE SENSORS/DEVICES INSTANCES
+            deviceList.load(directoryPath);
+            sensorList.load(directoryPath);
 
             if (File.Exists(directoryPath + filename))
             {
@@ -200,36 +201,37 @@ namespace CSCN72030_Anemoi
                         var name = reader.ReadLine();
 
                         var conditions = new List<Condition>();
-                        while (reader.ReadLine() != "}")
+                        var line = reader.ReadLine();
+                        while (line != "}")
                         {
-                            var line = reader.ReadLine();
                             var parts = line.Split(',');
                             if (parts.Length == 4)
                             {
-                                conditions.Add(new Condition(conditionAnalyzer.DeviceList.Sensors[0], //need search function, Type
+                                conditions.Add(new Condition(this.SensorList.search(Convert.ToInt32(parts[0])),
                                     Convert.ToBoolean(parts[1]), Convert.ToSingle(parts[2]), Convert.ToSingle(parts[3])));
                             }
                             else
                             {
                                 conditions.Add(new Condition((Weather)Enum.Parse(typeof(Weather), parts[0]), Convert.ToBoolean(parts[1])));
                             }
+                            line = reader.ReadLine();
                         }
 
                         var actions = new List<Action>();
-                        while (reader.ReadLine() != "}")
+                        line = reader.ReadLine();
+                        while (line != "}")
                         {
-                            var line = reader.ReadLine();
                             var parts = line.Split(',');
-                            actions.Add(new Action(conditionAnalyzer.DeviceList.Devices[0], Convert.ToBoolean(parts[1])));  //need search function
+                            actions.Add(new Action(this.DeviceList.search(Convert.ToInt32(parts[0])), Convert.ToBoolean(parts[1])));
+                            line = reader.ReadLine();
                         }
 
                         var isEnabled = Convert.ToBoolean(reader.ReadLine());
 
-                        conditionAnalyzer.AddConditionalAction(name, conditions, actions, isEnabled);
+                        this.AddConditionalAction(name, conditions, actions, isEnabled);
                     }
                 }
             }
-            return conditionAnalyzer;
         }
 
         private class ConditionalAction
@@ -256,7 +258,7 @@ namespace CSCN72030_Anemoi
                 Name = name;
                 Conditions = conditions;
                 Actions = actions;
-                IsEnabled = IsEnabled;
+                IsEnabled = isEnabled;
             }
 
             /// <summary>

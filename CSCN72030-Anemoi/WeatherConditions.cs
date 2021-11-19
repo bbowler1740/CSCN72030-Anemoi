@@ -41,24 +41,24 @@ namespace CSCN72030_Anemoi
         public static Weather GetCurrentWeather(List<Sensor> sensors)
         {
             var currentWeather = Weather.InsufficientSensors;
-            var lightSensor = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
-            var precipitationSensor = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
-            var thermometer = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
-            var barometer = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
-            var humiditySensor = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
-            var anemometer = sensors.Where(s => s.GetType() == typeof(Sensor)).FirstOrDefault();
+            var lightSensor = sensors.Where(s => s.GetType() == typeof(Sunlight)).FirstOrDefault();
+            var precipitationSensor = sensors.Where(s => s.GetType() == typeof(Precipitation)).FirstOrDefault();
+            var thermometer = sensors.Where(s => s.GetType() == typeof(Temperature)).FirstOrDefault();
+            var barometer = sensors.Where(s => s.GetType() == typeof(AirPressure)).FirstOrDefault();
+            var humiditySensor = sensors.Where(s => s.GetType() == typeof(Humidity)).FirstOrDefault();
+            var anemometer = sensors.Where(s => s.GetType() == typeof(WindSpeed)).FirstOrDefault();
 
             if (lightSensor != null)
             {
-                if (lightSensor.Data >= FULL_SUN) //Best determinate of sunny
+                if (lightSensor.SensorData >= FULL_SUN) //Best determinate of sunny
                 {
                     currentWeather = Weather.Sunny;
                 }
-                else if (lightSensor.Data > CLOUDY_LOWER_THRESHOLD) //Best determinate of cloudy
+                else if (lightSensor.SensorData > CLOUDY_LOWER_THRESHOLD) //Best determinate of cloudy
                 {
                     currentWeather = Weather.Cloudy;
                 }
-                else if (lightSensor.Data > 1) //Best determinate of overcast
+                else if (lightSensor.SensorData > 1) //Best determinate of overcast
                 {
                     currentWeather = Weather.Overcast;
                 }
@@ -75,11 +75,11 @@ namespace CSCN72030_Anemoi
                 }
                 if (barometer != null)
                 {
-                    if (barometer.Data > HIGH_PRESSURE_THRESHOLD && currentWeather != Weather.Night) //barometer.Data > HIGH_PRESSURE_THRESHOLD means clear skies
+                    if (barometer.SensorData > HIGH_PRESSURE_THRESHOLD && currentWeather != Weather.Night) //barometer.Data > HIGH_PRESSURE_THRESHOLD means clear skies
                     {
                         currentWeather = Weather.Sunny;
                     }
-                    else if (barometer.Data < HIGH_PRESSURE_THRESHOLD)
+                    else if (barometer.SensorData < HIGH_PRESSURE_THRESHOLD)
                     {
                         currentWeather = Weather.Cloudy;
                     }
@@ -88,14 +88,14 @@ namespace CSCN72030_Anemoi
 
             if (precipitationSensor != null)
             {
-                if (precipitationSensor.Data > 0) //Best determinate of rain
+                if (precipitationSensor.SensorData > 0) //Best determinate of rain
                 {
                     currentWeather = Weather.Rain;
                 }
             }
             else if (humiditySensor != null)
             {
-                if (humiditySensor.Data > RAIN_HUMIDITY_THRESHOLD && currentWeather >= Weather.Cloudy) //determine of rain without precipitation sensor
+                if (humiditySensor.SensorData > RAIN_HUMIDITY_THRESHOLD && currentWeather >= Weather.Cloudy) //determine of rain without precipitation sensor
                 {
                     currentWeather = Weather.Rain;
                 }
@@ -103,7 +103,7 @@ namespace CSCN72030_Anemoi
 
             if (thermometer != null)
             {
-                if (precipitationSensor.Data <= 0 && currentWeather == Weather.Rain) //Best determinate of snow
+                if (precipitationSensor.SensorData <= 0 && currentWeather == Weather.Rain) //Best determinate of snow
                 {
                     currentWeather = Weather.Snow;
                 }
@@ -111,7 +111,7 @@ namespace CSCN72030_Anemoi
 
             if (barometer != null)
             {
-                if (barometer.Data < LOW_PRESSURE_THRESHOLD && (currentWeather == Weather.Rain || currentWeather == Weather.Snow))
+                if (barometer.SensorData < LOW_PRESSURE_THRESHOLD && (currentWeather == Weather.Rain || currentWeather == Weather.Snow))
                 {
                     currentWeather = Weather.Thunderstorm;
                 }
@@ -119,15 +119,15 @@ namespace CSCN72030_Anemoi
 
             if (anemometer != null)
             {
-                if (anemometer.Data > TORNADO_WINDS)
+                if (anemometer.SensorData > TORNADO_WINDS)
                 {
                     currentWeather = Weather.Tornado;
                 }
-                else if (anemometer.Data > HURRICANE_WINDS)
+                else if (anemometer.SensorData > HURRICANE_WINDS)
                 {
                     currentWeather = Weather.Hurricane;
                 }
-                else if(anemometer.Data > STORM_WINDS && (currentWeather == Weather.Rain || currentWeather == Weather.Snow))
+                else if(anemometer.SensorData > STORM_WINDS && (currentWeather == Weather.Rain || currentWeather == Weather.Snow))
                 {
                     currentWeather = Weather.Thunderstorm;
                 }
