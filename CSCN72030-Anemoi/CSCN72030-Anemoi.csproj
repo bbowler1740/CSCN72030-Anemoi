@@ -127,12 +127,31 @@
     <Compile Include="ConditionAnalyzer.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="DeviceList.cs" />
+    <Compile Include="Devices.cs" />
+    <Compile Include="DeviceListLocation\DeviceList.cs" />
+    <Compile Include="DeviceListLocation\List.cs" />
+    <Compile Include="DeviceListLocation\Location.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="WeatherConditions.cs" />
+    <Compile Include="Specific Sensors\AirPressure.cs" />
+    <Compile Include="Specific Sensors\Custom.cs" />
+    <Compile Include="Specific Sensors\WindDirection.cs" />
+    <Compile Include="Specific Sensors\GroundMoisture.cs" />
+    <Compile Include="Specific Sensors\Humidity.cs" />
+    <Compile Include="Specific Sensors\Precipitation.cs" />
+    <Compile Include="Specific Sensors\Sunlight.cs" />
+    <Compile Include="Specific Sensors\Temperature.cs" />
+    <Compile Include="Specific Sensors\WindSpeed.cs" />
+    <Compile Include="Specific Devices\Irrigation.cs" />
+    <Compile Include="Specific Devices\CustomDevices.cs" />
+    <Compile Include="Specific Devices\Canopy.cs" />
+    <Compile Include="Specific Devices\Lights.cs" />
+    <Compile Include="Specific Devices\PoolHeater.cs" />
+    <Compile Include="DeviceListLocation\SensorList.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -168,6 +187,7 @@
       <Version>6.2.12</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
