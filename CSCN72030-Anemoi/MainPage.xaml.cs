@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,22 @@ namespace CSCN72030_Anemoi
         public MainPage()
         {
             this.InitializeComponent();
+
+            // ----------- Device List Intergration 
+            //List<Devices> deviceLists = new List<Devices>();
+            //DeviceList newList = new DeviceList();
+            //newList.createDevice("Canopy","Bob","This is a canopy, his name is bob."); 
+            //newList.save(ApplicationData.Current.LocalFolder.Path);
+            //newList.load(ApplicationData.Current.LocalFolder.Path);
+            //newList.removeDevice(1);
+
+            // ------------ Device Intergration 
+            List<Devices> deviceLists = new List<Devices>();
+            DeviceList newList = new DeviceList();
+            //newList.createDevice("Canopy","Bo|b","This is :a canopy, his name is bob.");
+            //Devices canopy = newList.search(1);
+
+
         }
     }
 }

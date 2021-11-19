@@ -119,6 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Devices.cs" />
+    <Compile Include="DeviceListLocation\DeviceList.cs" />
+    <Compile Include="DeviceListLocation\List.cs" />
+    <Compile Include="DeviceListLocation\Location.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +137,12 @@
     <Compile Include="Specific Sensors\Sunlight.cs" />
     <Compile Include="Specific Sensors\Temperature.cs" />
     <Compile Include="Specific Sensors\WindSpeed.cs" />
+    <Compile Include="Specific Devices\Irrigation.cs" />
+    <Compile Include="Specific Devices\CustomDevices.cs" />
+    <Compile Include="Specific Devices\Canopy.cs" />
+    <Compile Include="Specific Devices\Lights.cs" />
+    <Compile Include="Specific Devices\PoolHeater.cs" />
+    <Compile Include="DeviceListLocation\SensorList.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
