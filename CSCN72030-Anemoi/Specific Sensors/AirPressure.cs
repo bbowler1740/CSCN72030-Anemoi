@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,27 @@ namespace CSCN72030_Anemoi
             this.SensorNickName = sensorNickName;
             this.SensorLocation = sensorLocation;
             this.SensorData = sensorData;
+        }
+
+        /// <summary>
+        /// A method to allow a Sensor object to pull data from an external file.
+        /// </summary>
+        /// <param name="fileName"> The filename that the Sensor object should pull its data from.</param>
+        public override void ReadScenarioDataFromFile()
+        {
+            string fullFilePath = weatherScenarioPath + "\\" + "airpressure.txt";
+
+            if (!File.Exists(fullFilePath))
+            {
+                //Display message about lack of file existence.
+                return;
+            }
+
+            string[] weatherData = File.ReadAllLines(fullFilePath);
+
+            int numDataPoints = weatherData.Length;
+            var random = new Random();
+            this.SensorData = float.Parse(weatherData[random.Next(numDataPoints)]);
         }
 
     }

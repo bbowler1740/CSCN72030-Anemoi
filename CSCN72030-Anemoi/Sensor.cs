@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
 {
-    public class Sensor //Generalized class. See "Specific Sensors" folder for specializations.
+    public abstract class Sensor //Generalized class. See "Specific Sensors" folder for specializations.
     {
-        protected int SensorID { get; set; }
-        protected string SensorNickName { get; set; }
-        protected string SensorLocation { get; set; }
-        protected float SensorData { get; set; } //Continuosly overridden when reading from file. Real-time updating is ideal, but perhaps consider 5 second intervals.
+        protected static string weatherScenarioPath;
+
+        protected static string[] weatherScenarios = { "Sunny", "Rain", "ThunderStorm", "Tornado" };
+
+        protected static int weatherIncrementor = 0;
+
+        public int SensorID { get; protected set; } 
+        public string SensorNickName { get; protected set; }
+        public string SensorLocation { get; protected set; }
+        public float SensorData { get; protected set; } //Continuosly overridden when reading from file. Real-time updating is ideal, but perhaps consider 5 second intervals.
         public Sensor()
         {
             this.SensorID = -1;
@@ -54,7 +60,7 @@ namespace CSCN72030_Anemoi
                     Precipitation precipitationSensor = new Precipitation(id, nickname, location, data);
                     return precipitationSensor;
                     
-                case "Air Pressure":
+                case "AirPressure":
                     AirPressure airPressureSensor = new AirPressure(id, nickname, location, data);
                     return airPressureSensor;
                 
@@ -62,7 +68,7 @@ namespace CSCN72030_Anemoi
                     Sunlight sunlightSensor = new Sunlight(id, nickname, location, data);
                     return sunlightSensor;
                     
-                case "Ground Moisture":
+                case "GroundMoisture":
                     GroundMoisture moistureSensor = new GroundMoisture(id, nickname, location, data);
                     return moistureSensor;
                     
@@ -70,11 +76,11 @@ namespace CSCN72030_Anemoi
                     Humidity humiditySensor = new Humidity(id, nickname, location, data);
                     return humiditySensor;
                     
-                case "Wind Speed":
+                case "WindSpeed":
                     WindSpeed windSpeedSensor = new WindSpeed(id, nickname, location, data);
                     return windSpeedSensor;
                     
-                case "Wind Direction":
+                case "WindDirection":
                     WindDirection windDirectionSensor = new WindDirection(id, nickname, location, data);
                     return windDirectionSensor;
                     
@@ -153,25 +159,27 @@ namespace CSCN72030_Anemoi
             return;
         }
 
-        /// <summary>
-        /// A method to allow a Sensor object to pull data from an external file.
-        /// </summary>
-        /// <param name="fileName"> The filename that the Sensor object should pull its data from.</param>
-        public void ReadScenarioDataFromFile(string fileName)
+        public static void UpdateWeatherScenario(string filePath) //caller only know about the location (Cottage, Work, Home, etc...) directory
+                                                           //cottage > sunny//rainy//thunderstorm//tornado// > air pressure.txt, ground moisture.txt, 
         {
-            if (!File.Exists(fileName))
+
+            int arrayLen = weatherScenarioPath.Length;
+
+            if (weatherIncrementor == (arrayLen - 1))
             {
-                //Display message about lack of file existence.
-                return;
+                weatherIncrementor = 0;
             }
 
-            string[] weatherData = File.ReadAllLines(fileName);
+            string scenarioPath = filePath + "\\" + weatherScenarios[weatherIncrementor];
 
-            int numDataPoints = weatherData.Length;
-            var random = new Random();
-            this.SensorData = float.Parse(weatherData[random.Next(numDataPoints)]);
+            Sensor.weatherScenarioPath = scenarioPath;
+
+            weatherIncrementor++;
+           
         }
 
+        public abstract void ReadScenarioDataFromFile();
+       
         /// <summary>
         /// A method to convert the Sensor objects internal field values to a string.
         /// </summary>
@@ -180,7 +188,10 @@ namespace CSCN72030_Anemoi
         {
             string saveInfo;
 
-            saveInfo = this.GetType().ToString() + ':' + this.SensorID.ToString() + ',' + this.SensorNickName + ',' + this.SensorLocation + ',' + this.SensorData.ToString();
+
+            saveInfo = this.GetType().Name.ToString() + ':' + this.SensorID.ToString() + ',' + this.SensorNickName + ',' + this.SensorLocation + ',' + this.SensorData.ToString();
+
+
 
             return saveInfo;
         }

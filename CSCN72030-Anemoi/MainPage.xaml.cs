@@ -41,6 +41,40 @@ namespace CSCN72030_Anemoi
             //newList.createDevice("Canopy","Bo|b","This is :a canopy, his name is bob.");
             //Devices canopy = newList.search(1);
 
+            // ------------ Sensor Integration
+
+            List<Sensor> sensorList = new List<Sensor>();
+            SensorList coolBeans = new SensorList();
+
+
+            //Integration test to determine if the List module can create a sensor object.
+
+            string type = "Wind Speed";
+            string name = "Windy Boi";
+            string location = "Backyard";
+            coolBeans.createSensor(type, name, location);
+
+            //Integration test to determine the List modules ability to access properties of the Sensor object.
+
+            float test = coolBeans.search(1).SensorData;
+            int test2 = coolBeans.search(1).SensorID;
+            string test3 = coolBeans.search(1).SensorNickName;
+            string test4 = coolBeans.search(1).SensorLocation;
+
+            //Integration test to determine Sensor module's ability to receive the correct directory from which to load its external weather data form.
+
+
+
+            //Integration test to determine if the Sensor module can send it's save data string to the list module.
+
+            string teststring = coolBeans.search(1).SaveInfoToString();
+
+
+            //Integration test to determine if the Sensor module can correctly interpret a string containing the Sensor load data.
+
+            coolBeans.save(ApplicationData.Current.LocalFolder.Path);
+            coolBeans.load(ApplicationData.Current.LocalFolder.Path);
+
 
         }
     }
