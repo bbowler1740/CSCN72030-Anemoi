@@ -125,7 +125,6 @@
       <DependentUpon>ConditionalActionPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConditionAnalyzer.cs" />
-    <Compile Include="Device.cs" />
     <Compile Include="DeviceList.cs" />
     <Compile Include="Devices.cs" />
     <Compile Include="DeviceListLocation\DeviceList.cs" />
