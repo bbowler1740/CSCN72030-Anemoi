@@ -20,103 +20,103 @@ namespace CSCN72030_Anemoi
         /// <summary>
         /// Creates a new conditional action
         /// </summary>
-        /// <param name="name">name given to the conditional action</param>
         /// <param name="conditions">all conditions that must be met</param>
         /// <param name="actions">all actions taken when conditions are met</param>
         /// <param name="isEnabled">indicate whether this conditional action is enabled, default true</param>
         /// <returns>true when addition was successful</returns>
-        public bool AddConditionalAction(string name, List<Condition> conditions, List<Action> actions, bool isEnabled = true)
+        public bool AddConditionalAction(List<Condition> conditions, List<Action> actions, bool isEnabled = true)
         {
-            if (conditionalActions.Exists(x => x.Name == name) || actions.Count == 0)
+            if (conditions.Count == 0 || actions.Count == 0)
             {
                 return false;
             }
-            conditionalActions.Add(new ConditionalAction(name, conditions, actions, isEnabled));
+            conditionalActions.Add(new ConditionalAction(conditions, actions, isEnabled));
             return true;
         }
 
         /// <summary>
         /// Updates an existing conditional action
         /// </summary>
-        /// <param name="oldName">the original name of the conditional action to find it within collection</param>
-        /// <param name="newName">new name to change to</param>
+        /// <param name="id">the id of the conditional action to find it within collection</param>
         /// <param name="conditions">all conditions that must be met</param>
         /// <param name="actions">all actions taken when conditions are met</param>
         /// <param name="isEnabled">indicate whether this conditional action is enabled</param>
         /// <returns>true when update was successful</returns>
-        public bool UpdateConditionalAction(string oldName, string newName, List<Condition> conditions, List<Action> actions, bool isEnabled)
+        public bool UpdateConditionalAction(int id, List<Condition> conditions, List<Action> actions, bool isEnabled)
         {
-            if (!conditionalActions.Exists(x => x.Name == oldName) || conditionalActions.Exists(x => x.Name == newName) || actions.Count == 0)
+            if (!conditionalActions.Exists(x => x.Id == id) || conditions.Count == 0 || actions.Count == 0)
             {
                 return false;
             }
-            var conditionalAction = conditionalActions.Where(c => c.Name == oldName).FirstOrDefault();
+            var conditionalAction = conditionalActions.Where(c => c.Id == id).FirstOrDefault();
             var index = conditionalActions.IndexOf(conditionalAction);
-            conditionalActions[index] = new ConditionalAction(newName, conditions, actions, isEnabled);
+            conditionalActions[index].Conditions = conditions;
+            conditionalActions[index].Actions = actions;
+            conditionalActions[index].IsEnabled = isEnabled;
             return true;
         }
 
         /// <summary>
         /// Delete an existing conditional action from managed list
         /// </summary>
-        /// <param name="name">name of the conditional action to remove</param>
+        /// <param name="id">id of the conditional action to remove</param>
         /// <returns>true when removal was successful</returns>
-        public bool RemoveConditionalAction(string name)
+        public bool RemoveConditionalAction(int id)
         {
-            if (conditionalActions.Exists(x => x.Name == name))
+            if (conditionalActions.Exists(x => x.Id == id))
             {
                 return false;
             }
-            var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
+            var conditionalAction = conditionalActions.Where(c => c.Id == id).FirstOrDefault();
             var index = conditionalActions.IndexOf(conditionalAction);
             conditionalActions.RemoveAt(index);
             return true;
         }
 
         /// <summary>
-        /// Gets the list of names for the conditional actions
+        /// Gets the list of ids for the conditional actions
         /// </summary>
-        /// <returns>list of names</returns>
-        public List<string> GetListOfName()
+        /// <returns>list of ids</returns>
+        public List<int> GetListOfName()
         {
-            var listOfNames = new List<string>();
+            var listOfIds = new List<int>();
             foreach (var conditionalAction in conditionalActions)
             {
-                listOfNames.Add(conditionalAction.Name);
+                listOfIds.Add(conditionalAction.Id);
             }
-            return listOfNames;
+            return listOfIds;
         }
 
         /// <summary>
         /// Gets the list of conditions from a conditional action
         /// </summary>
-        /// <param name="name">name of the conditional action to get conditions from</param>
+        /// <param name="id">id of the conditional action to get conditions from</param>
         /// <returns>list of conditions</returns>
-        public List<Condition> GetConditions(string name)
+        public List<Condition> GetConditions(int id)
         {
-            var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
+            var conditionalAction = conditionalActions.Where(c => c.Id == id).FirstOrDefault();
             return conditionalAction.Conditions;
         }
 
         /// <summary>
         /// Gets the list of actions from a conditional action
         /// </summary>
-        /// <param name="name">name of the conditional action to get actions from</param>
+        /// <param name="id">id of the conditional action to get actions from</param>
         /// <returns>list of actions</returns>
-        public List<Action> GetActions(string name)
+        public List<Action> GetActions(int id)
         {
-            var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
+            var conditionalAction = conditionalActions.Where(c => c.Id == id).FirstOrDefault();
             return conditionalAction.Actions;
         }
 
         /// <summary>
         /// Gets the boolean indicating is the conditional action is enabled
         /// </summary>
-        /// <param name="name">name of the conditional action to check if enabled</param>
+        /// <param name="id">id of the conditional action to check if enabled</param>
         /// <returns>true if is enabled</returns>
-        public bool IsActionEnabled(string name)
+        public bool IsActionEnabled(int id)
         {
-            var conditionalAction = conditionalActions.Where(c => c.Name == name).FirstOrDefault();
+            var conditionalAction = conditionalActions.Where(c => c.Id == id).FirstOrDefault();
             return conditionalAction.IsEnabled;
         }
 
@@ -151,7 +151,7 @@ namespace CSCN72030_Anemoi
             {
                 foreach (var conditionalAction in conditionalActions)
                 {
-                    writer.WriteLine(conditionalAction.Name);
+                    writer.WriteLine(conditionalAction.Id);
 
                     foreach (var condition in conditionalAction.Conditions)
                     {
@@ -198,7 +198,7 @@ namespace CSCN72030_Anemoi
                 {
                     while (!reader.EndOfStream)
                     {
-                        var name = reader.ReadLine();
+                        var id = Convert.ToInt32(reader.ReadLine());
 
                         var conditions = new List<Condition>();
                         var line = reader.ReadLine();
@@ -228,7 +228,7 @@ namespace CSCN72030_Anemoi
 
                         var isEnabled = Convert.ToBoolean(reader.ReadLine());
 
-                        this.AddConditionalAction(name, conditions, actions, isEnabled);
+                        conditionalActions.Add(new ConditionalAction(id, conditions, actions, isEnabled));
                     }
                 }
             }
@@ -236,12 +236,14 @@ namespace CSCN72030_Anemoi
 
         private class ConditionalAction
         {
-            private string name;
+            private int id;
             private List<Condition> conditions;
             private List<Action> actions;
             private bool isEnabled;
 
-            public string Name { get => name; set => name = value; }
+            private static int masterId = 1;
+
+            public int Id { get => id; private set => id = value; }
             public List<Condition> Conditions { get => conditions; set => conditions = value; }
             public List<Action> Actions { get => actions; set => actions = value; }
             public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
@@ -249,13 +251,31 @@ namespace CSCN72030_Anemoi
             /// <summary>
             /// Parameterized constructor for a collection of conditions pairs with their respective collection of actions
             /// </summary>
-            /// <param name="name">name given to the conditional action</param>
+            /// <param name="id">id given to the conditional action</param>
             /// <param name="conditions">all conditions that must be met</param>
             /// <param name="actions">all actions taken when conditions are met</param>
             /// <param name="isEnabled">indicate whether this conditional action is enabled, default true</param>
-            public ConditionalAction(string name, List<Condition> conditions, List<Action> actions, bool isEnabled = true)
+            public ConditionalAction(int id, List<Condition> conditions, List<Action> actions, bool isEnabled)
             {
-                Name = name;
+                Id = id;
+                if (Id > masterId)
+                {
+                    masterId = Id + 1;
+                }
+                Conditions = conditions;
+                Actions = actions;
+                IsEnabled = isEnabled;
+            }
+
+            /// <summary>
+            /// Parameterized constructor for a collection of conditions pairs with their respective collection of actions
+            /// </summary>
+            /// <param name="conditions">all conditions that must be met</param>
+            /// <param name="actions">all actions taken when conditions are met</param>
+            /// <param name="isEnabled">indicate whether this conditional action is enabled, default true</param>
+            public ConditionalAction(List<Condition> conditions, List<Action> actions, bool isEnabled = true)
+            {
+                Id = masterId++;
                 Conditions = conditions;
                 Actions = actions;
                 IsEnabled = isEnabled;
