@@ -4,36 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Windows.Storage;
 
-namespace CSCN72030_Anemoi.DeviceListLocation
+namespace CSCN72030_Anemoi
 {
-    class Location
+    public class Location
     {
-        public static string locationFile = @"e:\LocationFile";
+        private ConditionAnalyzer conditionAnalyzer = new ConditionAnalyzer();
+
+        public string locationName;
+
+        public ConditionAnalyzer getCA()
+        {
+            return conditionAnalyzer;
+        }
 
         // This function creates a directory at the specified name by the user
         public void createLocation(string name)
         {
-            string folderName = @"e:\" + name;
+            string folderName = ApplicationData.Current.LocalFolder.Path + @"\" + name;
             if (Directory.Exists(folderName))
             {
                 return;
             }
-
-            TextWriter writer = new StreamWriter(locationFile);
-            writer.WriteLine(name);
+            locationName = name;
             Directory.CreateDirectory(folderName);
-
-            // must pass down the directory folderName to CA -> DLL
         }
 
         // This function deletes a directory at the specified name by the user
         public void deleteLocation(string name)
         {
-            string folderName = @"e:\" + name;
+            string folderName = ApplicationData.Current.LocalFolder.Path + @"\" + name;
             if (Directory.Exists(folderName))
             {
-                Directory.Delete(folderName);
+                Directory.Delete(folderName, true);
                 return;
             }
             else
@@ -44,21 +48,41 @@ namespace CSCN72030_Anemoi.DeviceListLocation
 
         public static string[] displayLocation()
         {
-            string[] lines = File.ReadAllLines(locationFile);
-            return lines;
+            DirectoryInfo[] lines = new DirectoryInfo(ApplicationData.Current.LocalFolder.Path).GetDirectories();
+            int len = lines.Length;
+            string[] arr = new string[len];
+            int i = 0;
+            foreach (DirectoryInfo info in lines)
+            {
+                arr[i] = info.Name; 
+                i++;
+            }
+
+            return arr;
         }
 
         public void selectLocation(string name)
-        { 
-            string folderName = @"e:\" + name; // where name is the user input for the name
+        {
+            string folderName = ApplicationData.Current.LocalFolder.Path + @"\" + name; // where name is the user input for the name
             if (Directory.Exists(folderName))
             {
-                // must pass down the directory folderName to CA -> DLL
+                conditionAnalyzer.Load(folderName);
+                locationName = name;
             }
             else
             {
                 // some sort of error message saying location doesnt exist
             }
+        }
+
+        public void save()
+        {
+            string folderName = ApplicationData.Current.LocalFolder.Path + @"\" + locationName;
+            if (!Directory.Exists(folderName))
+            {
+                return;
+            }
+            conditionAnalyzer.Save(folderName);
         }
     }
 }

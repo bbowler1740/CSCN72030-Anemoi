@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
 {
-    class ConditionAnalyzer
+    public class ConditionAnalyzer
     {
         private List<ConditionalAction> conditionalActions = new List<ConditionalAction>();
         private SensorList sensorList = new SensorList();

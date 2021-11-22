@@ -81,44 +81,68 @@ namespace CSCN72030_Anemoi
 
 
             // ------------ Condition Analyzer Integration
-            var ca = new ConditionAnalyzer();
+            /*            var ca = new ConditionAnalyzer();
 
-            SensorList coolBeans = new SensorList();
-            var weather = WeatherConditions.GetCurrentWeather(coolBeans.getSensorList());
+                        SensorList coolBeans = new SensorList();
+                        var weather = WeatherConditions.GetCurrentWeather(coolBeans.getSensorList());
 
-            string type = "Wind Speed";
-            string name = "Windy Boi";
-            string location = "Backyard";
-            coolBeans.createSensor(type, name, location);
-            var condition = new Condition(coolBeans.search(1), true, -1, 15);
+                        string type = "Wind Speed";
+                        string name = "Windy Boi";
+                        string location = "Backyard";
+                        coolBeans.createSensor(type, name, location);
+                        var condition = new Condition(coolBeans.search(1), true, -1, 15);
 
-            DeviceList newList = new DeviceList();
-            newList.createDevice("Canopy","Bob","This is a canopy, his name is bob.");
-            var action = new Action(newList.search(1), true);
+                        DeviceList newList = new DeviceList();
+                        newList.createDevice("Canopy","Bob","This is a canopy, his name is bob.");
+                        var action = new Action(newList.search(1), true);
 
-            var conditions = new List<Condition>();
-            conditions.Add(condition);
-            var actions = new List<Action>();
-            actions.Add(action);
-            ca.AddConditionalAction("custom", conditions, actions);
+                        var conditions = new List<Condition>();
+                        conditions.Add(condition);
+                        var actions = new List<Action>();
+                        actions.Add(action);
+                        ca.AddConditionalAction("custom", conditions, actions);
 
-            var b = ca.IsActionEnabled("custom");
+                        var b = ca.IsActionEnabled("custom");*/
 
             //ca.UpdateConditionalAction("custom", "yes", conditions, actions, false);
 
             //b = ca.IsActionEnabled("yes");
+            /*
+                        ca.DeviceList = newList;
+                        ca.SensorList = coolBeans;
 
-            ca.DeviceList = newList;
-            ca.SensorList = coolBeans;
+                        ca.ProcessAllConditionalActions();
 
-            ca.ProcessAllConditionalActions();
+                        ca.Save(ApplicationData.Current.LocalFolder.Path);
 
-            ca.Save(ApplicationData.Current.LocalFolder.Path);
+                        var temp = new ConditionAnalyzer();
+                        temp.Load(ApplicationData.Current.LocalFolder.Path);
 
-            var temp = new ConditionAnalyzer();
-            temp.Load(ApplicationData.Current.LocalFolder.Path);
+                        var readings = WeatherConditions.GetWeatherReadings(Weather.Rain);*/
 
-            var readings = WeatherConditions.GetWeatherReadings(Weather.Rain);
+            // ------------ Location Integration
+/*
+            Location location = new Location();
+            location.createLocation("Joe");
+            location.save();
+            location.selectLocation("Joe");
+            string type = "Wind Speed";
+            string name = "Windy Boi";
+            string area = "Backyard";
+            location.getCA().SensorList.createSensor(type, name, area);
+            location.getCA().DeviceList.createDevice("Canopy", "Bob", "This is a canopy, his name is bob.");
+            Condition condition = new Condition(location.getCA().SensorList.search(1), true, 0, 100);
+            Action action = new Action(location.getCA().DeviceList.search(1), true);
+            var conlist = new List<Condition>();
+            conlist.Add(condition);
+            var actlist = new List<Action>();
+            actlist.Add(action);
+            location.getCA().AddConditionalAction(conlist, actlist);
+            location.save();
+            location.createLocation("Bob");
+            location.createLocation("Alice");
+            Location.displayLocation();
+            location.deleteLocation("Joe");*/
         }
     }
 }

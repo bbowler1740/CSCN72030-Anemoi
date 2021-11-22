@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
 {
-    class Condition
+    public class Condition
     {
         private Sensor sensor = null;
         private bool isBetweenTrigger;

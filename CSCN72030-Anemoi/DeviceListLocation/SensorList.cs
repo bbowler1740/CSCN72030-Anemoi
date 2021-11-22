@@ -7,7 +7,7 @@ using System.IO;
 
 namespace CSCN72030_Anemoi
 {
-    class SensorList : aList
+    public class SensorList : aList
     {
         public string name = @"\SensorList.txt";
         List<Sensor> list = new List<Sensor>(); // Must change Sensor List to Sensors when intergrate
