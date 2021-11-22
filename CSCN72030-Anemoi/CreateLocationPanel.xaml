@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="CSCN72030_Anemoi.CreateLocationPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CSCN72030_Anemoi"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
+
+    <Grid  Width="900" Height="500" Background="white" BorderThickness="1" BorderBrush="Black">
+        <Button Content="Create Location" Margin="73,374,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="Button_Click"/>
+        <Button Content="Cancel" Margin="513,373,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCancel"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,200,0,0" PlaceholderText="Location Name..." Height="50" Width="650" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Center" Margin="0,54,0,0" Text="Create a New Location" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</UserControl>

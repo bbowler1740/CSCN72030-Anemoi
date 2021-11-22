@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="CSCN72030_Anemoi.LocationSelect"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CSCN72030_Anemoi"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
+
+
+    <Grid MaxWidth="1500" MaxHeight="1000" x:Name="gridLocationSelect">
+        <Button Content="Create New Location" Click="btnCreateNewLocation" Margin="300,0,0,100" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25"/>
+        <Button x:Name="btnCancel" Content="Cancel" Margin="900,0,0,100" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25" Click="btnCancelClick" />
+        <TextBlock HorizontalAlignment="Center" Margin="0,99,0,0" Text="Choose Your Location" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        
+        <ListView x:Name="LocationList" VerticalAlignment="Center" HorizontalAlignment="center" Width="600" Height="500" SelectionChanged="ListLocationSelect">
+            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="FontSize" Value="50"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.Items>
+                
+            </ListView.Items>
+        </ListView>
+
+
+
+
+    </Grid>
+</Page>

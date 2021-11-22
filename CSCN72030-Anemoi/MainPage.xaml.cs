@@ -143,6 +143,19 @@ namespace CSCN72030_Anemoi
             location.createLocation("Alice");
             Location.displayLocation();
             location.deleteLocation("Joe");*/
+
+
+
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string locatoinName = e.Parameter.ToString();
+
+            Stuff.Text = locatoinName;
+
+            base.OnNavigatedTo(e);      //Calls the parents implementation of the fuction
+
         }
     }
 }

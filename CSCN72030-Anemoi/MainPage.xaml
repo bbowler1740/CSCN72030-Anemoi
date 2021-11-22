@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="main">
-
+        <TextBlock x:Name="Stuff" HorizontalAlignment="Left" Margin="870,316,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Page>
