@@ -19,12 +19,27 @@ namespace CSCN72030_Anemoi
 {
     public sealed partial class DeviceDetailsPanel : UserControl
     {
+        DeviceList list;
+        Devices device;
 
         public System.Action<UserControl> Close;
 
-        public DeviceDetailsPanel()
+        public DeviceDetailsPanel(DeviceList tempList, int id)
         {
             this.InitializeComponent();
+
+            list = tempList;
+
+           device = list.search(id);
+
+            //Change the values of the panel
+
+            txtBlockName.Text = device.GetName();
+            txtBlockType.Text = device.GetType().ToString();
+            txtBlockDesc.Text = device.GetDescription();
+
+            toggleSwitch.IsOn = device.GetState();
+
         }
 
         private void bntCancelClick(object sender, RoutedEventArgs e)
@@ -32,6 +47,13 @@ namespace CSCN72030_Anemoi
 
             Close?.Invoke(this);
 
+        }
+
+        private void btnDeleteClick(object sender, RoutedEventArgs e1)
+        {
+            list.removeDevice(device.GetDeviceID());
+
+            Close?.Invoke(this);
         }
     }
 }
