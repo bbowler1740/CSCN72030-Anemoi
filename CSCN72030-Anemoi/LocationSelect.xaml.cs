@@ -72,9 +72,13 @@ namespace CSCN72030_Anemoi
             gridLocationSelect.Children.Add(backgroundFade);
 
             gridLocationSelect.Children.Add(panel);
+        }
 
-            
+        private void ClosePanel(UserControl sender)
+        {
+            gridLocationSelect.Children.Remove(backgroundFade);
 
+            gridLocationSelect.Children.Remove(sender);
         }
 
         private void ClosePanel(UserControl sender)
