@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
 
 
-    <Grid MaxWidth="1500" MaxHeight="1000" x:Name="gridLocationSelect">
+    <Grid Width="1500" Height="1000" x:Name="gridLocationSelect">
         <Button Content="Create New Location" Click="btnCreateNewLocation" Margin="300,0,0,100" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25"/>
         <Button x:Name="btnCancel" Content="Cancel" Margin="900,0,0,100" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25" Click="btnCancelClick" />
         <TextBlock HorizontalAlignment="Center" Margin="0,99,0,0" Text="Choose Your Location" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
