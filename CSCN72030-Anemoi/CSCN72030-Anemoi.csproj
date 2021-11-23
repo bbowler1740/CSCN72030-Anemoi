@@ -125,8 +125,14 @@
       <DependentUpon>ConditionalActionPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConditionAnalyzer\ConditionAnalyzer.cs" />
+    <Compile Include="CreateDevicePanel.xaml.cs">
+      <DependentUpon>CreateDevicePanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateLocationPanel.xaml.cs">
       <DependentUpon>CreateLocationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceDetailsPanel.xaml.cs">
+      <DependentUpon>DeviceDetailsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocationSelect.xaml.cs">
       <DependentUpon>LocationSelect.xaml</DependentUpon>
@@ -181,7 +187,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateDevicePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateLocationPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeviceDetailsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

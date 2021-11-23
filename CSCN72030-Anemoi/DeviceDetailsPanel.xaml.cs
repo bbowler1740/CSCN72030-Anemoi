@@ -17,32 +17,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CSCN72030_Anemoi
 {
-    public sealed partial class CreateLocationPanel : UserControl
+    public sealed partial class DeviceDetailsPanel : UserControl
     {
+
         public System.Action<UserControl> Close;
 
-        Frame frame;
-
-        public CreateLocationPanel(Frame frameTemp)
+        public DeviceDetailsPanel()
         {
             this.InitializeComponent();
-
-            frame = frameTemp;
         }
 
-        private void btnCancelClick(object sender, RoutedEventArgs e)
+        private void bntCancelClick(object sender, RoutedEventArgs e)
         {
+
             Close?.Invoke(this);
-
-        }
-
-        private void btnCreateLocationClick(object sender, RoutedEventArgs e)
-        {
-            Location newLocation = new Location();
-
-            newLocation.createLocation(locationName.Text);
-
-            frame.Navigate(typeof(MainPage), newLocation);
 
         }
     }

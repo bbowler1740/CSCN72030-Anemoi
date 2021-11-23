@@ -47,9 +47,13 @@ namespace CSCN72030_Anemoi
 
        private void ListLocationSelect(object sender, SelectionChangedEventArgs e)
         {
-           string name= (string)LocationList.SelectedItem;  // Obtains the name of the selected item
+           string name = (string)LocationList.SelectedItem;  // Obtains the name of the selected item
 
-            Frame.Navigate(typeof(MainPage), name); //Opens to the main page passing through the name
+            Location tempLoc = new Location();
+
+            tempLoc.selectLocation(name);
+
+            Frame.Navigate(typeof(MainPage), tempLoc); //Opens to the main page passing through the name
         }
 
         private void btnCancelClick(object sender, RoutedEventArgs e)
@@ -59,7 +63,8 @@ namespace CSCN72030_Anemoi
 
         private void btnCreateNewLocation(object sender, RoutedEventArgs e)
         {
-            var panel = new CreateLocationPanel();
+            var panel = new CreateLocationPanel(Frame);
+            panel.Close = ClosePanel;
 
             panel.VerticalAlignment = VerticalAlignment.Center;
             panel.HorizontalAlignment = HorizontalAlignment.Center;
@@ -70,6 +75,13 @@ namespace CSCN72030_Anemoi
 
             
 
+        }
+
+        private void ClosePanel(UserControl sender)
+        {
+            gridLocationSelect.Children.Remove(backgroundFade);
+
+            gridLocationSelect.Children.Remove(sender);
         }
     }
 }
