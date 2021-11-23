@@ -45,5 +45,12 @@ namespace CSCN72030_Anemoi
             frame.Navigate(typeof(MainPage), newLocation);
 
         }
+
+        private void btnCancel(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
     }
 }
