@@ -81,11 +81,5 @@ namespace CSCN72030_Anemoi
             gridLocationSelect.Children.Remove(sender);
         }
 
-        private void ClosePanel(UserControl sender)
-        {
-            gridLocationSelect.Children.Remove(backgroundFade);
-
-            gridLocationSelect.Children.Remove(sender);
-        }
     }
 }
