@@ -17,40 +17,37 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CSCN72030_Anemoi
 {
-    public sealed partial class CreateLocationPanel : UserControl
+    public sealed partial class CreateDevicePanel : UserControl
     {
+
         public System.Action<UserControl> Close;
 
-        Frame frame;
+        DeviceList list;
 
-        public CreateLocationPanel(Frame frameTemp)
+        
+        public CreateDevicePanel(DeviceList tempList)
         {
             this.InitializeComponent();
 
-            frame = frameTemp;
+            list = tempList;
         }
 
-        private void btnCancelClick(object sender, RoutedEventArgs e)
+        private void bntCancelClick(object sender, RoutedEventArgs e)
         {
+
             Close?.Invoke(this);
 
         }
 
-        private void btnCreateLocationClick(object sender, RoutedEventArgs e)
-        {
-            Location newLocation = new Location();
-
-            newLocation.createLocation(locationName.Text);
-
-            frame.Navigate(typeof(MainPage), newLocation);
-
-        }
-
-        private void btnCancel(object sender, RoutedEventArgs e)
+        private void btnCreateDeviceClick(object e, RoutedEventArgs e1)
         {
 
+            string type = cmbOuter.SelectedItem.ToString(); //No clue if this will work
+
+            list.createDevice(type, txtBoxName.Text, txtBoxDesc.Text);
+
+            Close?.Invoke(this);
 
         }
-
     }
 }

@@ -6,54 +6,29 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400"
-    Height="300"
-    Width="400">
+    d:DesignHeight="800"
+    d:DesignWidth="900"
+    Height="800"
+    Width="900">
 
     <Grid BorderBrush="Black" BorderThickness="1" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0">
-            <Grid>
-                <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" Text="Conditions" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cboSensor0" PlaceholderText="Sensor" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"/>
-                <Button Content="+ Sensor" Height="30" Margin="40,109,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="5"/>
+        
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="20,20,0,0" Text="Conditions" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="609,48,0,0" Text="Values" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30"/>
+        <Button Grid.Row="0" x:Name="btnAddSensor" Content="+ Sensor" Margin="45,0,0,20" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25" Click="btnAddSensor_Click"/>
+        <ListView Grid.Row="0" x:Name="listViewSensors" Margin="5,90,5,100"/>
 
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="20,20,0,0" Text="Actions" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40"/>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="610,48,0,0" Text="State" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30"/>
+        <Button Grid.Row="1" x:Name="btnAddDevice" Content="+ Device" Margin="45,0,0,20" VerticalAlignment="Bottom" Height="75" Width="300" FontSize="25" Click="btnAddDevice_Click"/>
+        <ListView Grid.Row="1" x:Name="listViewDevices" Margin="5,90,5,100"/>
 
-                <TextBlock HorizontalAlignment="Left" Margin="264,29,0,0" Text="Values" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12"/>
-                <TextBlock HorizontalAlignment="Left" Margin="278,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
-                <TextBox x:Name="txtLow0" HorizontalAlignment="Left" Margin="199,54,0,0" Text="Low" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" Height="25" Width="70" BorderThickness="1"/>
-                <TextBox x:Name="txtHigh0" HorizontalAlignment="Left" Margin="294,54,0,0" Text="High" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" Height="25" Width="70" BorderThickness="1"/>
-                <CheckBox x:Name="chkIsBetween0" Margin="234,84,0,0" VerticalAlignment="Top" FontSize="10">
-                    <CheckBox.RenderTransform>
-                        <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <TextBlock HorizontalAlignment="Left" Margin="254,89,0,0" Text="Trigger when between" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10"/>
-            </Grid>
-        </ScrollViewer>
-
-        <ScrollViewer Grid.Row="1">
-            <Grid>
-                <TextBlock  HorizontalAlignment="Left" Margin="20,20,0,0" Text="Actions" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cboDevice0" PlaceholderText="Device" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"/>
-                <Button Content="+ Device" Height="30" Margin="40,109,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="5"/>
-
-
-                <TextBlock HorizontalAlignment="Left" Margin="264,29,0,0" Text="Action" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12"/>
-                <CheckBox x:Name="chkState0" Margin="244,63,0,0" VerticalAlignment="Top" FontSize="10">
-                    <CheckBox.RenderTransform>
-                        <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
-                    </CheckBox.RenderTransform>
-                </CheckBox>
-                <TextBlock HorizontalAlignment="Left" Margin="264,0,0,0" Text="Turn On" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="10"/>
-            </Grid>
-        </ScrollViewer>
-        <Button Grid.Row="2" Content="Save" Height="30" Margin="200,10,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="10"/>
-        <Button Grid.Row="2" Content="Cancel" Height="30" Margin="300,10,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="10"/>
+        <Button Grid.Row="2" x:Name="btnSave" Content="Save" Margin="100,10,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnSave_Click"/>
+        <Button Grid.Row="2" x:Name="btnCancel" Content="Cancel" Margin="500,10,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCancel_Click"/>
     </Grid>
 </UserControl>
