@@ -20,8 +20,7 @@
         <ScrollViewer Grid.Row="0">
             <Grid>
                 <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" Text="Conditions" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cboSensor0" PlaceholderText="Sensor" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"
-                          ItemsSource="{x:Bind sensors}"/>
+                <ComboBox x:Name="cboSensor0" PlaceholderText="Sensor" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"/>
                 <Button Content="+ Sensor" Height="30" Margin="40,109,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="5"/>
 
 
@@ -41,8 +40,7 @@
         <ScrollViewer Grid.Row="1">
             <Grid>
                 <TextBlock  HorizontalAlignment="Left" Margin="20,20,0,0" Text="Actions" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cboDevice0" PlaceholderText="Device" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"
-                          ItemsSource="{x:Bind sensors}"/>
+                <ComboBox x:Name="cboDevice0" PlaceholderText="Device" Width="120" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="12"/>
                 <Button Content="+ Device" Height="30" Margin="40,109,0,0" VerticalAlignment="Top" Width="80" FontSize="12" CornerRadius="5"/>
 
 

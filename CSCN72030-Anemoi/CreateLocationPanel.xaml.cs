@@ -28,5 +28,12 @@ namespace CSCN72030_Anemoi
         {
 
         }
+
+        private void btnCancel(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
     }
 }

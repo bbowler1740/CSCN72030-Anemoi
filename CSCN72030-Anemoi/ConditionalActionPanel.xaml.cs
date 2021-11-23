@@ -20,9 +20,7 @@ namespace CSCN72030_Anemoi
 {
     public sealed partial class ConditionalActionPanel : UserControl
     {
-        private ObservableCollection<string> sensors;
-        private ObservableCollection<string> devices;
-
+        
         public ConditionalActionPanel()
         {
             this.InitializeComponent();
