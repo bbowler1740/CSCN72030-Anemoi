@@ -181,6 +181,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icon-air.png" />
+    <Content Include="Assets\icon-direction.png" />
+    <Content Include="Assets\icon-sun.png" />
+    <Content Include="Assets\icon-temp.png" />
+    <Content Include="Assets\icon-water-2.png" />
+    <Content Include="Assets\icon-water.png" />
+    <Content Include="Assets\icon-wind.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

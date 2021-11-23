@@ -16,18 +16,11 @@
         <Grid Grid.Row ="0" BorderBrush="Black" BorderThickness="0,0,0,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
-
                 <ColumnDefinition Width="150"/>
-
                 <ColumnDefinition Width="150"/>
-
                 <ColumnDefinition Width="150"/>
-
                 <ColumnDefinition Width="300"/>
-
                 <ColumnDefinition Width="600"/>
-
-
             </Grid.ColumnDefinitions>
             <Button Content="Device" Click="btnGoDevice" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "1" Background ="White" BorderBrush="Black" BorderThickness="1,1,1,0"/>
             <Button Content="Location" Click="btnGoLocation" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "0" Background ="White" BorderBrush="Black" BorderThickness="1,1,1,0"/>
@@ -43,10 +36,61 @@
                 <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            <Grid Grid.Row= "1" Grid.Column="0" BorderBrush="Black" Margin ="30,0,15,15" BorderThickness="1,1,1,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Text="Temperature" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="0"/>
+                <TextBlock HorizontalAlignment="Left" Text="Humidity" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="0"/>
+                <TextBlock HorizontalAlignment="Left" Text="Sunlight" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="0"/>
+                <TextBlock HorizontalAlignment="Left" Text="Air Pressure" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="0"/>
+                <TextBlock HorizontalAlignment="Left" Text="Wind Speed" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="1"/>
+                <TextBlock HorizontalAlignment="Left" Text="Ground Moisture" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="2"/>
+                <TextBlock HorizontalAlignment="Left" Text="Wind Direction" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="3"/>
+                <Image Grid.Column="0" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="130,15,0,0" VerticalAlignment="Top" Source="assets/icon-temp.png" />
+                <Image Grid.Column="1" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="110,15,0,0" VerticalAlignment="Top" Source="assets/icon-water-2.png" />
+                <Image Grid.Column="2" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="100,15,0,0" VerticalAlignment="Top" Source="assets/icon-sun.png" />
+                <Image Grid.Column="3" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="135,15,0,0" VerticalAlignment="Top" Source="assets/icon-air.png" />
+                <Image Grid.Column="0" Grid.Row ="1" HorizontalAlignment="Left" Height="30" Width="30" Margin="135,15,0,0" VerticalAlignment="Top" Source="assets/icon-wind.png" />
+                <Image Grid.Column="1" Grid.Row ="2" HorizontalAlignment="Left" Height="30" Width="30" Margin="175,20,0,0" VerticalAlignment="Top" Source="assets/icon-water.png" />
+                <Image Grid.Column="2" Grid.Row ="3" HorizontalAlignment="Left" Height="30" Width="30" Margin="155,15,0,0" VerticalAlignment="Top" Source="assets/icon-direction.png" />
+                <TextBlock x:Name ="tempLiveData" HorizontalAlignment="Left" Text="10.5 C" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="0"/>
+                <TextBlock x:Name ="humidityLiveData" HorizontalAlignment="Left" Text="90%" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="0"/>
+                <TextBlock x:Name ="sunlightLiveData" HorizontalAlignment="Left" Text="95%" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="0"/>
+                <TextBlock x:Name ="airPressureLiveData" HorizontalAlignment="Left" Text="1031 hPA" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="0"/>
+                <TextBlock x:Name ="windSpeedLiveData" HorizontalAlignment="Left" Text="25 km/h" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="1"/>
+                <TextBlock x:Name ="groundMoistureLiveData" HorizontalAlignment="Left" Text="71 ml" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="2"/>
+                <TextBlock x:Name ="windDirectionLiveData" HorizontalAlignment="Left" Text="North East" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="3"/>
+            </Grid>
+            <ListView Grid.Row= "1" Grid.Column="1" BorderBrush="Black" Margin ="15,0,30,15" BorderThickness="1,1,1,1">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="FontSize" Value="20"></Setter>
+                        <Setter Property="BorderBrush" Value ="Black"></Setter>
+                        <Setter Property="Margin" Value = "5"></Setter>
+                        <Setter Property="BorderThickness" Value ="1"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.Items>
+                    <ListViewItem x:Name="test" Content="Moon Light Sensor     0%" />
+                    <ListViewItem x:Name="test2" Content="Grass Clippings      15000" />
+                    <ListViewItem x:Name="test3" Content="Fence Post   1" />
+                </ListView.Items>
+            </ListView>
         </Grid>
      </Grid>
 </Page>
