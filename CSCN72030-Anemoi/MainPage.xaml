@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
 
-     <Grid Width="1500" Height="1000" x:Name="main">
+    <Grid Width="1500" Height="1000" x:Name="main">
         <Grid.RowDefinitions>
             <RowDefinition Height="77"/>
             <RowDefinition Height="1*"/>
@@ -97,6 +97,43 @@
             <!-- Device Section -->
             <Grid Grid.Row="2" Grid.Column="0" BorderBrush="Black" Margin ="30,15,15,15" BorderThickness="1,1,1,1">
 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
+                        <TextBlock x:Name="txtBlockDeviceName1" Text="Device Name" FontSize="25"/>
+                        <ToggleSwitch x:Name="toggleSwitch1" FontSize="20" />
+                        <TextBlock x:Name="txtBlockStatus" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel2" Grid.Column="1">
+                        <TextBlock x:Name="txtBlockDeviceName2" Text="Device Name" FontSize="25"/>
+                        <ToggleSwitch x:Name="toggleSwitch2" FontSize="20" />
+                        <TextBlock x:Name="txtBlockStatus2" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel3" Grid.Column="2">
+                        <TextBlock x:Name="txtBlockDeviceName3" Text="Device Name" FontSize="25"/>
+                        <ToggleSwitch x:Name="toggleSwitch3" FontSize="20" />
+                        <TextBlock x:Name="txtBlockStatus3" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel4" Grid.Column="3">
+                        <TextBlock x:Name="txtBlockDeviceName4" Text="Device Name" FontSize="25"/>
+                        <ToggleSwitch x:Name="toggleSwitch4" FontSize="20"/>
+                        <TextBlock x:Name="txtBlockStatus4" Text="Error Placeholder" FontSize="20" Margin="0, 20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                </Grid>
+
             </Grid>
             <!-- Custom Device Section -->
             <ListView Grid.Row="2" Grid.Column="1" BorderBrush="Black" Margin ="15,15,30,15" BorderThickness="1,1,1,1">
@@ -109,13 +146,35 @@
                         <Setter Property="BorderThickness" Value ="1"></Setter>
                     </Style>
                 </ListView.ItemContainerStyle>
-
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Lawn Mower" Grid.Column="0"></TextBlock>
+                            <ToggleSwitch Grid.Column="1"></ToggleSwitch>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
                 <ListView.Items>
-                    <ListViewItem Content="Moon Light Sensor     0%" />
-                    <ListViewItem Content="Grass Clippings      15000" />
-                    <ListViewItem Content="Fence Post   1" />
+                    <ListViewItem>
+                       <!--Example View-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Lawn Mower" Grid.Column="0"></TextBlock>
+                            <ToggleSwitch Grid.Column="1" ></ToggleSwitch>
+                        </Grid>
+                    </ListViewItem>
                 </ListView.Items>
             </ListView>
+            
             <!-- Conditional Action Section -->
             <ListView x:Name="listViewConditionalActions" Grid.Row="3" Grid.Column="0" BorderBrush="Black" Margin ="30,15,15,0" BorderThickness="1,1,1,1">
                 <ListView.HeaderTemplate>
@@ -160,7 +219,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-     </Grid>
+    </Grid>
     <Page.Resources>
         <local:StatusConverter x:Key="StatusConverter"/>
     </Page.Resources>
