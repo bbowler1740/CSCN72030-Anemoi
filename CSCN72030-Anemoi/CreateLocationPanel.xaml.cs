@@ -41,16 +41,10 @@ namespace CSCN72030_Anemoi
             Location newLocation = new Location();
 
             newLocation.createLocation(locationName.Text);
+            newLocation.save();
 
             frame.Navigate(typeof(MainPage), newLocation);
 
         }
-
-        private void btnCancel(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
     }
 }

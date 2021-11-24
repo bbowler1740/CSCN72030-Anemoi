@@ -134,12 +134,14 @@
     <Compile Include="ConditionDataItem.xaml.cs">
       <DependentUpon>ConditionDataItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters.cs" />
     <Compile Include="CreateDevicePanel.xaml.cs">
       <DependentUpon>CreateDevicePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateLocationPanel.xaml.cs">
       <DependentUpon>CreateLocationPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataTemplateObjects.cs" />
     <Compile Include="DeviceDetailsPanel.xaml.cs">
       <DependentUpon>DeviceDetailsPanel.xaml</DependentUpon>
     </Compile>

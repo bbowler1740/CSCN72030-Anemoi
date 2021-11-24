@@ -31,8 +31,7 @@ namespace CSCN72030_Anemoi
 
             //Get the locations
 
-            //string[] listOfLocations = Location.displayLocation();
-            string[] listOfLocations = { "Hello", "Hia", "Hey" };
+            string[] listOfLocations = Location.displayLocation();
 
             //print to the listview
             LocationList.ItemsSource = listOfLocations;
