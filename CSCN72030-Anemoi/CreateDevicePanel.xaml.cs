@@ -42,7 +42,7 @@ namespace CSCN72030_Anemoi
         private void btnCreateDeviceClick(object e, RoutedEventArgs e1)
         {
 
-            string type = cmbOuter.SelectedItem.ToString(); //No clue if this will work
+            string type = cmbOuter.SelectedItem.ToString().Replace(" ", ""); //No clue if this will work
 
             list.createDevice(type, txtBoxName.Text, txtBoxDesc.Text);
 

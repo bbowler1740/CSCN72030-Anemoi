@@ -20,11 +20,11 @@
         <Button x:Name="bntCancel" Content="Cancel" Margin="513,473,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="bntCancelClick"/>
 
         <ComboBox x:Name="cmbOuter" PlaceholderText="Select Device..." Margin="0,375,0,0" Width="200" HorizontalAlignment="Center">
-            <ComboBoxItem Content="Lights"></ComboBoxItem>
-            <ComboBoxItem Content="Pool Heater"></ComboBoxItem>
-            <ComboBoxItem Content="Canopy"></ComboBoxItem>
-            <ComboBoxItem Content="Irrigation"></ComboBoxItem>
-            <ComboBoxItem Content="Custom"></ComboBoxItem>
+            <x:String>Lights</x:String>
+            <x:String>Pool Heater</x:String>
+            <x:String>Canopy</x:String>
+            <x:String>Irrigation</x:String>
+            <x:String>Custom</x:String>
         </ComboBox>
 
     </Grid>

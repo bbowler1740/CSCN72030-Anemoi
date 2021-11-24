@@ -27,11 +27,11 @@ namespace CSCN72030_Anemoi
         {
             this.InitializeComponent();
             CA = ca;
-            CA.SensorList.createSensor("Temperature", "name", "here");
-            CA.SensorList.createSensor("Humidity", "other", "here");
+            //CA.SensorList.createSensor("Temperature", "name", "here");
+            //CA.SensorList.createSensor("Humidity", "other", "here");
 
-            CA.DeviceList.createDevice("Canopy", "name", "here");
-            CA.DeviceList.createDevice("Lights", "other", "here");
+            //CA.DeviceList.createDevice("Canopy", "name", "here");
+            //CA.DeviceList.createDevice("Lights", "other", "here");
 
             listViewSensors.Items.Add(new ConditionDataItem(CA.SensorList));
 

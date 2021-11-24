@@ -39,7 +39,7 @@ namespace CSCN72030_Anemoi
             foreach (Devices devices in list)
             {
 
-                if (devices.GetType().Name.ToString() == "Custom")
+                if (devices.GetType().Name.ToString() == "CustomDevice")
                 {
 
                     customList.Add(devices);
@@ -164,7 +164,7 @@ namespace CSCN72030_Anemoi
                         list.Add(p);
                         break;
 
-                    case "Custom":
+                    case "CustomDevice":
                              CustomDevice cd = new CustomDevice(words[1]);
                         list.Add(cd);
                         break;
@@ -176,9 +176,9 @@ namespace CSCN72030_Anemoi
             }
             foreach (Devices device in list)
             {
-                if (device.GetDeviceID() > idCount)
+                if (device.GetDeviceID() >= idCount)
                 {
-                    idCount = device.GetDeviceID();
+                    idCount = device.GetDeviceID() + 1;
                 }
             }
 

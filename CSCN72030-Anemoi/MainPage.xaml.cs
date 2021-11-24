@@ -26,6 +26,7 @@ namespace CSCN72030_Anemoi
     {
         Location location;
         StackPanel backgroundFade;
+        List<TextBlock> listOfTextBlock;
 
         public MainPage()
         {
@@ -37,6 +38,16 @@ namespace CSCN72030_Anemoi
             backgroundFade.VerticalAlignment = VerticalAlignment.Stretch;
             backgroundFade.HorizontalAlignment = HorizontalAlignment.Stretch;
             backgroundFade.SetValue(Grid.RowSpanProperty, 2);
+
+
+            listOfTextBlock = new List<TextBlock>();
+            foreach (var element in grdSensorSection.Children)
+            {
+                if (element is TextBlock && (element as TextBlock).Tag != null)
+                {
+                    listOfTextBlock.Add(element as TextBlock);
+                }
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -52,7 +63,7 @@ namespace CSCN72030_Anemoi
 
         private void btnGoLocation(object sender, RoutedEventArgs e)
         {
-            location.save();
+            Save();
             Frame.Navigate(typeof(LocationSelect));
         }
 
@@ -98,6 +109,11 @@ namespace CSCN72030_Anemoi
             main.Children.Add(panel);
         }
 
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateLiveData();
+        }
+
         private void UpdateLiveData()
         {
             //Current Weather : Sunny     21:45
@@ -106,6 +122,20 @@ namespace CSCN72030_Anemoi
 
             //Sensors Sections
             //is this where we read from file?
+            listViewCustomSensors.ItemsSource = location.getCA().SensorList.getCustomSensorList();
+
+            var listOfSensors = location.getCA().SensorList.getSensorList();
+
+            foreach (var sensor in listOfSensors)
+            {
+                foreach (TextBlock textBlock in listOfTextBlock)
+                {
+                    if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
+                    {
+                        textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
+                    }
+                }
+            }
 
             //Conditional Actions Section
             listViewConditionalActions.ItemsSource = new List<ConditionalActionData>() {
@@ -117,6 +147,13 @@ namespace CSCN72030_Anemoi
 
             //Devices Sections
             //Do this last because sensors/conditionalAction can change their states
+            var customDevices = location.getCA().DeviceList.getCustomDeviceList();
+            var customDeviceListdata = new List<DeviceData>();
+            foreach (var customdev in customDevices)
+            {
+                customDeviceListdata.Add(new DeviceData() { Name = customdev.GetName(), Device = customdev });
+            }
+            listViewCustomDevices.ItemsSource = customDeviceListdata;
         }
 
         private void ClosePanel(UserControl sender)
@@ -124,6 +161,14 @@ namespace CSCN72030_Anemoi
             main.Children.Remove(backgroundFade);
 
             main.Children.Remove(sender);
+
+            UpdateLiveData();
+            Save();
+        }
+
+        public void Save()
+        {
+            location.save();
         }
     }
 }

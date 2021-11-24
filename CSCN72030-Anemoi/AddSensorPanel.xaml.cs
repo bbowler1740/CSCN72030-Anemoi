@@ -59,14 +59,13 @@ namespace CSCN72030_Anemoi
 
             //Get the textbox data
             string sensorNickName = txtNickname.Text;
-            int sensorID = Int32.Parse(txtID.Text);
             string sensorLocation = txtLocation.Text;
 
             //Get the dropbox selection for sensor type
             string sensorType = cboSensorTypes.SelectedItem.ToString();
 
             //Send the data to the sensor creation method
-            CA.SensorList.createSensor(sensorType, sensorNickName, sensorLocation, sensorID);
+            CA.SensorList.createSensor(sensorType, sensorNickName, sensorLocation);
 
             Close?.Invoke(this);
            
@@ -104,7 +103,7 @@ namespace CSCN72030_Anemoi
         private void setBtnAddSenVisibility()
         {
 
-            if ((txtNickname.Text != string.Empty) && (txtID.Text != string.Empty) && (txtLocation.Text != string.Empty) && (cboSensorTypes.SelectedItem != null))
+            if ((txtNickname.Text != string.Empty) && (txtLocation.Text != string.Empty) && (cboSensorTypes.SelectedItem != null))
             {
 
                 btnAddSen.IsEnabled = true;

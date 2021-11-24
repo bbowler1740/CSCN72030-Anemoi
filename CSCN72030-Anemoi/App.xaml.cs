@@ -39,6 +39,8 @@ namespace CSCN72030_Anemoi
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().Title = "Anemoi: Smart Outdoor Monitoring";
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -94,6 +96,12 @@ namespace CSCN72030_Anemoi
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            var frame = Window.Current.Content as Frame;
+            if (frame.Content.GetType().IsAssignableFrom(typeof(MainPage)))
+            {
+                var mainpage = frame.Content as MainPage;
+                mainpage.Save();
+            }
             deferral.Complete();
         }
     }

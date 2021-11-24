@@ -120,9 +120,9 @@ namespace CSCN72030_Anemoi
 
             foreach (Sensor sensor in list)
             {
-                if (sensor.SensorID > idCount)
+                if (sensor.SensorID >= idCount)
                 {
-                    idCount = sensor.SensorID;
+                    idCount = sensor.SensorID + 1;
                 }
             }
         }
