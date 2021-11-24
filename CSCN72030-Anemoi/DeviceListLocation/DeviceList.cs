@@ -31,6 +31,27 @@ namespace CSCN72030_Anemoi
             return null;
         }
 
+        public List<Devices> getCustomDeviceList()
+        {
+
+            List<Devices> customList = new List<Devices>();
+
+            foreach (Devices devices in list)
+            {
+
+                if (devices.GetType().Name.ToString() == "Custom")
+                {
+
+                    customList.Add(devices);
+
+                }
+
+            }
+
+            return customList;
+
+        }
+
         // This function allows for the creation of devices
         // The switch case is for the user to select what device they want through a numbered list
         public void createDevice(string type, string name, string description)
