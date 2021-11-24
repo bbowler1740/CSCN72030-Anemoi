@@ -18,6 +18,27 @@ namespace CSCN72030_Anemoi
             return list;
         }
 
+        public List<Sensor> getCustomSensorList()
+        {
+
+            List<Sensor> customList = new List<Sensor>();
+
+            foreach (Sensor sensor in list)
+            {
+
+                if (sensor.GetType().Name.ToString() == "Custom")
+                {
+
+                    customList.Add(sensor);
+
+                }
+
+            }
+
+            return customList;
+
+        }
+
         // This function allows for the creation of sensors
         public void createSensor(string type, string name, string location, float data)
         {
