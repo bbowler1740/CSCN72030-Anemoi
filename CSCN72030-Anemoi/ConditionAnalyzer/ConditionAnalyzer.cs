@@ -258,7 +258,7 @@ namespace CSCN72030_Anemoi
             public ConditionalAction(int id, List<Condition> conditions, List<Action> actions, bool isEnabled)
             {
                 Id = id;
-                if (Id > masterId)
+                if (Id >= masterId)
                 {
                     masterId = Id + 1;
                 }

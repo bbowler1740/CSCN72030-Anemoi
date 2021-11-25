@@ -169,49 +169,13 @@ namespace CSCN72030_Anemoi
 
             foreach (var caID in location.getCA().GetListOfName())
             {
-                string conditions = "";
-                string actions = "";
-                string status = "";
-
-                foreach (var condition in location.getCA().GetConditions(caID))
-                {
-
-                    if (condition.IsBetweenTrigger) {
-                        conditions += string.Format("{0} < {1} < {2} ",
-                            condition.LowThreshold.ToString(),
-                            condition.Sensor.GetType().Name,
-                            condition.HighThreshold.ToString()
-                            );
-                    }
-                    else
-                    {
-                        conditions += string.Format("{1} < {0} or {1} > {2} ",
-                            condition.LowThreshold.ToString(), 
-                            condition.Sensor.GetType().Name,    
-                            condition.HighThreshold.ToString()  
-                            );
-                    }
-
-                }
-
-                foreach (var action in location.getCA().GetActions(caID))
-                {
-
-                    actions += string.Format("{0} = {1} ", action.Device.GetType().Name, action.OutputState ? "On" : "Off");
-
-                }
-
-
-                status = location.getCA().IsActionEnabled(caID)? "Enabled": "Disabled";
-
-
                 listOfCondtions.Add(new ConditionalActionData()
                 {
-                    Conditions = conditions,
-                    Actions = actions,
-                    Status = status
+                    Id = caID,
+                    Conditions = location.getCA().GetConditions(caID),
+                    Actions = location.getCA().GetActions(caID),
+                    Status = location.getCA().IsActionEnabled(caID)
                 });
-
             }
             listViewConditionalActions.ItemsSource = listOfCondtions;
 
@@ -319,6 +283,20 @@ namespace CSCN72030_Anemoi
             Sensor.UpdateWeatherScenario(ApplicationData.Current.LocalFolder.Path + @"\" + location.locationName);
             UpdateLiveData();
 
+        }
+
+        private void listViewConditionalActions_ItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var panel = new ConditionalActionPanel(location.getCA(), e.ClickedItem as ConditionalActionData);
+            panel.Close = ClosePanel;
+
+            panel.SetValue(Grid.RowSpanProperty, 2);
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            panel.HorizontalAlignment = HorizontalAlignment.Center;
+
+            main.Children.Add(backgroundFade);
+
+            main.Children.Add(panel);
         }
 
         //Opens the detailed device 

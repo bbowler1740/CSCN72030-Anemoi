@@ -199,7 +199,8 @@
             </ListView>
             
             <!-- Conditional Action Section -->
-            <ListView x:Name="listViewConditionalActions" Grid.Row="3" Grid.Column="0" BorderBrush="#1C110A" Margin ="30,15,15,0" BorderThickness="1,1,1,1">
+            <ListView x:Name="listViewConditionalActions" Grid.Row="3" Grid.Column="0" BorderBrush="#1C110A" Margin ="30,15,15,0" BorderThickness="1,1,1,1" 
+                      IsItemClickEnabled="True" ItemClick="listViewConditionalActions_ItemClicked">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid Background="LightGray">
@@ -233,10 +234,10 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{x:Bind Conditions}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind Actions}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind Status}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                                       Foreground="{x:Bind Status, Converter={StaticResource StatusConverter}}"/>
+                            <TextBlock Grid.Column="0" Text="{x:Bind ConditionsString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind ActionsString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind StatusString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                       Foreground="{x:Bind StatusString, Converter={StaticResource StatusConverter}}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
