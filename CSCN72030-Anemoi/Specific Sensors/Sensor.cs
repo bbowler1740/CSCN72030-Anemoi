@@ -162,7 +162,7 @@ namespace CSCN72030_Anemoi
                                                            //cottage > sunny//rainy//thunderstorm//tornado// > air pressure.txt, ground moisture.txt, 
         {
 
-            int arrayLen = weatherScenarioPath.Length;
+            int arrayLen = weatherScenarios.Length;
 
             if (weatherIncrementor == (arrayLen - 1))
             {

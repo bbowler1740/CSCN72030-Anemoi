@@ -27,6 +27,7 @@ namespace CSCN72030_Anemoi
         Location location;
         StackPanel backgroundFade;
         List<TextBlock> listOfTextBlock;
+        List<StackPanel> listOfPanels;
 
         public MainPage()
         {
@@ -49,16 +50,31 @@ namespace CSCN72030_Anemoi
                     
                 }
             }
+
+            listOfPanels = new List<StackPanel>();
+            foreach (var element in gridDevicesInner.Children)
+            {
+                var item = element as StackPanel;
+                listOfPanels.Add(item);
+
+            }
+
+
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             location = e.Parameter as Location;
 
+            Sensor.UpdateWeatherScenario(ApplicationData.Current.LocalFolder.Path + @"\" + location.locationName);
+
             Title.Text = location.locationName;
             UpdateLiveData();
 
             base.OnNavigatedTo(e);      //Calls the parents implementation of the fuction
+
+            
 
         }
 
@@ -118,19 +134,27 @@ namespace CSCN72030_Anemoi
         private void UpdateLiveData()
         {
             //Current Weather : Sunny     21:45
-            var curWeather = WeatherConditions.GetCurrentWeather(location.getCA().SensorList.getSensorList());
-            LiveData.Text = string.Format("Current Weather: {0}\t\t{1}", curWeather.ToString(), DateTime.Now.ToString("HH:mm"));
+           
 
             //Sensors Sections
-            //is this where we read from file?
+            
+
             listViewCustomSensors.ItemsSource = location.getCA().SensorList.getCustomSensorList();
 
             var listOfSensors = location.getCA().SensorList.getSensorList();
 
+            //is this where we read from file?
+
+
+
+
             foreach (var sensor in listOfSensors)
             {
+                sensor.ReadScenarioDataFromFile();
+
                 foreach (TextBlock textBlock in listOfTextBlock)
                 {
+                    
                     if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
                     {
                         textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
@@ -138,7 +162,11 @@ namespace CSCN72030_Anemoi
                         textBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
+
             }
+
+            var curWeather = WeatherConditions.GetCurrentWeather(location.getCA().SensorList.getSensorList());
+            LiveData.Text = string.Format("Current Weather: {0}\t\t{1}", curWeather.ToString(), DateTime.Now.ToString("HH:mm"));
 
             //Conditional Actions Section
             listViewConditionalActions.ItemsSource = new List<ConditionalActionData>() {
@@ -157,6 +185,44 @@ namespace CSCN72030_Anemoi
                 customDeviceListdata.Add(new DeviceData() { Name = customdev.GetName(), Device = customdev });
             }
             listViewCustomDevices.ItemsSource = customDeviceListdata;
+
+
+            var listOfDevices = location.getCA().DeviceList.getDeviceList();
+
+            foreach (var device in listOfDevices)
+            {
+                foreach (StackPanel element in listOfPanels)
+                {
+                    bool isHere = false;
+
+                    foreach (var things in element.Children)
+                    {
+                        
+                        if(things is ToggleSwitch)
+                        {
+                            var tSwitch = things as ToggleSwitch;
+
+                            if (tSwitch.Tag.ToString().StartsWith(device.GetType().Name))
+                            {
+                                tSwitch.IsEnabled = true;
+                                tSwitch.IsOn = device.GetState();
+                                isHere = true;
+                            }
+                            
+                        }
+                     
+                        else if(things is TextBlock && (things as TextBlock).Tag != null && isHere)
+                        {
+
+                            var textBlock = things as TextBlock;
+                            
+                            textBlock.Text = "";
+                        } 
+                    }
+                }
+                    
+            }
+
         }
 
         private void ClosePanel(UserControl sender)
@@ -172,6 +238,39 @@ namespace CSCN72030_Anemoi
         public void Save()
         {
             location.save();
+        }
+
+        private void toggleSwitchToggled(object sender, RoutedEventArgs e)
+        {
+            //set the state of the device
+
+            ToggleSwitch tSwitch = sender as ToggleSwitch;
+
+            var element = location.getCA().DeviceList.getDeviceList().Where (x => x.GetType().Name == tSwitch.Tag.ToString()).FirstOrDefault();
+            
+            if(element == null)
+            {
+                return;
+            }
+
+            if (tSwitch.IsOn)
+            {
+                element.TurnOn();
+
+            }
+            else
+            {
+                element.TurnOff();
+            }
+           
+
+        }
+
+        private void btnNextScenario_Click(object sender, RoutedEventArgs e)
+        {
+            Sensor.UpdateWeatherScenario(ApplicationData.Current.LocalFolder.Path + @"\" + location.locationName);
+            UpdateLiveData();
+
         }
     }
 }

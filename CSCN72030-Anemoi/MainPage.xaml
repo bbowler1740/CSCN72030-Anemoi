@@ -119,7 +119,7 @@
             <!-- Device Section -->
             <Grid Grid.Row="2" Grid.Column="0" BorderBrush="#1C110A" Margin ="30,15,15,15" BorderThickness="1,1,1,1">
 
-                <Grid>
+                <Grid x:Name="gridDevicesInner">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
@@ -131,27 +131,27 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
-                        <TextBlock x:Name="txtBlockDeviceName1" Text="Device Name" FontSize="25"/>
-                        <ToggleSwitch x:Name="toggleSwitch1" FontSize="20"  />
-                        <TextBlock x:Name="txtBlockStatus" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
+                        <TextBlock x:Name="txtBlockLights" Text="Lights" FontSize="25"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchLights" FontSize="20" Toggled="toggleSwitchToggled" Tag="Lights"/>
+                        <TextBlock Tag="Status" x:Name="txtBlockStatusLights" Text="No Device"  Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel2" Grid.Column="1">
-                        <TextBlock x:Name="txtBlockDeviceName2" Text="Device Name" FontSize="25"/>
-                        <ToggleSwitch x:Name="toggleSwitch2" FontSize="20" />
-                        <TextBlock x:Name="txtBlockStatus2" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="txtBlockPoolHeater" Text="Pool Heater" FontSize="25"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchPoolHeater" FontSize="20" Toggled="toggleSwitchToggled" Tag="PoolHeater" />
+                        <TextBlock Tag="Status" x:Name="txtBlockStatusPoolHeater" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel3" Grid.Column="2">
-                        <TextBlock x:Name="txtBlockDeviceName3" Text="Device Name" FontSize="25"/>
-                        <ToggleSwitch x:Name="toggleSwitch3" FontSize="20" />
-                        <TextBlock x:Name="txtBlockStatus3" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="txtBlockCanopy" Text="Canopy" FontSize="25"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchCanopy"  FontSize="20" Toggled="toggleSwitchToggled" Tag="Canopy"/>
+                        <TextBlock Tag="Status" x:Name="txtBlockStatusCanopy" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel4" Grid.Column="3">
-                        <TextBlock x:Name="txtBlockDeviceName4" Text="Device Name" FontSize="25"/>
-                        <ToggleSwitch x:Name="toggleSwitch4" FontSize="20"/>
-                        <TextBlock x:Name="txtBlockStatus4" Text="Error Placeholder" FontSize="20" Margin="0, 20" Foreground="#9b2915" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="txtBlockDeviceNameIrrigation" Text="Irrigation" FontSize="25" />
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchIrrigation" FontSize="20" Toggled="toggleSwitchToggled" Tag="Irrigation"/>
+                        <TextBlock Tag="Status" x:Name="txtBlockStatusIrrigation" Text="No Device" FontSize="20" Margin="0, 20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                 </Grid>
@@ -251,7 +251,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Developer Tools" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button Grid.Row="1" x:Name="btnUpdate" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnUpdate_Click"/>
-                <Button Grid.Row="2" x:Name="btnNextScenario" Content="Next Scenario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20"/>
+                <Button Grid.Row="2" x:Name="btnNextScenario" Content="Next Scenario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnNextScenario_Click"/>
             </Grid>
         </Grid>
     </Grid>
