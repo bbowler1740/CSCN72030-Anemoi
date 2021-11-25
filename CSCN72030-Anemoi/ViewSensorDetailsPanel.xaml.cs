@@ -42,5 +42,12 @@ namespace CSCN72030_Anemoi
             Close?.Invoke(this);
         }
 
+        public void btnSenDetailsRemoveClick(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
+
     }
 }

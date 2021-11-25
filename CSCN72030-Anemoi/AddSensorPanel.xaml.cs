@@ -56,7 +56,6 @@ namespace CSCN72030_Anemoi
         {
             //Only enable button if textboxes contain something
             
-
             //Get the textbox data
             string sensorNickName = txtNickname.Text;
             string sensorLocation = txtLocation.Text;
