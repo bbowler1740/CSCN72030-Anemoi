@@ -22,20 +22,46 @@ namespace CSCN72030_Anemoi
     {
         private ConditionAnalyzer CA;
         public System.Action<UserControl> Close;
+        private int updateId;
 
         public ConditionalActionPanel(ConditionAnalyzer ca)
         {
             this.InitializeComponent();
             CA = ca;
-            //CA.SensorList.createSensor("Temperature", "name", "here");
-            //CA.SensorList.createSensor("Humidity", "other", "here");
-
-            //CA.DeviceList.createDevice("Canopy", "name", "here");
-            //CA.DeviceList.createDevice("Lights", "other", "here");
 
             listViewSensors.Items.Add(new ConditionDataItem(CA.SensorList));
 
             listViewDevices.Items.Add(new ActionDataItem(CA.DeviceList));
+        }
+
+        public ConditionalActionPanel(ConditionAnalyzer ca, ConditionalActionData caData)
+        {
+            this.InitializeComponent();
+            CA = ca;
+            btnSave.Content = "Update";
+            updateId = caData.Id;
+            tglIsEnabled.Visibility = Visibility.Visible;
+            tglIsEnabled.IsOn = caData.Status;
+
+            foreach (var condition in caData.Conditions)
+            {
+                listViewSensors.Items.Add(new ConditionDataItem(CA.SensorList)
+                {
+                    SelectedSensor = condition.Sensor,
+                    LowText = condition.LowThreshold.ToString(),
+                    HighText = condition.HighThreshold.ToString(),
+                    IsBetween = condition.IsBetweenTrigger
+                });
+            }
+
+            foreach (var action in caData.Actions)
+            {
+                listViewDevices.Items.Add(new ActionDataItem(CA.DeviceList)
+                {
+                    SelectedDevice = action.Device,
+                    IsTurnOn = action.OutputState
+                });
+            }
         }
 
         private void btnAddSensor_Click(object sender, RoutedEventArgs e)
@@ -74,7 +100,14 @@ namespace CSCN72030_Anemoi
                 actions.Add(action);
             }
 
-            CA.AddConditionalAction(conditions, actions);
+            if (btnSave.Content.ToString() == "Save")
+            {
+                CA.AddConditionalAction(conditions, actions);
+            }
+            else
+            {
+                CA.UpdateConditionalAction(updateId, conditions, actions, tglIsEnabled.IsOn);
+            }
             Close?.Invoke(this);
         }
 

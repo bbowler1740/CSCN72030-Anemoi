@@ -28,10 +28,15 @@ namespace CSCN72030_Anemoi
                 }
                 return SensorList.search((int)cboSensor.SelectedValue);
             }
+            set
+            {
+                cboSensor.SelectedItem = new ListSensorItem() { SensorType = value.GetType().Name, SensorId = value.SensorID };
+            }
         }
-        public string LowText { get => txtLow.Text; }
-        public string HighText { get => txtHigh.Text; }
-        public bool IsBetween { get => Convert.ToBoolean(chkIsBetween.IsChecked); }
+        public string LowText { get => txtLow.Text; set => txtLow.Text = value; }
+        public string HighText { get => txtHigh.Text; set => txtHigh.Text = value; }
+        public bool IsBetween { get => Convert.ToBoolean(chkIsBetween.IsChecked); set => chkIsBetween.IsChecked = value; }
+
         public ConditionDataItem(SensorList sensorList)
         {
             this.InitializeComponent();
@@ -40,7 +45,8 @@ namespace CSCN72030_Anemoi
             var sensorItems = new List<ListSensorItem>();
             foreach (var item in sensorList.getSensorList())
             {
-                sensorItems.Add(new ListSensorItem() { SensorType = item.GetType().Name, SensorId = item.SensorID });
+                sensorItems.Add(new ListSensorItem() { SensorType = string.Format("{0} ({1})", item.SensorNickName, item.GetType().Name), 
+                    SensorId = item.SensorID });
             }
             cboSensor.ItemsSource = sensorItems;
         }
@@ -55,5 +61,11 @@ namespace CSCN72030_Anemoi
     {
         public string SensorType { get; set; }
         public int SensorId { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            ListSensorItem other = obj as ListSensorItem;
+            return SensorId == other.SensorId;
+        }
     }
 }

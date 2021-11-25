@@ -27,8 +27,13 @@ namespace CSCN72030_Anemoi
                 }
                 return DeviceList.search(Convert.ToInt32(cboDevice.SelectedValue));
             }
+            set
+            {
+                cboDevice.SelectedItem = new ListDeviceItem() { DeviceType = value.GetType().Name, DeviceId = value.GetDeviceID() };
+            }
         }
-        public bool IsTurnOn { get => Convert.ToBoolean(chkTurnOn.IsChecked); }
+        public bool IsTurnOn { get => Convert.ToBoolean(chkTurnOn.IsChecked); set => chkTurnOn.IsChecked = value; }
+
         public ActionDataItem(DeviceList deviceList)
         {
             this.InitializeComponent();
@@ -37,7 +42,8 @@ namespace CSCN72030_Anemoi
             var deviceItems = new List<ListDeviceItem>();
             foreach (var item in deviceList.getDeviceList())
             {
-                deviceItems.Add(new ListDeviceItem() { DeviceType = item.GetType().Name, DeviceId = item.GetDeviceID() });
+                deviceItems.Add(new ListDeviceItem() { DeviceType = string.Format("{0} ({1})", item.GetName(), item.GetType().Name), 
+                    DeviceId = item.GetDeviceID() });
             }
             cboDevice.ItemsSource = deviceItems;
         }
@@ -47,5 +53,11 @@ namespace CSCN72030_Anemoi
     {
         public string DeviceType { get; set; }
         public uint DeviceId { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            ListDeviceItem other = obj as ListDeviceItem;
+            return DeviceId == other.DeviceId;
+        }
     }
 }
