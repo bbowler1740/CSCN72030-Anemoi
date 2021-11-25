@@ -46,6 +46,7 @@ namespace CSCN72030_Anemoi
                 if (element is TextBlock && (element as TextBlock).Tag != null)
                 {
                     listOfTextBlock.Add(element as TextBlock);
+                    
                 }
             }
         }
@@ -133,6 +134,8 @@ namespace CSCN72030_Anemoi
                     if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
                     {
                         textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
+
+                        textBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
             }

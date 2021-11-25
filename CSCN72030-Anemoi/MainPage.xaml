@@ -6,14 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000">
-
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" MinWidth="1500" MinHeight="1000"
+    
+    >
+    
+<!--
+    #1C110A DARK GREY
+    #78BC61 GREEN
+    #E9B44C YELLOW
+    #9B2915 RED
+    #50A2A7 BLUE
+    -->
+    
     <Grid Width="1500" Height="1000" x:Name="main">
         <Grid.RowDefinitions>
             <RowDefinition Height="77"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row ="0" BorderBrush="Black" BorderThickness="0,0,0,2">
+        <Grid Grid.Row ="0" BorderBrush="#1C110A" BorderThickness="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
@@ -22,13 +32,14 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="600"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Device" Click="btnGoDevice" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "1" Background ="White" BorderBrush="Black" BorderThickness="1,1,1,0"/>
-            <Button Content="Location" Click="btnGoLocation" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "0" Background ="White" BorderBrush="Black" BorderThickness="1,1,1,0"/>
-            <Button Content="Sensor" Click="btnGoSensor" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "2" Background ="White" BorderBrush="Black" BorderThickness="1,1,1,0"/>
-            <Button Click="btnGoConditional" VerticalAlignment="Top" Height="75" Width="150" FontSize="25" Grid.Column = "3" Background ="White" BorderBrush="Black" BorderThickness="1,1,2,0">
-                <TextBlock Text="Conditional Action" TextAlignment="Center" TextWrapping="Wrap"/>
+
+            <Button Content="+ Device" Click="btnGoDevice" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "1"  FontWeight="SemiLight" Background="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0"/>
+            <Button Content="Location" Click="btnGoLocation" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "0" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="0,0,1,0"/>
+            <Button Content="+ Sensor" Click="btnGoSensor" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "2" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0"/>
+            <Button Click="btnGoConditional" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "3" Background ="White" FontWeight="SemiLight" BorderBrush="#1C110A" BorderThickness="1,0,2,0">
+                <TextBlock Text="+ Condition Action" TextAlignment="Center" TextWrapping="Wrap"/>
             </Button>
-            <TextBlock x:Name="LiveData" HorizontalAlignment="Center" Text="Current Weather : Sunny     21:45" TextWrapping="Wrap" FontSize="25" VerticalAlignment="Center" Grid.Column= "5"/>
+            <TextBlock x:Name="LiveData" HorizontalAlignment="Right" Padding="50" Text="Current Weather : Sunny     21:45" TextWrapping="Wrap" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" Grid.Column= "5"/>
             <TextBlock x:Name="Title" HorizontalAlignment="Center" FontWeight = "Bold"  Text="Home" TextWrapping="Wrap" FontSize="40" VerticalAlignment="Center" Grid.Column= "4"/>
             <!--<TextBlock x:Name="Time" HorizontalAlignment="Right"   Text="23:00" Margin="0,21,25,0" TextWrapping="Wrap" FontSize="25" VerticalAlignment="Top" Grid.Column= "6"/>-->
         </Grid>
@@ -72,22 +83,22 @@
                 <Image Grid.Column="1" Grid.Row ="2" HorizontalAlignment="Left" Height="30" Width="30" Margin="175,20,0,0" VerticalAlignment="Top" Source="assets/icon-water.png" />
                 <Image Grid.Column="2" Grid.Row ="3" HorizontalAlignment="Left" Height="30" Width="30" Margin="155,15,0,0" VerticalAlignment="Top" Source="assets/icon-direction.png" />
                 <Image Grid.Column="3" Grid.Row ="3" HorizontalAlignment="Left" Height="30" Width="30" Margin="135,15,0,0" VerticalAlignment="Top" Source="assets/icon-water-2.png" />
-                <TextBlock x:Name ="tempLiveData" Tag="Temperature C" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="0"/>
-                <TextBlock x:Name ="humidityLiveData" Tag="Humidity %" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="0"/>
-                <TextBlock x:Name ="sunlightLiveData" Tag="Sunlight lx" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="0"/>
-                <TextBlock x:Name ="airPressureLiveData" Tag="AirPressure hPA" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="0"/>
-                <TextBlock x:Name ="windSpeedLiveData" Tag="WindSpeed km/h" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="1"/>
-                <TextBlock x:Name ="groundMoistureLiveData" Tag="GroundMoisture ml" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="2"/>
-                <TextBlock x:Name ="windDirectionLiveData" Tag="WindDirection" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="3"/>
-                <TextBlock x:Name ="precipitationLiveData" Tag="Precipitation mm" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="3"/>
+                <TextBlock x:Name ="tempLiveData" Tag="Temperature C" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="0"/>
+                <TextBlock x:Name ="humidityLiveData" Tag="Humidity %" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="0"/>
+                <TextBlock x:Name ="sunlightLiveData" Tag="Sunlight lx" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="0"/>
+                <TextBlock x:Name ="airPressureLiveData" Tag="AirPressure hPA" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="0"/>
+                <TextBlock x:Name ="windSpeedLiveData" Tag="WindSpeed km/h" Text="No Sensor"  Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="1"/>
+                <TextBlock x:Name ="groundMoistureLiveData" Tag="GroundMoisture ml" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="2"/>
+                <TextBlock x:Name ="windDirectionLiveData" Tag="WindDirection" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="3"/>
+                <TextBlock x:Name ="precipitationLiveData" Tag="Precipitation mm" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="3"/>
             </Grid>
             <!-- Custom Sensor Section -->
-            <ListView Grid.Row= "1" Grid.Column="1" x:Name="listViewCustomSensors" BorderBrush="Black" Margin ="15,0,30,15" BorderThickness="1,1,1,1">
+            <ListView Grid.Row= "1" Grid.Column="1" x:Name="listViewCustomSensors" BorderBrush="#1C110A" Margin ="15,0,30,15" BorderThickness="1,1,1,1">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="FontSize" Value="20"></Setter>
-                        <Setter Property="BorderBrush" Value ="Black"></Setter>
+                        <Setter Property="BorderBrush" Value ="#1C110A"></Setter>
                         <Setter Property="Margin" Value = "5"></Setter>
                         <Setter Property="BorderThickness" Value ="1"></Setter>
                     </Style>
@@ -106,7 +117,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!-- Device Section -->
-            <Grid Grid.Row="2" Grid.Column="0" BorderBrush="Black" Margin ="30,15,15,15" BorderThickness="1,1,1,1">
+            <Grid Grid.Row="2" Grid.Column="0" BorderBrush="#1C110A" Margin ="30,15,15,15" BorderThickness="1,1,1,1">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -121,7 +132,7 @@
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
                         <TextBlock x:Name="txtBlockDeviceName1" Text="Device Name" FontSize="25"/>
-                        <ToggleSwitch x:Name="toggleSwitch1" FontSize="20" />
+                        <ToggleSwitch x:Name="toggleSwitch1" FontSize="20"  />
                         <TextBlock x:Name="txtBlockStatus" Text="Error Placeholder" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
                     </StackPanel>
 
@@ -147,12 +158,12 @@
 
             </Grid>
             <!-- Custom Device Section -->
-            <ListView Grid.Row="2" Grid.Column="1" x:Name="listViewCustomDevices" BorderBrush="Black" Margin ="15,15,30,15" BorderThickness="1,1,1,1">
+            <ListView Grid.Row="2" Grid.Column="1" x:Name="listViewCustomDevices" BorderBrush="#1C110A" Margin ="15,15,30,15" BorderThickness="1,1,1,1">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="FontSize" Value="20"></Setter>
-                        <Setter Property="BorderBrush" Value ="Black"></Setter>
+                        <Setter Property="BorderBrush" Value ="#1C110A"></Setter>
                         <Setter Property="Margin" Value = "5"></Setter>
                         <Setter Property="BorderThickness" Value ="1"></Setter>
                     </Style>
@@ -187,7 +198,7 @@
             </ListView>
             
             <!-- Conditional Action Section -->
-            <ListView x:Name="listViewConditionalActions" Grid.Row="3" Grid.Column="0" BorderBrush="Black" Margin ="30,15,15,0" BorderThickness="1,1,1,1">
+            <ListView x:Name="listViewConditionalActions" Grid.Row="3" Grid.Column="0" BorderBrush="#1C110A" Margin ="30,15,15,0" BorderThickness="1,1,1,1">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid Background="LightGray">
@@ -208,7 +219,7 @@
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="FontSize" Value="15"></Setter>
-                        <Setter Property="BorderBrush" Value ="Black"></Setter>
+                        <Setter Property="BorderBrush" Value ="#1C110A"></Setter>
                         <Setter Property="Margin" Value="5"></Setter>
                         <Setter Property="BorderThickness" Value="1"></Setter>
                     </Style>
@@ -231,7 +242,7 @@
             </ListView>
             
             <!--Developer Tools-->
-            <Grid Grid.Row="3" Grid.Column="1" BorderBrush="Black" Margin ="15,15,30,0" BorderThickness="1,1,1,1">
+            <Grid Grid.Row="3" Grid.Column="1" BorderBrush="#1C110A" Margin ="15,15,30,0" BorderThickness="1,1,1,1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
