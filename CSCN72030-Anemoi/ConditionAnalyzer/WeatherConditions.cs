@@ -103,7 +103,7 @@ namespace CSCN72030_Anemoi
 
             if (thermometer != null)
             {
-                if (precipitationSensor.SensorData <= 0 && currentWeather == Weather.Rain) //Best determinate of snow
+                if (thermometer.SensorData <= 0 && currentWeather == Weather.Rain) //Best determinate of snow
                 {
                     currentWeather = Weather.Snow;
                 }

@@ -164,7 +164,7 @@ namespace CSCN72030_Anemoi
 
             int arrayLen = weatherScenarios.Length;
 
-            if (weatherIncrementor == (arrayLen - 1))
+            if (weatherIncrementor == (arrayLen))
             {
                 weatherIncrementor = 0;
             }
