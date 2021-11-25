@@ -44,7 +44,7 @@ namespace CSCN72030_Anemoi
             listOfTextBlock = new List<TextBlock>();
             foreach (var element in grdSensorSection.Children)
             {
-                if (element is TextBlock && (element as TextBlock).Tag != null)
+                if (element is TextBlock)
                 {
                     listOfTextBlock.Add(element as TextBlock);
                     
@@ -130,35 +130,37 @@ namespace CSCN72030_Anemoi
         private void UpdateLiveData()
         {
             //Current Weather : Sunny     21:45
-           
 
             //Sensors Sections
             
-
             listViewCustomSensors.ItemsSource = location.getCA().SensorList.getCustomSensorList();
 
             var listOfSensors = location.getCA().SensorList.getSensorList();
 
             //is this where we read from file?
 
-
-
-
             foreach (var sensor in listOfSensors)
             {
                 sensor.ReadScenarioDataFromFile();
-
                 foreach (TextBlock textBlock in listOfTextBlock)
                 {
                     
-                    if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
+                    if (textBlock.Tag == null)
+                    {
+
+                        if (sensor.GetType().Name == textBlock.Text.Replace(" ", ""))
+                        {
+                            textBlock.IsTapEnabled = true;
+                        }
+
+                    }
+
+                    else if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
                     {
                         textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
-
                         textBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
-
             }
 
             var curWeather = WeatherConditions.GetCurrentWeather(location.getCA().SensorList.getSensorList());
@@ -328,5 +330,39 @@ namespace CSCN72030_Anemoi
 
 
         }
+
+        private void txtBlockSensorDetails_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            TextBlock textBlock = sender as TextBlock;
+            int id = 0;
+
+            foreach (Sensor sensor in location.getCA().SensorList.getSensorList())
+            {
+
+                string parse = sensor.GetType().Name;
+
+                if (parse == textBlock.Text.ToString().Replace(" ", ""))
+                {
+
+                    id = sensor.SensorID;
+
+                }
+
+            }
+
+            var panel = new ViewSensorDetailsPanel(location.getCA(), id);
+            panel.Close = ClosePanel;
+
+            panel.SetValue(Grid.RowSpanProperty, 2);
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            panel.HorizontalAlignment = HorizontalAlignment.Center;
+
+            main.Children.Add(backgroundFade);
+
+            main.Children.Add(panel);
+
+        }
+
     }
 }

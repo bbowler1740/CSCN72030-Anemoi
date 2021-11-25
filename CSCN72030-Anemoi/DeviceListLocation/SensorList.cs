@@ -69,7 +69,7 @@ namespace CSCN72030_Anemoi
 
         // This fucntion removes a sensor at a given index from the list
         // Takes the user input for what sensor they wish to delete by id
-        public void removeSensor(uint id)
+        public void removeSensor(int id)
         {
 
             foreach (Sensor sensor in list)

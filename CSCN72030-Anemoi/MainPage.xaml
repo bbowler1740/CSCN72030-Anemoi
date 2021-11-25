@@ -67,14 +67,14 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Left" Text="Temperature" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="0"/>
-                <TextBlock HorizontalAlignment="Left" Text="Humidity" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="0"/>
-                <TextBlock HorizontalAlignment="Left" Text="Sunlight" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="0"/>
-                <TextBlock HorizontalAlignment="Left" Text="Air Pressure" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="0"/>
-                <TextBlock HorizontalAlignment="Left" Text="Wind Speed" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="1"/>
-                <TextBlock HorizontalAlignment="Left" Text="Ground Moisture" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="2"/>
-                <TextBlock HorizontalAlignment="Left" Text="Wind Direction" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="3"/>
-                <TextBlock HorizontalAlignment="Left" Text="Precipitation" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="3"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Temperature" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="0"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Humidity" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="0"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Sunlight" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="0"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Air Pressure" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="0"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Speed" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="1"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Ground Moisture" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="2"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Direction" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="3"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Precipitation" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="3"/>
                 <Image Grid.Column="0" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="130,15,0,0" VerticalAlignment="Top" Source="assets/icon-temp.png" />
                 <Image Grid.Column="1" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="110,15,0,0" VerticalAlignment="Top" Source="assets/icon-water-2.png" />
                 <Image Grid.Column="2" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="100,15,0,0" VerticalAlignment="Top" Source="assets/icon-sun.png" />
