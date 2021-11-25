@@ -169,10 +169,55 @@ namespace CSCN72030_Anemoi
             LiveData.Text = string.Format("Current Weather: {0}\t\t{1}", curWeather.ToString(), DateTime.Now.ToString("HH:mm"));
 
             //Conditional Actions Section
-            listViewConditionalActions.ItemsSource = new List<ConditionalActionData>() {
-                new ConditionalActionData() { Conditions = "Temperature > 10, Wind Speed < 60", Actions = "Canopy = On", Status = "Enabled" },
-                new ConditionalActionData() { Conditions = "Sunlight < 10", Actions = "Lights = On, Pool Heater = Off", Status = "Disabled" }
-            };
+            var listOfCondtions = new List<ConditionalActionData>();
+
+            foreach (var caID in location.getCA().GetListOfName())
+            {
+                string conditions = "";
+                string actions = "";
+                string status = "";
+
+                foreach (var condition in location.getCA().GetConditions(caID))
+                {
+
+                    if (condition.IsBetweenTrigger) {
+                        conditions += string.Format("{0} < {1} < {2} ",
+                            condition.LowThreshold.ToString(),
+                            condition.Sensor.GetType().Name,
+                            condition.HighThreshold.ToString()
+                            );
+                    }
+                    else
+                    {
+                        conditions += string.Format("{1} < {0} or {1} > {2} ",
+                            condition.LowThreshold.ToString(), 
+                            condition.Sensor.GetType().Name,    
+                            condition.HighThreshold.ToString()  
+                            );
+                    }
+
+                }
+
+                foreach (var action in location.getCA().GetActions(caID))
+                {
+
+                    actions += string.Format("{0} = {1} ", action.Device.GetType().Name, action.OutputState ? "On" : "Off");
+
+                }
+
+
+                status = location.getCA().IsActionEnabled(caID)? "Enabled": "Disabled";
+
+
+                listOfCondtions.Add(new ConditionalActionData()
+                {
+                    Conditions = conditions,
+                    Actions = actions,
+                    Status = status
+                });
+
+            }
+            listViewConditionalActions.ItemsSource = listOfCondtions;
 
             location.getCA().ProcessAllConditionalActions();
 

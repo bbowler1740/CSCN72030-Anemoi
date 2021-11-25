@@ -25,7 +25,7 @@ namespace CSCN72030_Anemoi
                 {
                     return null;
                 }
-                return DeviceList.search((int)cboDevice.SelectedValue);
+                return DeviceList.search(Convert.ToInt32(cboDevice.SelectedValue));
             }
         }
         public bool IsTurnOn { get => Convert.ToBoolean(chkTurnOn.IsChecked); }
