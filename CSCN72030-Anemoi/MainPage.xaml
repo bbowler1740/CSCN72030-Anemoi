@@ -130,26 +130,27 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
-                        <TextBlock x:Name="txtBlockLights" Text="Lights" FontSize="25"/>
+                    <StackPanel  Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
+                        <!--<Button Content="Lights"  BorderBrush="White" BorderThickness="1" Background="White"></Button>-->
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Lights" x:Name="txtBlockLights" Text="Lights" FontSize="25"/>
                         <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchLights" FontSize="20" Toggled="toggleSwitchToggled" Tag="Lights"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusLights" Text="No Device"  Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel2" Grid.Column="1">
-                        <TextBlock x:Name="txtBlockPoolHeater" Text="Pool Heater" FontSize="25"/>
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="PoolHeater" x:Name="txtBlockPoolHeater" Text="Pool Heater" FontSize="25"/>
                         <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchPoolHeater" FontSize="20" Toggled="toggleSwitchToggled" Tag="PoolHeater" />
                         <TextBlock Tag="Status" x:Name="txtBlockStatusPoolHeater" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel3" Grid.Column="2">
-                        <TextBlock x:Name="txtBlockCanopy" Text="Canopy" FontSize="25"/>
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Canopy" x:Name="txtBlockCanopy" Text="Canopy" FontSize="25"/>
                         <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchCanopy"  FontSize="20" Toggled="toggleSwitchToggled" Tag="Canopy"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusCanopy" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel4" Grid.Column="3">
-                        <TextBlock x:Name="txtBlockDeviceNameIrrigation" Text="Irrigation" FontSize="25" />
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Irrigation" x:Name="txtBlockDeviceNameIrrigation" Text="Irrigation" FontSize="25" />
                         <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchIrrigation" FontSize="20" Toggled="toggleSwitchToggled" Tag="Irrigation"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusIrrigation" Text="No Device" FontSize="20" Margin="0, 20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>

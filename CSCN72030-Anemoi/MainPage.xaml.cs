@@ -59,8 +59,6 @@ namespace CSCN72030_Anemoi
 
             }
 
-
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -73,8 +71,6 @@ namespace CSCN72030_Anemoi
             UpdateLiveData();
 
             base.OnNavigatedTo(e);      //Calls the parents implementation of the fuction
-
-            
 
         }
 
@@ -247,22 +243,29 @@ namespace CSCN72030_Anemoi
                         {
                             var tSwitch = things as ToggleSwitch;
 
-                            if (tSwitch.Tag.ToString().StartsWith(device.GetType().Name))
+                            if (tSwitch.Tag.ToString().StartsWith(device.GetType().Name))      //Switch Logic
                             {
                                 tSwitch.IsEnabled = true;
                                 tSwitch.IsOn = device.GetState();
+                                
+                            }
+                        }
+                        else if (things is TextBlock)
+                        {
+                            var textBlock = things as TextBlock;
+
+                            if((things as TextBlock).Tag.ToString() == "Status" && isHere)  //Error Message Logic
+                            {
+                                textBlock.Text = "";
+
+                            }else if (textBlock.Tag.ToString().StartsWith(device.GetType().Name))       //Tappable Logic
+                            {
+                                textBlock.IsTapEnabled = true;
                                 isHere = true;
                             }
-                            
-                        }
-                     
-                        else if(things is TextBlock && (things as TextBlock).Tag != null && isHere)
-                        {
 
-                            var textBlock = things as TextBlock;
-                            
-                            textBlock.Text = "";
-                        } 
+                        }
+
                     }
                 }
                     
@@ -315,6 +318,36 @@ namespace CSCN72030_Anemoi
         {
             Sensor.UpdateWeatherScenario(ApplicationData.Current.LocalFolder.Path + @"\" + location.locationName);
             UpdateLiveData();
+
+        }
+
+        //Opens the detailed device 
+        private void txtBlockDeviceDetails_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            TextBlock txtBlock = sender as TextBlock;
+            int id = -1;
+
+            foreach(Devices device in location.getCA().DeviceList.getDeviceList())
+            {
+                string[] parse = device.GetType().ToString().Split('.');
+
+                if (txtBlock.Tag.ToString() == parse[1])
+                {
+                    id = (int)device.GetDeviceID();
+                }
+            }
+
+            var panel = new DeviceDetailsPanel(location.getCA().DeviceList, id);
+            panel.Close = ClosePanel;
+
+            panel.SetValue(Grid.RowSpanProperty, 2);
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            panel.HorizontalAlignment = HorizontalAlignment.Center;
+
+            main.Children.Add(backgroundFade);
+
+            main.Children.Add(panel);
+
 
         }
     }

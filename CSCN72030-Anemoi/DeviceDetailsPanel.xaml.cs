@@ -26,23 +26,29 @@ namespace CSCN72030_Anemoi
 
         public DeviceDetailsPanel(DeviceList tempList, int id)
         {
+
             this.InitializeComponent();
 
             list = tempList;
 
            device = list.search(id);
 
+
+
             //Change the values of the panel
 
             txtBlockName.Text = device.GetName();
             txtBlockType.Text = device.GetType().ToString();
             txtBlockDesc.Text = device.GetDescription();
+            
+            string[] parse = device.GetType().ToString().Split('.');
+            txtBlockType.Text = "Type of Device: " + parse[1];
 
             toggleSwitch.IsOn = device.GetState();
 
         }
 
-        private void bntCancelClick(object sender, RoutedEventArgs e)
+        private void btnDoneClick(object sender, RoutedEventArgs e)
         {
 
             Close?.Invoke(this);
@@ -54,6 +60,28 @@ namespace CSCN72030_Anemoi
             list.removeDevice(device.GetDeviceID());
 
             Close?.Invoke(this);
+        }
+
+        private void toggleSwitchToggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch tSwitch = sender as ToggleSwitch;
+
+            var element = device;
+
+            if (element == null)
+            {
+                return;
+            }
+
+            if (tSwitch.IsOn)
+            {
+                element.TurnOn();
+
+            }
+            else
+            {
+                element.TurnOff();
+            }
         }
     }
 }

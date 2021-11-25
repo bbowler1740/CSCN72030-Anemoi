@@ -15,9 +15,9 @@
         <TextBlock x:Name="txtBlockDesc" HorizontalAlignment="Center" Margin="0,200,0,0" Text="Device Description" FontSize="45" TextWrapping="Wrap" VerticalAlignment="Top" />
         <TextBlock x:Name="txtBlockType" HorizontalAlignment="Center" Margin="0,150,0,0" Text="Device Name" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
 
-        <Button Content="Delete" Margin="73,474,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" BorderBrush="#9b2915" Click="btnDeleteClick"/>
-        <Button Content="Cancel" Margin="513,473,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25"/>
-        <ToggleSwitch x:Name="toggleSwitch" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" Margin="0,315,0,0" Width="124" />
+        <Button Content="Delete" Margin="73,474,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnDeleteClick"/>
+        <Button Content="Done" Margin="513,473,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnDoneClick"/>
+        <ToggleSwitch x:Name="toggleSwitch"  Toggled="toggleSwitchToggled" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" Margin="0,315,0,0" Width="124" />
 
 
     </Grid>
