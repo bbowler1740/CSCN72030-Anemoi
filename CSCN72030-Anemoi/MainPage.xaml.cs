@@ -425,8 +425,9 @@ namespace CSCN72030_Anemoi
         private void listViewCustomSensor_ItemClicked(object sender, ItemClickEventArgs e)
         {
 
-          
-            var panel = new ViewSensorDetailsPanel(location.getCA(), );
+            var sensor = e.ClickedItem as Sensor;
+            
+            var panel = new ViewSensorDetailsPanel(location.getCA(),sensor.SensorID);
             panel.Close = ClosePanel;
 
             panel.SetValue(Grid.RowSpanProperty, 2);
