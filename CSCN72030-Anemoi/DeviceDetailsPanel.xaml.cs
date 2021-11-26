@@ -54,7 +54,9 @@ namespace CSCN72030_Anemoi
 
         private void btnDeleteClick(object sender, RoutedEventArgs e1)
         {
-            list.removeDevice(device.GetDeviceID());
+
+             list.removeDevice(device.GetDeviceID());
+            
 
             Close?.Invoke(this);
         }
