@@ -183,6 +183,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AnemoiLogo.png" />
     <Content Include="Assets\icon-air.png" />
     <Content Include="Assets\icon-direction.png" />
     <Content Include="Assets\icon-sun.png" />
