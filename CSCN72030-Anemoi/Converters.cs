@@ -23,4 +23,44 @@ namespace CSCN72030_Anemoi
             throw new NotImplementedException();
         }
     }
+
+    public class WindDirectionConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var val = (float)value;
+
+            if (val < 0)
+            {
+
+                return "No Sensor";
+
+            }
+
+            if (val < 45.00 || val > 315.00)
+            {
+                return "North";
+            }
+            if (val < 135.00 || val > 45.00)
+            {
+                return "East";
+            }
+            if (val < 225.00 || val > 135.00)
+            {
+                return "South";
+            }
+            if (val < 315.00 || val > 225.00)
+            {
+                return "West";
+            }
+
+            return "No Sensor";
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return 0f;
+        }
+    }
 }

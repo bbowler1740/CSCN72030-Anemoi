@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Windows.UI;
+using System.ComponentModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,12 +23,45 @@ namespace CSCN72030_Anemoi
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page , INotifyPropertyChanged
     {
         Location location;
         StackPanel backgroundFade;
         List<TextBlock> listOfTextBlock;
         List<StackPanel> listOfPanels;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged (string info)
+        {
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+
+        }
+
+        public float windDirection 
+        { 
+            get 
+            {
+               
+              var test = location.getCA().SensorList.getSensorList().Where(x => x.GetType().Name == "WindDirection").FirstOrDefault(); 
+                
+                if (test != null)
+                {
+                    return test.SensorData;
+                }
+
+                return -1;
+
+            }
+
+            set 
+            {
+
+                NotifyPropertyChanged(nameof(windDirection));
+
+            }
+
+        }
 
         public MainPage()
         {
@@ -139,12 +173,24 @@ namespace CSCN72030_Anemoi
 
             //is this where we read from file?
 
+            foreach (TextBlock textBlock in listOfTextBlock)
+            {
+                textBlock.IsTapEnabled = false;
+
+                if (textBlock.Tag != null)
+                {
+                    textBlock.Text = "No Sensor";
+                    textBlock.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x9B, 0x29, 0x15));
+                }
+            }
+
             foreach (var sensor in listOfSensors)
             {
+
                 sensor.ReadScenarioDataFromFile();
                 foreach (TextBlock textBlock in listOfTextBlock)
                 {
-                    
+
                     if (textBlock.Tag == null)
                     {
 
