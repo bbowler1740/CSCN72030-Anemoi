@@ -57,6 +57,14 @@
             </Grid.RowDefinitions>
             <!-- Sensor Section -->
             <Grid Grid.Row= "1" Grid.Column="0" x:Name="grdSensorSection" BorderBrush="Black" Margin ="30,0,15,15" BorderThickness="1,1,1,1">
+                <Grid.Resources>
+                    <local:GenericConverter x:Key="GenericConverter"/>
+                    <local:WindDirectionConverter x:Key="DirectionConverter"/>
+                    <local:WindSpeedConverter x:Key="WindSpeedConverter"/>
+                    <local:TemperatureConverter x:Key="TemperatureConverter"/>
+                    <local:SunlightConverter x:Key="SunlightConverter"/>
+                    <local:PrecipitationConverter x:Key="PrecipitationConverter"/>
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -83,14 +91,22 @@
                 <Image Grid.Column="1" Grid.Row ="2" HorizontalAlignment="Left" Height="30" Width="30" Margin="175,20,0,0" VerticalAlignment="Top" Source="assets/icon-water.png" />
                 <Image Grid.Column="2" Grid.Row ="3" HorizontalAlignment="Left" Height="30" Width="30" Margin="155,15,0,0" VerticalAlignment="Top" Source="assets/icon-direction.png" />
                 <Image Grid.Column="3" Grid.Row ="3" HorizontalAlignment="Left" Height="30" Width="30" Margin="135,15,0,0" VerticalAlignment="Top" Source="assets/icon-water-2.png" />
-                <TextBlock x:Name ="tempLiveData" Tag="Temperature C" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="0"/>
-                <TextBlock x:Name ="humidityLiveData" Tag="Humidity %" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="0"/>
-                <TextBlock x:Name ="sunlightLiveData" Tag="Sunlight lx" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="0"/>
-                <TextBlock x:Name ="airPressureLiveData" Tag="AirPressure hPA" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="0"/>
-                <TextBlock x:Name ="windSpeedLiveData" Tag="WindSpeed km/h" Text="No Sensor"  Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="1"/>
-                <TextBlock x:Name ="groundMoistureLiveData" Tag="GroundMoisture ml" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="2"/>
-                <TextBlock x:Name ="windDirectionLiveData" Tag="WindDirection" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="3" Text="{x:Bind windDirection, Converter={StaticResource WindDirectionConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock x:Name ="precipitationLiveData" Tag="Precipitation mm" Text="No Sensor" Foreground="#9b2915" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="3"/>
+                <TextBlock x:Name ="tempLiveData" Tag="Temperature C" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="0"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource TemperatureConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="humidityLiveData" Tag="Humidity %" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="0"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource GenericConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="sunlightLiveData" Tag="Sunlight lx" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="0"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource SunlightConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="airPressureLiveData" Tag="AirPressure hPA" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="0"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource GenericConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="windSpeedLiveData" Tag="WindSpeed km/h" Text="No Sensor"  HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "0" Grid.Row="1"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource WindSpeedConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="groundMoistureLiveData" Tag="GroundMoisture ml" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "1" Grid.Row="2"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource GenericConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="windDirectionLiveData" Tag="WindDirection" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "2" Grid.Row="3" 
+                            Text="{Binding Path=SensorData, Converter={StaticResource DirectionConverter}, Mode=TwoWay}" Foreground="{Binding Path=SensorData, Converter={StaticResource GenericConverter}, Mode=TwoWay}"/>
+                <TextBlock x:Name ="precipitationLiveData" Tag="Precipitation mm" Text="No Sensor" HorizontalAlignment="Left" Margin="15,15,0,0" FontSize="30" VerticalAlignment="Center" Grid.Column= "3" Grid.Row="3"
+                            Foreground="{Binding Path=SensorData, Converter={StaticResource PrecipitationConverter}, Mode=TwoWay}"/>
             </Grid>
             <!-- Custom Sensor Section -->
             <ListView Grid.Row= "1" Grid.Column="1" x:Name="listViewCustomSensors" BorderBrush="#1C110A" Margin ="15,0,30,15" BorderThickness="1,1,1,1">
@@ -247,6 +263,5 @@
     </Grid>
     <Page.Resources>
         <local:StatusConverter x:Key="StatusConverter"/>
-        <local:WindDirectionConverter x:Key="WindDirectionConverter"/>
     </Page.Resources>
 </Page>

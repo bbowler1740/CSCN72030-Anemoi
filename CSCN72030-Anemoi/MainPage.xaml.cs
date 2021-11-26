@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Windows.UI;
-using System.ComponentModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,45 +22,12 @@ namespace CSCN72030_Anemoi
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page , INotifyPropertyChanged
+    public sealed partial class MainPage : Page
     {
         Location location;
         StackPanel backgroundFade;
         List<TextBlock> listOfTextBlock;
         List<StackPanel> listOfPanels;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged (string info)
-        {
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
-
-        }
-
-        public float windDirection 
-        { 
-            get 
-            {
-               
-              var test = location.getCA().SensorList.getSensorList().Where(x => x.GetType().Name == "WindDirection").FirstOrDefault(); 
-                
-                if (test != null)
-                {
-                    return test.SensorData;
-                }
-
-                return -1;
-
-            }
-
-            set 
-            {
-
-                NotifyPropertyChanged(nameof(windDirection));
-
-            }
-
-        }
 
         public MainPage()
         {
@@ -176,6 +142,7 @@ namespace CSCN72030_Anemoi
             foreach (TextBlock textBlock in listOfTextBlock)
             {
                 textBlock.IsTapEnabled = false;
+                textBlock.DataContext = null;
 
                 if (textBlock.Tag != null)
                 {
@@ -203,8 +170,13 @@ namespace CSCN72030_Anemoi
 
                     else if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
                     {
-                        textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
-                        textBlock.Foreground = new SolidColorBrush(Colors.Black);
+                        textBlock.DataContext = sensor;
+                        var units = textBlock.Tag.ToString().Replace(sensor.GetType().Name, "");
+                        if (!string.IsNullOrEmpty(units)) //Winddirection should be only without units
+                        {
+                            textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
+                        }
+                        //textBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
             }
@@ -247,16 +219,7 @@ namespace CSCN72030_Anemoi
 
                 foreach (var things in panel.Children)
                 {
-
-                    if (things is ToggleSwitch)
-                    {
-                        var tSwitch = things as ToggleSwitch;
-
-                        //tSwitch.IsOn = false;   //Is Toggled gets called cannt be used
-                        //tSwitch.IsEnabled = false;
-
-                    }
-                    else if (things is TextBlock)
+                    if (things is TextBlock)
                     {
                         var textBlock = things as TextBlock;
 
@@ -276,60 +239,63 @@ namespace CSCN72030_Anemoi
                     }
 
                 }
-
-            
             }
-    
 
-            foreach (var device in listOfDevices)   //Changing the state of the panel children to on
+
+            foreach (StackPanel panel in listOfPanels)
             {
-                foreach (StackPanel element in listOfPanels)
+                foreach (var element in panel.Children)
                 {
-                    bool isHere = false;
-
-                    foreach (var things in element.Children)
+                    if (element is TextBlock)
                     {
-                        
-                        if(things is ToggleSwitch)
+                        var textBlock = element as TextBlock;
+                        if (textBlock.Tag.ToString() != "Status") //Tappable Logic/Header
                         {
-                            var tSwitch = things as ToggleSwitch;
-
-                            if (tSwitch.Tag.ToString().StartsWith(device.GetType().Name))      //Switch Logic
+                            foreach (var device in listOfDevices)
                             {
-                                
-                                tSwitch.IsOn = device.GetState();
-                                tSwitch.IsEnabled = true;
-
-                            }
-   
-                        }
-                        else if (things is TextBlock)
-                        {
-                            var textBlock = things as TextBlock;
-
-                            if((things as TextBlock).Tag.ToString() == "Status" && isHere)  //Error Message Logic
-                            {
-
-                                    textBlock.Text = "";
-                              
-                            }
-                            else if((things as TextBlock).Tag.ToString() != "Status") //Tappable Logic
-                            {
-
-                                if (textBlock.Tag.ToString().StartsWith(device.GetType().Name)){
+                                if (textBlock.Tag.ToString().StartsWith(device.GetType().Name))
+                                {
                                     textBlock.IsTapEnabled = true;
-                                    isHere = true;
+                                    break;
                                 }
-
+                            } 
+                        }
+                        else
+                        {
+                            foreach (var device in listOfDevices)
+                            {
+                                if (textBlock.Name.EndsWith(device.GetType().Name))
+                                {
+                                    textBlock.Text = "";
+                                    break;
+                                }
                             }
-
                         }
 
                     }
-                }
-                    
-            }
+                    else if (element is ToggleSwitch)
+                    {
+                        var tSwitch = element as ToggleSwitch;
+                        var devFound = false;
+                        foreach (var device in listOfDevices)
+                        {
+                            if (tSwitch.Tag.ToString().StartsWith(device.GetType().Name))
+                            {
+                                tSwitch.IsEnabled = true;
+                                tSwitch.IsOn = device.GetState();
+                                devFound = true;
+                                break;
+                            }
+                        }
+                        if (!devFound)
+                        {
+                            tSwitch.IsEnabled = false;
+                            tSwitch.IsOn = false;
+                        }
+                    }
 
+                }
+            }
         }
 
         private void ClosePanel(UserControl sender)
