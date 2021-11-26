@@ -40,10 +40,7 @@ namespace CSCN72030_Anemoi
             txtBlockName.Text = device.GetName();
             txtBlockType.Text = device.GetType().ToString();
             txtBlockDesc.Text = device.GetDescription();
-            
-            string[] parse = device.GetType().ToString().Split('.');
-            txtBlockType.Text = "Type of Device: " + parse[1];
-
+            txtBlockType.Text = device.GetType().Name;
             toggleSwitch.IsOn = device.GetState();
 
         }

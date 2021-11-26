@@ -47,7 +47,7 @@ namespace CSCN72030_Anemoi
                 if (element is TextBlock && (element as TextBlock).Tag != null)
                 {
                     listOfTextBlock.Add(element as TextBlock);
-                    
+
                 }
             }
 
@@ -130,10 +130,10 @@ namespace CSCN72030_Anemoi
         private void UpdateLiveData()
         {
             //Current Weather : Sunny     21:45
-           
+
 
             //Sensors Sections
-            
+
 
             listViewCustomSensors.ItemsSource = location.getCA().SensorList.getCustomSensorList();
 
@@ -150,7 +150,7 @@ namespace CSCN72030_Anemoi
 
                 foreach (TextBlock textBlock in listOfTextBlock)
                 {
-                    
+
                     if (textBlock.Tag.ToString().StartsWith(sensor.GetType().Name))
                     {
                         textBlock.Text = string.Format("{0}{1}", sensor.SensorData, textBlock.Tag.ToString().Replace(sensor.GetType().Name, ""));
@@ -194,7 +194,46 @@ namespace CSCN72030_Anemoi
 
             var listOfDevices = location.getCA().DeviceList.getDeviceList();
 
-            foreach (var device in listOfDevices)
+            foreach (StackPanel panel in listOfPanels)  // Turn to default states
+            {
+
+                foreach (var things in panel.Children)
+                {
+
+                    if (things is ToggleSwitch)
+                    {
+                        var tSwitch = things as ToggleSwitch;
+
+                        tSwitch.IsOn = false;
+                        tSwitch.IsEnabled = false;
+
+                    }
+                    else if (things is TextBlock)
+                    {
+                        var textBlock = things as TextBlock;
+
+                        if ((things as TextBlock).Tag.ToString() == "Status")  //Error Message Logic
+                        {
+
+                            textBlock.Text = "No Device";
+
+                        }
+                        else if ((things as TextBlock).Tag.ToString() != "Status") //Tappable Logic
+                        {
+
+                            textBlock.IsTapEnabled = false;
+
+                        }
+
+                    }
+
+                }
+
+            
+            }
+    
+
+            foreach (var device in listOfDevices)   //Changing the state of the panel children to on
             {
                 foreach (StackPanel element in listOfPanels)
                 {
@@ -213,6 +252,7 @@ namespace CSCN72030_Anemoi
                                 tSwitch.IsOn = device.GetState();
                                 
                             }
+    
                         }
                         else if (things is TextBlock)
                         {
@@ -220,12 +260,18 @@ namespace CSCN72030_Anemoi
 
                             if((things as TextBlock).Tag.ToString() == "Status" && isHere)  //Error Message Logic
                             {
-                                textBlock.Text = "";
 
-                            }else if (textBlock.Tag.ToString().StartsWith(device.GetType().Name))       //Tappable Logic
+                                    textBlock.Text = "";
+                              
+                            }
+                            else if((things as TextBlock).Tag.ToString() != "Status") //Tappable Logic
                             {
-                                textBlock.IsTapEnabled = true;
-                                isHere = true;
+
+                                if (textBlock.Tag.ToString().StartsWith(device.GetType().Name)){
+                                    textBlock.IsTapEnabled = true;
+                                    isHere = true;
+                                }
+
                             }
 
                         }
@@ -307,9 +353,8 @@ namespace CSCN72030_Anemoi
 
             foreach(Devices device in location.getCA().DeviceList.getDeviceList())
             {
-                string[] parse = device.GetType().ToString().Split('.');
 
-                if (txtBlock.Tag.ToString() == parse[1])
+                if (txtBlock.Tag.ToString() == device.GetType().Name)
                 {
                     id = (int)device.GetDeviceID();
                 }
