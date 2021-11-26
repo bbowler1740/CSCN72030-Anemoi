@@ -252,8 +252,8 @@ namespace CSCN72030_Anemoi
                     {
                         var tSwitch = things as ToggleSwitch;
 
-                        tSwitch.IsOn = false;   //Is Toggled gets called cannt be used
-                        tSwitch.IsEnabled = false;
+                        //tSwitch.IsOn = false;   //Is Toggled gets called cannt be used
+                        //tSwitch.IsEnabled = false;
 
                     }
                     else if (things is TextBlock)
@@ -301,7 +301,6 @@ namespace CSCN72030_Anemoi
                                 tSwitch.IsEnabled = true;
 
                             }
-
    
                         }
                         else if (things is TextBlock)
@@ -457,5 +456,22 @@ namespace CSCN72030_Anemoi
 
         }
 
+        private void listViewCustomDevices_ItemClicked(object sender, ItemClickEventArgs e)
+        {
+
+            DeviceData item = (DeviceData)e.ClickedItem;
+
+            var panel = new DeviceDetailsPanel(location.getCA().DeviceList, (int)item.DeviceID) ;
+            panel.Close = ClosePanel;
+
+            panel.SetValue(Grid.RowSpanProperty, 2);
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            panel.HorizontalAlignment = HorizontalAlignment.Center;
+
+            main.Children.Add(backgroundFade);
+
+            main.Children.Add(panel);
+
+        }
     }
 }

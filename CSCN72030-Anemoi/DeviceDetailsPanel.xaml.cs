@@ -57,7 +57,6 @@ namespace CSCN72030_Anemoi
 
              list.removeDevice(device.GetDeviceID());
             
-
             Close?.Invoke(this);
         }
 

@@ -59,6 +59,18 @@ namespace CSCN72030_Anemoi
     public class DeviceData
     {
         public Devices Device { get; set; }
+
+        public uint DeviceID { 
+            get {
+                return Device.GetDeviceID(); 
+            }
+
+            set {
+                Device.SetDeviceID(value);
+            }
+        
+        }
+
         public string Name { get; set; }
         public bool State
         {

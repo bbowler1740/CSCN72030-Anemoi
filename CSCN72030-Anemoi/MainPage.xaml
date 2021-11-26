@@ -159,7 +159,8 @@
 
             </Grid>
             <!-- Custom Device Section -->
-            <ListView Grid.Row="2" Grid.Column="1" x:Name="listViewCustomDevices" BorderBrush="#1C110A" Margin ="15,15,30,15" BorderThickness="1,1,1,1">
+            <ListView Grid.Row="2" Grid.Column="1" x:Name="listViewCustomDevices" IsItemClickEnabled="True" ItemClick="listViewCustomDevices_ItemClicked"
+                      BorderBrush="#1C110A" Margin ="15,15,30,15" BorderThickness="1,1,1,1">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -171,31 +172,18 @@
                 </ListView.ItemContainerStyle>
                 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local:DeviceData">
+                    <DataTemplate x:DataType="local:DeviceData" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind Name}" Grid.Column="0"></TextBlock>
+                            <TextBlock Text="{x:Bind Name}" Tag="{x:Bind DeviceID}" Grid.Column="0"></TextBlock>
+                            <!--<TextBlock Text="{x:Bind DeviceID}" Grid.Column="0"></TextBlock>-->
                             <ToggleSwitch Grid.Column="1" IsOn="{x:Bind State, Mode=TwoWay}"></ToggleSwitch>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                
-                <!--<ListView.Items>
-                    <ListViewItem>
-                       --><!--Example View--><!--
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Lawn Mower" Grid.Column="0"></TextBlock>
-                            <ToggleSwitch Grid.Column="1" ></ToggleSwitch>
-                        </Grid>
-                    </ListViewItem>
-                </ListView.Items>-->
             </ListView>
             
             <!-- Conditional Action Section -->
