@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CSCN72030_Anemoi
 {
-    public abstract class Sensor //Generalized class. See "Specific Sensors" folder for specializations.
+    public abstract class Sensor : INotifyPropertyChanged //Generalized class. See "Specific Sensors" folder for specializations.
     {
         protected static string weatherScenarioPath;
 
@@ -17,7 +18,24 @@ namespace CSCN72030_Anemoi
         public int SensorID { get; protected set; } 
         public string SensorNickName { get; protected set; }
         public string SensorLocation { get; protected set; }
-        public float SensorData { get; protected set; } //Continuosly overridden when reading from file. Real-time updating is ideal, but perhaps consider 5 second intervals.
+        private float sensorData;
+        public float SensorData { get { return sensorData; } 
+            set
+            {
+                sensorData = value;
+                NotifyPropertyChanged(nameof(SensorData));
+            }
+        } //Continuosly overridden when reading from file. Real-time updating is ideal, but perhaps consider 5 second intervals.
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string info)
+        {
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+
+        }
+
         public Sensor()
         {
             this.SensorID = -1;
