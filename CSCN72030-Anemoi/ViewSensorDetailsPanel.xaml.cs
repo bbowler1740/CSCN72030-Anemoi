@@ -22,12 +22,14 @@ namespace CSCN72030_Anemoi
 
         private ConditionAnalyzer CA;
         public System.Action<UserControl> Close;
+        int sensorId;
 
         public ViewSensorDetailsPanel(ConditionAnalyzer ca, int id)
         {
             this.InitializeComponent();
 
             CA = ca;
+            sensorId = id;
 
             //Initialize object data on panel start-up.
             txtDetailedNickname.Text = "Nickname: " + ca.SensorList.search(id).SensorNickName;
@@ -45,7 +47,9 @@ namespace CSCN72030_Anemoi
         public void btnSenDetailsRemoveClick(object sender, RoutedEventArgs e)
         {
 
+            CA.SensorList.removeSensor(sensorId);
 
+            Close?.Invoke(this);
 
         }
 
