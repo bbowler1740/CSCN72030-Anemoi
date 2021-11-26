@@ -206,7 +206,7 @@ namespace CSCN72030_Anemoi
                     {
                         var tSwitch = things as ToggleSwitch;
 
-                        tSwitch.IsOn = false;
+                        //tSwitch.IsOn = false;   //Is Toggled gets called cannt be used
                         tSwitch.IsEnabled = false;
 
                     }
@@ -252,8 +252,13 @@ namespace CSCN72030_Anemoi
                             {
                                 tSwitch.IsEnabled = true;
                                 tSwitch.IsOn = device.GetState();
-                                
+
+                                if (!tSwitch.IsEnabled)
+                                {
+                                    tSwitch.IsOn = false;
+                                }
                             }
+
     
                         }
                         else if (things is TextBlock)
