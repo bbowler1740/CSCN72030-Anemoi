@@ -11,8 +11,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
 
     <Grid  Width="900" Height="500" Background="white" BorderThickness="1" BorderBrush="Black">
-        <Button x:Name="btnAddSen" Content="Add Sensor" Margin="73,375,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnAddSenClick" IsEnabled="false"/>
-        <Button x:Name="btnSenCancel" Content="Cancel" Margin="513,375,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnSenCancelClick"/>
+        <Button x:Name="btnAddSen" Content="Add Sensor" Margin="73,375,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnAddSenClick" IsEnabled="false" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+        <Button x:Name="btnSenCancel" Content="Cancel" Margin="513,375,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnSenCancelClick" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
         <TextBox x:Name="txtNickname" HorizontalAlignment="Left" Margin="100,150,0,0" PlaceholderText="Enter a Nickname" Height="50" Width="500" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="txtNickname_TextChanged"/>
         <TextBox x:Name="txtLocation" HorizontalAlignment="Left" Margin="100,225,0,0" PlaceholderText="Enter a Location Tag" Height="50" Width="500" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="txtLocation_TextChanged"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,40,0,0" Text="Add a New Sensor" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>

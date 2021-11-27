@@ -80,5 +80,18 @@ namespace CSCN72030_Anemoi
             gridLocationSelect.Children.Remove(sender);
         }
 
+        private void PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 1);
+
+        }
+
+        private void PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+
+            Window.Current.CoreWindow.PointerCursor = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 1);
+
+        }
     }
 }

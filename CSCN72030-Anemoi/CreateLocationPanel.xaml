@@ -11,8 +11,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000" >
 
     <Grid  Width="900" Height="500" Background="white" BorderThickness="1" BorderBrush="Black">
-        <Button Content="Create Location" Margin="73,374,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCreateLocationClick" />
-        <Button Content="Cancel" Margin="513,373,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCancelClick"/>
+        <Button Content="Create Location" Margin="73,374,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCreateLocationClick" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+        <Button Content="Cancel" Margin="513,373,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCancelClick" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
         <TextBox x:Name="locationName" HorizontalAlignment="Center" Margin="0,200,0,0" PlaceholderText="Location Name..." Height="50" Width="650" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
         <TextBlock HorizontalAlignment="Center" Margin="0,54,0,0" Text="Create a New Location" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
 

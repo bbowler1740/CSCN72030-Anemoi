@@ -33,10 +33,10 @@
                 <ColumnDefinition Width="600"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="+ Device" Click="btnGoDevice" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "1"  FontWeight="SemiLight" Background="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0"/>
-            <Button Content="Location" Click="btnGoLocation" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "0" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="0,0,1,0"/>
-            <Button Content="+ Sensor" Click="btnGoSensor" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "2" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0"/>
-            <Button Click="btnGoConditional" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "3" Background ="White" FontWeight="SemiLight" BorderBrush="#1C110A" BorderThickness="1,0,2,0">
+            <Button Content="+ Device" Click="btnGoDevice" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "1"  FontWeight="SemiLight" Background="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+            <Button Content="Location" Click="btnGoLocation" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "0" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="0,0,1,0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+            <Button Content="+ Sensor" Click="btnGoSensor" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "2" FontWeight="SemiLight" Background ="White" BorderBrush="#1C110A" BorderThickness="1,0,1,0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+            <Button Click="btnGoConditional" VerticalAlignment="Top" Height="75" Width="150" FontSize="20" Grid.Column = "3" Background ="White" FontWeight="SemiLight" BorderBrush="#1C110A" BorderThickness="1,0,2,0" PointerEntered ="PointerEntered" PointerExited="PointerExited">
                 <TextBlock Text="+ Condition Action" TextAlignment="Center" TextWrapping="Wrap"/>
             </Button>
             <TextBlock x:Name="LiveData" HorizontalAlignment="Right" Padding="50" Text="Current Weather : Sunny     21:45" TextWrapping="Wrap" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" Grid.Column= "5"/>
@@ -75,14 +75,14 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Temperature" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="0"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Humidity" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="0"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Sunlight" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="0"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Air Pressure" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="0"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Speed" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="1"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Ground Moisture" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="2"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Direction" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="3"/>
-                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Precipitation" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="3"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Temperature" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Humidity" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Sunlight" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Air Pressure" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="0" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Speed" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "0" Grid.Row="1" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Ground Moisture" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "1" Grid.Row="2" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Wind Direction" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "2" Grid.Row="3" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <TextBlock Tapped="txtBlockSensorDetails_Tapped" IsTapEnabled="False" HorizontalAlignment="Left" Text="Precipitation" Margin="15,15,0,0" FontSize="20" VerticalAlignment="Top" Grid.Column= "3" Grid.Row="3" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
                 <Image Grid.Column="0" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="130,15,0,0" VerticalAlignment="Top" Source="assets/icon-temp.png" />
                 <Image Grid.Column="1" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="110,15,0,0" VerticalAlignment="Top" Source="assets/icon-water-2.png" />
                 <Image Grid.Column="2" Grid.Row ="0" HorizontalAlignment="Left" Height="30" Width="30" Margin="100,15,0,0" VerticalAlignment="Top" Source="assets/icon-sun.png" />
@@ -121,13 +121,13 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Sensor">
-                        <Grid>
+                        <Grid PointerEntered ="PointerEntered" PointerExited="PointerExited">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind SensorNickName}" Grid.Column="0"></TextBlock>
-                            <TextBlock Text="{x:Bind SensorData}" Grid.Column="1"></TextBlock>
+                            <TextBlock Text="{x:Bind SensorNickName}" Grid.Column="0" HorizontalAlignment="Stretch"> </TextBlock>
+                            <TextBlock Text="{x:Bind SensorData}" Grid.Column="1" HorizontalAlignment="Stretch"></TextBlock>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -148,26 +148,26 @@
 
                     <StackPanel  Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel1" Grid.Column="0">
                         <!--<Button Content="Lights"  BorderBrush="White" BorderThickness="1" Background="White"></Button>-->
-                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Lights" x:Name="txtBlockLights" Text="Lights" FontSize="25"/>
-                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchLights" FontSize="20" Toggled="toggleSwitchToggled" Tag="Lights"/>
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Lights" x:Name="txtBlockLights" Text="Lights" FontSize="25" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchLights" FontSize="20" Toggled="toggleSwitchToggled" Tag="Lights" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusLights" Text="No Device"  Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center"  />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel2" Grid.Column="1">
-                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="PoolHeater" x:Name="txtBlockPoolHeater" Text="Pool Heater" FontSize="25"/>
-                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchPoolHeater" FontSize="20" Toggled="toggleSwitchToggled" Tag="PoolHeater" />
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="PoolHeater" x:Name="txtBlockPoolHeater" Text="Pool Heater" FontSize="25" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchPoolHeater" FontSize="20" Toggled="toggleSwitchToggled" Tag="PoolHeater" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusPoolHeater" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel3" Grid.Column="2">
-                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Canopy" x:Name="txtBlockCanopy" Text="Canopy" FontSize="25"/>
-                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchCanopy"  FontSize="20" Toggled="toggleSwitchToggled" Tag="Canopy"/>
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Canopy" x:Name="txtBlockCanopy" Text="Canopy" FontSize="25" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchCanopy"  FontSize="20" Toggled="toggleSwitchToggled" Tag="Canopy" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusCanopy" Text="No Device" Margin="0, 20" FontSize="20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Panel4" Grid.Column="3">
-                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Irrigation" x:Name="txtBlockDeviceNameIrrigation" Text="Irrigation" FontSize="25" />
-                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchIrrigation" FontSize="20" Toggled="toggleSwitchToggled" Tag="Irrigation"/>
+                        <TextBlock Tapped="txtBlockDeviceDetails_Tapped" IsTapEnabled="False" Tag="Irrigation" x:Name="txtBlockDeviceNameIrrigation" Text="Irrigation" FontSize="25" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                        <ToggleSwitch IsEnabled="False" x:Name="toggleSwitchIrrigation" FontSize="20" Toggled="toggleSwitchToggled" Tag="Irrigation" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
                         <TextBlock Tag="Status" x:Name="txtBlockStatusIrrigation" Text="No Device" FontSize="20" Margin="0, 20" Foreground="#9b2915" HorizontalAlignment="Center" />
                     </StackPanel>
 
@@ -189,12 +189,12 @@
                 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:DeviceData" >
-                        <Grid>
+                        <Grid PointerEntered ="PointerEntered" PointerExited="PointerExited">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind Name}" Tag="{x:Bind DeviceID}" Grid.Column="0"></TextBlock>
+                            <TextBlock Text="{x:Bind Name}" Tag="{x:Bind DeviceID}" Grid.Column="0" HorizontalAlignment="Stretch"></TextBlock>
                             <!--<TextBlock Text="{x:Bind DeviceID}" Grid.Column="0"></TextBlock>-->
                             <ToggleSwitch Grid.Column="1" IsOn="{x:Bind State, Mode=TwoWay}"></ToggleSwitch>
                         </Grid>
@@ -232,15 +232,15 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ConditionalActionData">
-                        <Grid>
+                        <Grid PointerEntered ="PointerEntered" PointerExited="PointerExited">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{x:Bind ConditionsString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind ActionsString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="{x:Bind StatusString}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <TextBlock Grid.Column="0" Text="{x:Bind ConditionsString}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind ActionsString}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind StatusString}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center"
                                        Foreground="{x:Bind StatusString, Converter={StaticResource StatusConverter}}"/>
                         </Grid>
                     </DataTemplate>
@@ -256,8 +256,8 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Developer Tools" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Grid.Row="1" x:Name="btnUpdate" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnUpdate_Click"/>
-                <Button Grid.Row="2" x:Name="btnNextScenario" Content="Next Scenario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnNextScenario_Click"/>
+                <Button Grid.Row="1" x:Name="btnUpdate" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnUpdate_Click" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+                <Button Grid.Row="2" x:Name="btnNextScenario" Content="Next Scenario" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200" FontSize="20" Click="btnNextScenario_Click" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
             </Grid>
         </Grid>
     </Grid>

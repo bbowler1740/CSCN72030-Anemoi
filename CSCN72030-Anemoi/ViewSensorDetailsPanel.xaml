@@ -11,8 +11,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="1500" MaxHeight="1000">
 
     <Grid  Width="900" Height="500" Background="white" BorderThickness="1" BorderBrush="Black">
-        <Button x:Name="btnViewSenDetailsCancel" Content="Cancel" Margin="0,375,100,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="75" Width="300" FontSize="25" Click="btnSenDetailsCancelClick"/>
-        <Button x:Name="btnViewSenDetailsRemoveSensor" Content="Remove Sensor" Margin="100,375,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="75" Width="300" FontSize="25" Click="btnSenDetailsRemoveClick"/>
+        <Button x:Name="btnViewSenDetailsCancel" Content="Cancel" Margin="0,375,100,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="75" Width="300" FontSize="25" Click="btnSenDetailsCancelClick" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
+        <Button x:Name="btnViewSenDetailsRemoveSensor" Content="Remove Sensor" Margin="100,375,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="75" Width="300" FontSize="25" Click="btnSenDetailsRemoveClick" PointerEntered ="PointerEntered" PointerExited="PointerExited"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,40,0,0" Text="Sensor Details" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtDetailedNickname" HorizontalAlignment="Left" Margin="200,150,0,0" Text="Nickname: Nickname" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtDetailedID" HorizontalAlignment="Left" Margin="200,225,0,0" Text="ID: ID" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top"/>
