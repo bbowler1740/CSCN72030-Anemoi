@@ -24,7 +24,7 @@ namespace CSCN72030_Anemoi
 
         DeviceList list;
 
-        
+
         public CreateDevicePanel(DeviceList tempList)
         {
             this.InitializeComponent();
@@ -49,5 +49,36 @@ namespace CSCN72030_Anemoi
             Close?.Invoke(this);
 
         }
+
+        private void setBtnAddSenVisibility()
+        {
+
+            if ((txtBoxName.Text != string.Empty) && (cmbOuter.SelectedItem != null))
+            {
+
+                btnCreateDevice.IsEnabled = true;
+
+            }
+
+            else
+            {
+
+                btnCreateDevice.IsEnabled = false;
+
+            }
+        }
+
+        private void cmbOuter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            setBtnAddSenVisibility();
+        }
+
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            setBtnAddSenVisibility();
+        }
+        
+
     }
 }
+    

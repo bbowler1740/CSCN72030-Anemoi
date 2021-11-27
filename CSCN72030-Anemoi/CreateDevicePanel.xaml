@@ -13,13 +13,13 @@
     <Grid  Width="900" Height="600" Background="white" BorderThickness="1" BorderBrush="Black">
         <TextBlock HorizontalAlignment="Center" Margin="0,54,0,0" Text="Create a New Device" FontSize="50" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="txtBoxName" HorizontalAlignment="Center" Margin="0,200,0,0" PlaceholderText="Device Name..." Height="50" Width="650" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBoxName" TextChanged="txtName_TextChanged" HorizontalAlignment="Center" Margin="0,200,0,0" PlaceholderText="Device Name..." Height="50" Width="650" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
         <TextBox x:Name="txtBoxDesc" HorizontalAlignment="Center" Margin="0,300,0,0" PlaceholderText="Device Description..." Height="50" Width="650" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Top" />
 
-        <Button x:Name="btnCreateDevice" Content="Create Device" Margin="73,474,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCreateDeviceClick"/>
+        <Button x:Name="btnCreateDevice" Content="Add Device" IsEnabled="false" Margin="73,474,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="btnCreateDeviceClick"/>
         <Button x:Name="bntCancel" Content="Cancel" Margin="513,473,0,0" VerticalAlignment="Top" Height="75" Width="300" FontSize="25" Click="bntCancelClick"/>
 
-        <ComboBox x:Name="cmbOuter" PlaceholderText="Select Device..." Margin="0,375,0,0" Width="200" HorizontalAlignment="Center">
+        <ComboBox x:Name="cmbOuter" PlaceholderText="Select Device..." Margin="0,375,0,0" Width="200" HorizontalAlignment="Center" SelectionChanged="cmbOuter_SelectionChanged" >
             <x:String>Lights</x:String>
             <x:String>Pool Heater</x:String>
             <x:String>Canopy</x:String>
