@@ -109,7 +109,7 @@
                             Foreground="{Binding Path=SensorData, Converter={StaticResource PrecipitationConverter}, Mode=TwoWay}"/>
             </Grid>
             <!-- Custom Sensor Section -->
-            <ListView Grid.Row= "1" Grid.Column="1" x:Name="listViewCustomSensors" BorderBrush="#1C110A" Margin ="15,0,30,15" BorderThickness="1,1,1,1">
+            <ListView Grid.Row= "1" Grid.Column="1" x:Name="listViewCustomSensors" BorderBrush="#1C110A" Margin ="15,0,30,15" BorderThickness="1,1,1,1" ItemClick="listViewCustomSensor_ItemClicked" IsItemClickEnabled="True" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
